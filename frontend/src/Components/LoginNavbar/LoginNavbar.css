@@ -1,0 +1,108 @@
+/* Container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Logo */
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0077b6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Search Box */
+.nav-search-box {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+}
+
+.nav-search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px 0 0 6px;
+}
+
+.nav-search-icon {
+  padding: 0.5rem;
+  background-color: #0077b6;
+  color: white;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+}
+
+/* Auth Buttons Group */
+.nav-auth-buttons {
+  display: flex;
+  align-items: center;
+  border: 1px solid #00b4d8;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Individual Buttons */
+.nav-login-btn,
+.nav-signup-btn {
+  background-color: #00b4d8;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nav-login-btn:hover,
+.nav-signup-btn:hover {
+  background-color: #0096c7;
+}
+
+/* Optional: Visual separator effect */
+.nav-login-btn {
+  border-right: 1px solid white;
+}
+
+/* Responsive: Small screens */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 30px;
+  }
+
+  .nav-search-box {
+    display: none;
+  }
+
+  .nav-logo {
+    font-size: 1.4rem;
+  }
+
+  .nav-auth-buttons {
+    margin-left: auto;
+  }
+
+  .nav-login-btn,
+  .nav-signup-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+  }
+}
+@media (max-width: 400px) {
+.nav-container{
+    padding: 10px;
+}
+}

@@ -1,0 +1,150 @@
+.fishDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 25px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fishDetailImage {
+  flex: 1 1 50%;
+}
+
+.fishDetailImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.fishDetailList {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.fishDetailName h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.fishDetailName h1 {
+  font-size: 2.1rem;
+  color: #0077b6;
+}
+
+.fishDetailStock h4 {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0.2rem 0;
+}
+
+.fishDetailStock span {
+  font-weight: 600;
+  color: #0077b6;
+}
+
+.fishDetailQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fishDetailQuantity h4 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.quantity-controller {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.quantity-controller button {
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.quantity-controller button:hover {
+  background-color: #005f91;
+}
+
+.fishDetailAddtoCart {
+  width: 100%;
+}
+
+.fishDetailAddtoCart button {
+  background-color: #00b4d8;
+  color: white;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.fishDetailAddtoCart button:hover {
+  background-color: #0096c7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fishDetails {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .fishDetailImage,
+  .fishDetailList {
+    width: 100%;
+  }
+
+  .fishDetailList {
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .fishDetailName h3 {
+    font-size: 1.5rem;
+  }
+
+  .fishDetailName h1 {
+    font-size: 1.7rem;
+  }
+
+  .fishDetailQuantity {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .quantity-controller {
+    font-size: 1.1rem;
+  }
+
+  .fishDetailAddtoCart button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+  }
+}
+

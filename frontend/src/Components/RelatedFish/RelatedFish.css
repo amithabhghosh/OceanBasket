@@ -1,0 +1,65 @@
+.RelatedFish {
+  padding: 2rem 1rem;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.relatedFishHead h3 {
+  font-size: 1.8rem;
+  color: #0077b6;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Scrollable container */
+.relatedFishesList {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.relatedFishesList::-webkit-scrollbar {
+  height: 8px;
+}
+
+.relatedFishesList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.scroll-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.scroll-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  background-color: #00b4d8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background-color: #0096c7;
+}
+
+/* Responsive Grid on large screens */
+@media (min-width: 1024px) {
+  .relatedFishesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    overflow-x: unset;
+  }
+
+  .scroll-buttons {
+    display: none;
+  }
+}
