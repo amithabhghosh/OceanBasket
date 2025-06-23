@@ -8,12 +8,12 @@ import { FaSignOutAlt } from 'react-icons/fa'; // Using react-icons
 import { ContextAPI } from '../../Context/ContextAPI'
 
 export const Navbar = () => {
-  const {logout} = useContext(ContextAPI)
+  const {logout,cartItems} = useContext(ContextAPI)
     const navigate = useNavigate()
      const [isCartOpen, setCartOpen] = useState(false);
- const [cartItems, setCartItems] = useState([]);
+ const [cartItem, setCartItem] = useState([]);
 
-  const getCartData = async () => {
+  const getData = async () => {
     const token = localStorage.getItem("Token");
     if (!token) return;
 
@@ -23,7 +23,7 @@ export const Navbar = () => {
       });
 
       if (res.data.success) {
-        setCartItems(res.data.cart);
+        setCartItem(res.data.cart);
       }
     } catch (error) {
       toast.error(error.response?.data || error.message)
@@ -37,7 +37,7 @@ logout()
 };
 
   const handleOpenCart = () => {
-    getCartData();
+    getData();
     setCartOpen(true);
   };
   return (
@@ -74,7 +74,7 @@ logout()
     </div>
     <CartSideBar  isOpen={isCartOpen}
         onClose={() => setCartOpen(false)}
-        cartItems={cartItems}/>
+        cartItems={cartItem}/>
     </>
   )
 }
