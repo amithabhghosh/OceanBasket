@@ -9,19 +9,13 @@ import { ToastContainer } from 'react-toastify';
 import { CartPage } from './Pages/CartPage'
 import  {checkTokenExpiration} from "./tokenExpiry"
 import { BonyFish } from './Pages/BonyFishPage'
-import { CartFishPage } from './Pages/CartFishPage'
-import { OilyFishPage } from './Pages/OilyFishPage'
-import { SaltWaterPage } from './Pages/SaltWaterPage'
-import { FreshFishPage } from './Pages/FreshFishPage'
+
 const router= createBrowserRouter([
   {path:"/",element:<HomePage/>},
   {path:"/fish/:id",element:<FishPage/>},
   {path:"/cart",element:<CartPage/>},
   {path:"/:category",element:<BonyFish/>},
-  // {path:"/Cart",element:<CartFishPage/>},
-  // {path:"/Oily",element:<OilyFishPage/>},
-  // {path:"/Salt",element:<SaltWaterPage/>},
-  // {path:"/Freshwater",element:<FreshFishPage/>}
+
 ])
 
 function App() {
