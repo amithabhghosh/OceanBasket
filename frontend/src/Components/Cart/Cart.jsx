@@ -14,7 +14,7 @@ export const Cart = () => {
   const token = localStorage.getItem("Token");
 
   const fetchCart = async () => {
-    const res = await axios.get("http://localhost:5000/api/customer/cart", {
+    const res = await axios.get("https://oceanbasket.onrender.com/api/customer/cart", {
       headers: { token }
     });
     if (res.data.success) setCartItems(res.data.cart);
@@ -30,7 +30,7 @@ const updateQuantity = async (productId, newQty,price) => {
   newQty = parseFloat(newQty.toFixed(1)); 
 
   try {
-    await axios.put("http://localhost:5000/api/customer/cart", {
+    await axios.put("https://oceanbasket.onrender.com/api/customer/cart", {
       productId,
       quantity: newQty,
       price
@@ -62,7 +62,7 @@ const total = subtotal + deliveryCharge;
 
   const deleteCartItem = async (id) => {
   try {
-    await axios.delete(`http://localhost:5000/api/customer/cart/${id}`, {
+    await axios.delete(`https://oceanbasket.onrender.com/api/customer/cart/${id}`, {
       headers: { token }
     });
 

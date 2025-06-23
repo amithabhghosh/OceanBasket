@@ -3,6 +3,7 @@ import { ContextAPI } from '../Context/ContextAPI'
 import { Navbar } from '../Components/Navbar/Navbar'
 import { LoginNavbar } from '../Components/LoginNavbar/LoginNavbar'
 import { Cart } from '../Components/Cart/Cart'
+import { Footer } from '../Components/Footer/Footer'
 
 
 export const CartPage = () => {
@@ -11,6 +12,7 @@ export const CartPage = () => {
     <div>
     {isLoggedIn ?  <Navbar/> : <LoginNavbar/>}
     <Cart/>
+    <Footer/>
     </div>
   )
 }

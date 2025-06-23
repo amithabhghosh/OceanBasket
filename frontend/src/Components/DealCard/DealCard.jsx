@@ -15,7 +15,7 @@ if (!token) {
   }
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/customer/quantityCart", // Your backend URL
+      "https://oceanbasket.onrender.com/api/customer/quantityCart", // Your backend URL
       { productId:id, price ,name},
       {
         headers: {

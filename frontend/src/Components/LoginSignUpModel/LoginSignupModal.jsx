@@ -23,7 +23,7 @@ const {token,setToken,login} = useContext(ContextAPI)
     if (!email.trim()) return setError("Email is required");
     if (!password.trim()) return setError("Password is required");
 
-    const endpoint = activeTab === "login" ? "http://localhost:5000/api/customer/login" : "http://localhost:5000/api/customer/register";
+    const endpoint = activeTab === "login" ? "https://oceanbasket.onrender.com/api/customer/login" : "https://oceanbasket.onrender.com/api/customer/register";
 
     try {
       const res = await axios.post(endpoint, formData);

@@ -18,7 +18,7 @@ export const Navbar = () => {
     if (!token) return;
 
     try {
-      const res = await axios.get("http://localhost:5000/api/customer/cart", {
+      const res = await axios.get("https://oceanbasket.onrender.com/api/customer/cart", {
         headers: { token },
       });
 
