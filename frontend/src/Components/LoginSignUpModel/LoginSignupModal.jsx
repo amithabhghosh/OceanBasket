@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./LoginSignupModal.css";
 import { ContextAPI } from "../../Context/ContextAPI";
+import { toast } from "react-toastify";
 
 const LoginSignupModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState("login");
@@ -32,8 +33,10 @@ const {token,setToken,login} = useContext(ContextAPI)
         const { token } = res.data;
         login(res.data.token)
         setToken(token)
-        console.log("Login successful");
+        toast.success("Login Success")
+        
       } else {
+        toast.success("Register Success")
         console.log("Signup successful");
       }
 
