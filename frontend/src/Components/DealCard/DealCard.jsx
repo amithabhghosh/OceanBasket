@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import LoginSignUpModal from  "../LoginSignUpModel/LoginSignupModal"
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import API from '../../connectApi'
 export const DealCard = ({key,id,name,off,price,quantity,image,deal}) => {
 const [showPopUp,setShowPopUp] = useState(false)
 const cartAdding=async(id,price)=>{
@@ -14,8 +15,8 @@ if (!token) {
     return;
   }
   try {
-    const response = await axios.post(
-      "https://oceanbasket.onrender.com/api/customer/quantityCart", // Your backend URL
+    const response = await API.post(
+      "/customer/quantityCart", // Your backend URL
       { productId:id, price ,name},
       {
         headers: {

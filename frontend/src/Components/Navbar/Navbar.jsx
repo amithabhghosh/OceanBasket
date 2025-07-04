@@ -54,7 +54,7 @@ logout()
 
   <div className="navbarIcons">
     <button className="icon-button" aria-label="Profile">
-      <a><i className="fas fa-user"></i></a>
+      <a><i className="fas fa-user" onClick={()=>navigate("/profile")}></i></a>
     </button>
     <a onClick={handleOpenCart}>
       <button className="icon-button" aria-label="Shopping Cart" >

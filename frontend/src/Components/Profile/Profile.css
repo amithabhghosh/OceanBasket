@@ -1,0 +1,193 @@
+/* General styles */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Sidebar */
+.profile-sidebar {
+  background: linear-gradient(to bottom right, #00695c, #004d40);
+  color: white;
+  padding: 30px 20px;
+  border-radius: 15px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.username {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.nav-buttons button {
+  padding: 10px;
+  background-color: #004d40;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-buttons button:hover {
+  background-color: #00796b;
+}
+
+/* Main content */
+.profile-main-content {
+  flex: 1;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-main-content h1 {
+  margin-bottom: 20px;
+}
+
+.profile-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1 1 200px;
+  background-color: #e0f7fa;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.edit-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #00796b;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover {
+  background-color: #004d40;
+}
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-actions button:first-child {
+  background-color: #00796b;
+  color: white;
+}
+
+.form-actions button:last-child {
+  background-color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .nav-buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-buttons button {
+    flex: 1 1 40%;
+  }
+}
+
+@media (max-width: 767px) {
+  .profile-sidebar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-buttons button {
+    width: 100%;
+  }
+
+  .profile-main-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile-main-content {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}

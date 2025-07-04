@@ -9,13 +9,14 @@ import { ToastContainer } from 'react-toastify';
 import { CartPage } from './Pages/CartPage'
 import  {checkTokenExpiration} from "./tokenExpiry"
 import { BonyFish } from './Pages/BonyFishPage'
+import { ProfilePage } from './Pages/ProfilePage'
 
 const router= createBrowserRouter([
   {path:"/",element:<HomePage/>},
   {path:"/fish/:id",element:<FishPage/>},
   {path:"/cart",element:<CartPage/>},
   {path:"/:category",element:<BonyFish/>},
-
+{path:"/profile",element:<ProfilePage/>}
 ])
 
 function App() {

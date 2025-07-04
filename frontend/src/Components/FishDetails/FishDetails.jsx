@@ -5,6 +5,7 @@ import "./FishDetails.css"; // ensure this file styles layout
 import axios from "axios";
 import LoginSignupModal from "../LoginSignUpModel/LoginSignupModal";
 import { toast } from 'react-toastify';
+import API from "../../connectApi";
 
 export const FishDetails = () => {
   const  {id}  = useParams();
@@ -32,8 +33,8 @@ if (!token) {
   const actualPrice = quantity*price*2
 
   try {
-    const response = await axios.post(
-      "https://oceanbasket.onrender.com/api/customer/cart", // Your backend URL
+    const response = await API.post(
+      "/customer/cart", // Your backend URL
       { productId:id, price:actualPrice ,quantity,name},
       {
         headers: {

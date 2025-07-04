@@ -3,6 +3,7 @@ import axios from "axios";
 import "./LoginSignupModal.css";
 import { ContextAPI } from "../../Context/ContextAPI";
 import { toast } from "react-toastify";
+import API from "../../connectApi";
 
 const LoginSignupModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState("login");
@@ -24,10 +25,10 @@ const {token,setToken,login} = useContext(ContextAPI)
     if (!email.trim()) return setError("Email is required");
     if (!password.trim()) return setError("Password is required");
 
-    const endpoint = activeTab === "login" ? "https://oceanbasket.onrender.com/api/customer/login" : "https://oceanbasket.onrender.com/api/customer/register";
+    const endpoint = activeTab === "login" ? "/customer/login" : "/customer/register";
 
     try {
-      const res = await axios.post(endpoint, formData);
+      const res = await API.post(endpoint, formData);
 
       if (activeTab === "login") {
         const { token } = res.data;

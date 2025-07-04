@@ -12,6 +12,7 @@ import shop4 from "../assets/images/shop4.jpg"
 import shop5 from "../assets/images/shop5.jpg"
 import { toast } from "react-toastify";
 import axios from "axios";
+import API from "../connectApi";
 export const ContextAPI = createContext();
 
 const ContextProvider = ({children})=>{
@@ -138,7 +139,7 @@ const [token,setToken]=useState(localStorage.getItem("Token")?localStorage.getIt
     if (!token) return;
 
     try {
-      const res = await axios.get("https://oceanbasket.onrender.com/api/customer/cart", {
+      const res = await API.get("/customer/cart", {
         headers: { token },
       });
 
@@ -151,16 +152,35 @@ const [token,setToken]=useState(localStorage.getItem("Token")?localStorage.getIt
     }
   };
 
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getProfile = async () => {
+    try {
+      const res = await API.get("/customer/getprofile",{headers:{token:token}});
+      if (res.data.success) {
+        setProfile(res.data.user);
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(()=>{
     if(token){
  getCartData()
     }
-   
   },[cartItems])
 
 
+   useEffect(() => {
+    getProfile();
+  }, []);
+
     return(
-        <ContextAPI.Provider value={{fishes,setFishes,shops,setShops,token,setToken,getCartData,cartItems,setCartItems,isLoggedIn,login,logout}}>
+        <ContextAPI.Provider value={{fishes,setFishes,shops,setShops,token,setToken,getCartData,cartItems,setCartItems,isLoggedIn,login,logout,profile, setProfile, loading, getProfile}}>
 {children}
         </ContextAPI.Provider>
     )

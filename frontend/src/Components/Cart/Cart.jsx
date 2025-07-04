@@ -4,6 +4,7 @@ import "./Cart.css";
 import { ContextAPI } from '../../Context/ContextAPI';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import API from '../../connectApi';
 export const Cart = () => {
    
 
@@ -14,7 +15,7 @@ export const Cart = () => {
   const token = localStorage.getItem("Token");
 
   const fetchCart = async () => {
-    const res = await axios.get("https://oceanbasket.onrender.com/api/customer/cart", {
+    const res = await API.get("/customer/cart", {
       headers: { token }
     });
     if (res.data.success) setCartItems(res.data.cart);
@@ -30,7 +31,7 @@ const updateQuantity = async (productId, newQty,price) => {
   newQty = parseFloat(newQty.toFixed(1)); 
 
   try {
-    await axios.put("https://oceanbasket.onrender.com/api/customer/cart", {
+    await API.put("/customer/cart", {
       productId,
       quantity: newQty,
       price
@@ -62,7 +63,7 @@ const total = subtotal + deliveryCharge;
 
   const deleteCartItem = async (id) => {
   try {
-    await axios.delete(`https://oceanbasket.onrender.com/api/customer/cart/${id}`, {
+    await API.delete(`/customer/cart/${id}`, {
       headers: { token }
     });
 
