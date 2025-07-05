@@ -6,7 +6,7 @@ const Cart = require("../Models/Cart")
 const {CustomerAuthentication} = require("../MiddleWare/Middleware")
 const {getAuthentication} = require("../MiddleWare/getAuth");
 const Fish = require('../Models/Fish');
-
+const mongoose = require('mongoose');
 
 
 const registerCustomer = async (req,res)=>{
@@ -18,7 +18,7 @@ const registerCustomer = async (req,res)=>{
 
     const hashedPassword = await argon2.hash(password);
 
-    const newUser = new User({ email, password: hashedPassword ,name});
+    const newUser = new User({ phone, password: hashedPassword ,name});
     await newUser.save();
 
     res.status(201).json({ msg: 'User registered successfully' });
@@ -93,7 +93,7 @@ let cart = await Cart.findOne({ userId });
         productId,
         name: fish.name,
         image: fish.images[0] || '',
-        price: fish.pricePerKg*quantity,
+        price: fish.pricePerKg,
         quantity,
       };
 
@@ -121,13 +121,13 @@ let cart = await Cart.findOne({ userId });
         productId,
         name: fish.name,
         image: fish.images[0] || '',
-        price: fish.pricePerKg*quantity,
+        price: fish.pricePerKg,
         quantity,
       });
     }
 
     cart.totalQuantity = cart.items.reduce((sum, item) => sum + item.quantity, 0);
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + item.price*item.quantity, 0);
 
     await cart.save();
     res.status(200).json(cart);
@@ -172,22 +172,39 @@ const addCartIfNotadded = async (req,res)=>{
 }
 
 
-const deleteCartItem = async (req,res)=>{
-     try {
-        const userId = req.user.id;
-        const { id } = req.params;
-    
-        const deletedItem = await Cart.findOneAndDelete({ user: userId, _id:id });
-    
-        if (!deletedItem) {
-          return res.status(404).json({ success: false, message: "Item not found in cart" });
-        }
-    
-        res.status(200).json({ success: true, message: "Item removed from cart" });
-      } catch (error) {
-        res.status(500).json({ success: false, message: "Error deleting item", error: error.message });
-      }
-}
+const deleteCartItem = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { productId } = req.params;
+
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(404).json({ success: false, msg: 'Cart not found' });
+    }
+
+    const itemIndex = cart.items.findIndex(
+      item => item.productId.toString() === productId
+    );
+    if (itemIndex === -1) {
+      return res.status(404).json({ success: false, msg: 'Item not found in cart' });
+    }
+
+    cart.items.splice(itemIndex, 1);
+
+    cart.totalQuantity = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+    await cart.save();
+
+    res.status(200).json({ success: true, msg: 'Item removed from cart', cart });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error deleting item',
+      error: error.message,
+    });
+  }
+};
 
 const updateQuantity =async (req,res)=>{
      try {

@@ -21,7 +21,7 @@ router.post("/cart", getAuthentication,addCart)
 router.post("/quantityCart", getAuthentication,addCartIfNotadded)
 
 //Delete Cart Item
-router.delete("/cart/:id", getAuthentication, deleteCartItem)
+router.delete("/cart/:productId", getAuthentication, deleteCartItem)
 
 //Update Quantity
 router.put("/cart", getAuthentication, updateQuantity)
