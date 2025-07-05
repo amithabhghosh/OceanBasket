@@ -9,15 +9,15 @@ const {getAuthentication} = require("../MiddleWare/getAuth")
 
 
 const registerCustomer = async (req,res)=>{
- const { email, password } = req.body;
+ const { phone, password,name } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ phone });
     if (existingUser)
       return res.status(400).json({ msg: 'User already exists' });
 
     const hashedPassword = await argon2.hash(password);
 
-    const newUser = new User({ email, password: hashedPassword });
+    const newUser = new User({ email, password: hashedPassword ,name});
     await newUser.save();
 
     res.status(201).json({ msg: 'User registered successfully' });
@@ -27,10 +27,10 @@ const registerCustomer = async (req,res)=>{
 } 
  
 const loginCustomer = async (req,res)=>{
-const { email, password } = req.body;
+const { phone, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ phone });
     if (!user)
       return res.status(400).json({ msg: 'Invalid credentials' });
 
