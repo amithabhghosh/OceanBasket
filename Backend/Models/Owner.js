@@ -26,14 +26,7 @@ const ownerSchema = new mongoose.Schema({
     }
   },
 
-  inventory: [
-    {
-      fishName: String,
-      price: Number,
-      quantity: Number,
-      imageUrl: String
-    }
-  ],
+
 
 
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
