@@ -1,28 +1,26 @@
 const express = require("express")
 
 const Owner = require("../Models/Owner")
+const Fish = require("../Models/Fish")
 
 require("dotenv").config() 
 
 const addFish = async (req,res)=>{
      try {
-            const ownerId = req.user.id
-    const {fishName,price,quantity} = req.body
+            const owner = req.user.id
+    const {name,description,category,pricePerKg,availableQuantityKg} = req.body
     
-     const updatedOwner = await Owner.findByIdAndUpdate(
-          ownerId,
-          {
-            $push: {
-              inventory: { fishName, price, quantity },
-            },
-          },
-          { new: true }
-        );
-    
-        if(!updatedOwner){
-            return res.status(400).json({success:false,message:"Owner Not Found",inventory:updatedOwner.inventory})
-        }
-        res.status(200).json({success:true,message:"Fish Added SuccessFully"})
+   const fish = new Fish({
+    owner,
+    name,
+    description,
+    category,
+    pricePerKg,
+    availableQuantityKg
+   })
+
+await fish.save()
+return res.status(201).json({success:true,message:"Fish Added SuccessFully",fish})   
         } catch (error) {
             res.status(500).json({success:false,message:error.message})
         }
@@ -30,14 +28,13 @@ const addFish = async (req,res)=>{
 
 const getFish = async (req,res)=>{
     try {
-        const ownerId = req.user.id
-        const owner = await Owner.findById(ownerId)
-        if(!owner){
-            return res.status(400).json({success:false,message:"Owner Not Found"})
-        }
-    
-        const fishesList = owner.inventory
-        res.status(201).json({success:true,message:"Fishes List",fishesList})
+        const owner = req.user.id
+       const fishes = await Fish.find({owner:owner})
+      if(fishes.length <= 0){
+        return res.status(400).json({success:false,message:"No Fishes Added Yet"})
+      }
+
+      return res.status(201).json({succes:true,fishes})
     } catch (error) {
         res.status(500).json({success:false,message:error.message})
     }
