@@ -1,7 +1,7 @@
 // routes/auth.js
 const express = require('express');
 const {getAuthentication} = require("../MiddleWare/getAuth");
-const {  loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress, verifyCustomer, otpSending, registerCustomer } = require('../Contollers/CustomerController');
+const {  loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress, verifyCustomer, otpSending, registerCustomer, listShopByPincode } = require('../Contollers/CustomerController');
 const router = express.Router();
 
 
@@ -49,6 +49,9 @@ router.put("/editAddress", getAuthentication, editAddress)
 
 //Delete Address
 router.delete("/deleteAddress", getAuthentication,deleteAddress)
+
+//Get Shops By Pincode
+router.get("/listShopByPincode",listShopByPincode)
 
 
 module.exports = router;

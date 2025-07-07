@@ -14,4 +14,6 @@ router.post("/login",loginOwner)
 
 //Get Owner/Shop Data
 router.get("/getOwnerData",getAuthentication,getOwnerData)
+
+
 module.exports = router

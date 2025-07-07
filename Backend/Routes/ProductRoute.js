@@ -2,7 +2,7 @@ const express = require("express")
 const router= express.Router()
 
 const {getAuthentication} = require("../MiddleWare/getAuth");
-const { addFish, getFish, deleteFish, editFish,  getFishByPincode } = require("../Contollers/ProductController");
+const { addFish, getFish, deleteFish, editFish,getFishByShop } = require("../Contollers/ProductController");
 require("dotenv").config() 
 
 //Add Fish By the Owner
@@ -17,8 +17,7 @@ router.delete("/deleteFish/:fishId",getAuthentication,deleteFish)
 //Edit the Fish
 router.put("/editFish/:fishId",getAuthentication,editFish)
 
+//Get Fishes By Shop
+router.get("/getFishByShop/:ownerId",getFishByShop)
 
-
-//Get Fishes By Pincode
-router.get("/getFishByPincode",getAuthentication,getFishByPincode)
 module.exports = router

@@ -11,6 +11,7 @@ const generateOTP = require('../utils/GenerateOTP');
 const sendOTP = require('../utils/sendOTP');
 const Customer = require('../Models/Customer');
 const { default: axios } = require('axios');
+const Owner = require('../Models/Owner');
 
 require("dotenv").config() 
 
@@ -467,6 +468,21 @@ const deleteAddress = async (req,res)=>{
     res.status(500).json({ success: false, message: error.message });
   }
 }
-module.exports = {registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress}
+
+const listShopByPincode = async (req,res)=>{
+  try {
+    const {zipCode} = req.body
+    const shops = await Owner.find({"shopAddress.zipCode":zipCode})
+
+    if(shops.length == 0){
+      return res.status(400).json({success:false,message:"No Shops Under This Pincode"})
+    }
+
+    return res.status(201).json({success:true,shops})
+  } catch (error) {
+    res.status(500).json({success:false,message:error.message})
+  }
+}
+module.exports = {registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
 
 

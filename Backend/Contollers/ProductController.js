@@ -72,8 +72,18 @@ const editFish = async (req,res)=>{
 
 
 
-const getFishByPincode = async (req,res)=>{
-   
+const getFishByShop = async (req,res)=>{
+   try {
+    const {ownerId} = req.params
+    const fishes = await Fish.find({owner:ownerId})
+
+    if(fishes.length == 0){
+        return res.status(400).json({success:false,messsage:"No Fishes In the Shop"})
+    }
+    return res.status(201).json({success:true,fishes})
+   } catch (error) {
+    res.status(500).json({success:false,message:error.message})
+   }
 }
 
-module.exports = {addFish,getFish,deleteFish,editFish,getFishByPincode}
+module.exports = {addFish,getFish,deleteFish,editFish,getFishByShop}
