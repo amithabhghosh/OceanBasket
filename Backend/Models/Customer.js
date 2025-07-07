@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   address: [addressSchema], 
   phone: { type: String,unique:true,required:true},
-  alternativeNumber: { type: String }
+  alternativeNumber: { type: String },
+  verified:{type:Boolean}
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

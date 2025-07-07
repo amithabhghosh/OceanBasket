@@ -7,26 +7,113 @@ const {CustomerAuthentication} = require("../MiddleWare/Middleware")
 const {getAuthentication} = require("../MiddleWare/getAuth");
 const Fish = require('../Models/Fish');
 const mongoose = require('mongoose');
+const generateOTP = require('../utils/GenerateOTP');
+const sendOTP = require('../utils/sendOTP');
+const Customer = require('../Models/Customer');
+const { default: axios } = require('axios');
 
+require("dotenv").config() 
 
-const registerCustomer = async (req,res)=>{
- const { phone, password,name } = req.body;
+let otpStore = {};
+const OTP_EXPIRATION = 5 * 60 * 1000;
+let sessionId = null;
+const otpSending = async (req,res)=>{
+
+const {phone}=req.body
   try {
     const existingUser = await User.findOne({ phone });
-    if (existingUser)
+    if (existingUser){
       return res.status(400).json({ msg: 'User already exists' });
+    }
 
-    const hashedPassword = await argon2.hash(password);
+console.log("Generating OTP...");
+console.log(process.env.FAST2SMS_API_KEY) 
+        const otp = generateOTP();
+        const expiresAt = Date.now() + OTP_EXPIRATION;
+        
+        otpStore[phone] = { otp, expiresAt };
 
-    const newUser = new User({ phone, password: hashedPassword ,name});
-    await newUser.save();
+ await sendOTP(phone,otp)
 
-    res.status(201).json({ msg: 'User registered successfully' });
+// console.log("API KEY:", process.env.TWO_FACTOR_API_KEY);
+
+// const response = await axios.get(
+//   `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/${phone}/AUTOGEN/OTP1`
+// );
+
+
+
+//     sessionId = response.data.Details;
+//      res.status(200).json({
+//       success: true,
+//       message: "OTP sent successfully",
+//       sessionId,
+//     });
+  } catch (error) {
+  console.error("Error sending OTP:", error.response?.data || error.message);
+  res.status(500).json({ error: "Failed to send OTP" });
+  }
+}
+
+const verifyCustomer = async (req,res)=>{
+  try{
+
+const { phone, otp } = req.body;
+
+    if (!otpStore[phone] || otpStore[phone].expiresAt < Date.now()) {
+      return res.json({ message: "OTP expired. Request a new one." });
+    }
+  
+    if (otpStore[phone].otp !== otp) {
+      return res.json({ message: "Invalid OTP" });
+    }
+  
+    delete otpStore[phone];
+
+    return res.status(200).json({success:true,message:"OTP VERIFIED"})
+
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+// const { otp } = req.body;
+//   try {
+//     const response = await axios.get(
+//       `https://2factor.in/API/V1/${process.env.TWO_FACTOR_API_KEY}/SMS/VERIFY/${sessionId}/${otp}`
+//     );
+
+//     if (response.data.Details === "OTP Matched") {
+//       res.status(200).json({ message: "OTP Verified" });
+//     } else {
+//       res.status(400).json({ message: "OTP Invalid" });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: "OTP verification failed" });
+//   }
+
 } 
  
+
+const registerCustomer = async(req,res)=>{
+  try {
+    const {name,password,phone} = req.body
+  const customer = await Customer.findOne(phone)
+  if(customer){
+    return res.status(400).json({success:false,message:"Customer Already Exists"})
+  }
+  const hashedPassword = await argon2.hash(password);
+  const newOne= new Customer({
+    name,
+    phone,
+    password:hashedPassword
+  })
+  await newOne.save()
+  res.status(201).json({success:true,message:"Customer Registration SuccessFull"})
+  } catch (error) {
+    res.status(500).json({success:false,message:error.message})
+  }
+}
+
 const loginCustomer = async (req,res)=>{
 const { phone, password } = req.body;
 
@@ -41,13 +128,14 @@ const { phone, password } = req.body;
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
-    res.json({
+    res.status(201).json({
+      success:true,
       token,
       user: { id: user._id, email: user.email },
       refreshToken
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({success:false, error: err.message });
   }
 }
 
@@ -379,6 +467,6 @@ const deleteAddress = async (req,res)=>{
     res.status(500).json({ success: false, message: error.message });
   }
 }
-module.exports = {registerCustomer,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress}
+module.exports = {registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress}
 
 

@@ -1,12 +1,18 @@
 // routes/auth.js
 const express = require('express');
 const {getAuthentication} = require("../MiddleWare/getAuth");
-const { registerCustomer, loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress } = require('../Contollers/CustomerController');
+const {  loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress, verifyCustomer, otpSending, registerCustomer } = require('../Contollers/CustomerController');
 const router = express.Router();
 
 
-// REGISTER
-router.post('/register',registerCustomer)
+//OTP Sending
+router.post("/sentOtp",otpSending)
+
+//OTP Verify
+router.post('/verify',verifyCustomer)
+
+//Register
+router.post("/register",registerCustomer)
 
 // LOGIN
 router.post('/login', loginCustomer)
