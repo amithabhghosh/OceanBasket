@@ -8,10 +8,12 @@ import { ToastContainer } from 'react-toastify';
 
 import  {checkTokenExpiration} from "./tokenExpiry"
 import { LoginSignUp } from './CustomerPages/LoginSignUp'
+import { DashboardPage } from './CustomerPages/DashboardPage'
 
 
 const router= createBrowserRouter([
-  {path:"/",element:<LoginSignUp/>}
+  {path:"/",element:<LoginSignUp/>},
+  {path:"/dashboard",element:<DashboardPage/>}
 ])
 
 function App() {

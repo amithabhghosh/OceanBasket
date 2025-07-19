@@ -1,5 +1,5 @@
 export const checkTokenExpiration = () => {
-  const token = localStorage.getItem("Token");
+  const token = localStorage.getItem("userToken");
   if (!token) return;
 
   try {
@@ -10,12 +10,12 @@ export const checkTokenExpiration = () => {
     const currentTime = Date.now() / 1000;
 
     if (payload.exp < currentTime) {
-      localStorage.removeItem("Token");
+      localStorage.removeItem("userToken");
       window.location.href = "/";
     }
   } catch (err) {
     console.error("Invalid token format", err);
-    localStorage.removeItem("Token");
+    localStorage.removeItem("userToken");
     window.location.href = "/";
   }
 };

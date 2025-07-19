@@ -3,8 +3,13 @@ import "./LoginSignup.css"
 import { FaUser, FaPhone, FaUserCircle } from 'react-icons/fa';
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
+import {loginCustomer} from "../../api/auth"
+import { FaSpinner } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 export const LoginSignup = () => {
-
+const navigate = useNavigate()
 const [signUp,setSignUp] = useState("signup")
 const [otpSent,setOtpSent] = useState(false)
  const [timeLeft, setTimeLeft] = useState();
@@ -12,6 +17,8 @@ const [otpSent,setOtpSent] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 const [isOtpVerified,setisOtpVerified] = useState(false)
 const [showPassword,setShowPassword] = useState(false)
+const [phoneNumber,setPhoneNumber] = useState("")
+const [password,setPassword] = useState("")
 
 const confirmOtp = async ()=>{
     try {
@@ -51,6 +58,29 @@ startTimer()
         console.log(error)
     }
 }
+
+const loginToAccount = ()=>{
+    if(!password.trim() || !phoneNumber.trim()){
+        return toast.error("Fill the Form")
+    }
+    mutate({phoneNumber,password})
+}
+
+const {mutate,isPending,isSuccess,isError,error} = useMutation({
+    mutationFn:loginCustomer,
+    onSuccess:(data)=>{
+        localStorage.setItem("userToken",data.token)
+        localStorage.setItem("userRefreshToken",data.refreshToken)
+        localStorage.setItem("user",data.user)
+    toast.success("Login Success")
+    navigate("/dashboard")
+
+    },
+    onError:(err)=>{
+        toast.error('Login error:', err.response?.data?.message || err.message)
+    }
+})
+
 
   return (
     <>
@@ -291,7 +321,7 @@ startTimer()
         <div className="loginPhoneInputs">
             <label htmlFor="phone">Phone Number</label>
             <div className="loginPhoneInputIcons">
-<input type="tel" name="" id="phone" className='loginPhoneInputField'/>
+<input type="tel" name="" id="phone" className='loginPhoneInputField' onChange={(e)=>setPhoneNumber(e.target.value)}/>
             <FaPhone className="loginPhoneIcon" />
             </div>
             
@@ -301,7 +331,7 @@ startTimer()
           <div className="loginPasswordInputs">
             <label htmlFor="password">Password</label>
             <div className="loginPasswordInputIcons">
-  <input type="password" name="" id="password" className='loginPasswordInputField'/>
+  <input type="password" name="" id="password" className='loginPasswordInputField' onChange={(e)=>setPassword(e.target.value)}/>
             <FaLock className="loginPasswordIcon" />
             </div>
           
@@ -317,7 +347,19 @@ startTimer()
         </div>
 
         <div className="loginButton">
-            <button>Sign In</button>
+            <button onClick={loginToAccount} disabled={isPending} >
+               {
+                isPending ? (
+ <FaSpinner className="spin" />
+                )
+               
+                :(
+"Sign In"
+                )
+              
+               }
+                
+                </button>
         </div>
 
     </div>

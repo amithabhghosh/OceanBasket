@@ -98,7 +98,7 @@ const { phone, otp } = req.body;
 const registerCustomer = async(req,res)=>{
   try {
     const {name,password,phone} = req.body
-  const customer = await Customer.findOne(phone)
+  const customer = await Customer.findOne({phone:phone})
   if(customer){
     return res.status(400).json({success:false,message:"Customer Already Exists"})
   }
@@ -132,7 +132,7 @@ const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expire
     res.status(201).json({
       success:true,
       token,
-      user: { id: user._id, email: user.email },
+      user: { id: user._id, email: user.email,address:user.address },
       refreshToken
     });
   } catch (err) {

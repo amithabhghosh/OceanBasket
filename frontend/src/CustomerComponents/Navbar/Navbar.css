@@ -1,0 +1,47 @@
+.Navbar{
+    background-color: #164863;
+    color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px 10px 50px;
+}
+.navbarHeading{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.navbarIcons{
+    display: flex;
+    gap: 15px;
+}
+.navbarHeading p{
+    font-size: 13px;
+    font-weight: 400;
+}
+.navbarIcons ion-icon{
+    font-size: 19px;
+}
+.Navbar-Sign-In-Button{
+    background-color: #fff;
+    color: #164863;
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    
+    cursor: pointer;
+}
+.Navbar-Sign-In-Button:hover{
+background-color: rgb(77, 168, 248);
+}
+@media (max-width : 500px){
+    .navbarIcons{
+        gap: 10px;
+    }
+    .Navbar{
+        padding: 10px 10px 10px 10px;
+    }
+}
