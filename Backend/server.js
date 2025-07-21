@@ -9,6 +9,7 @@ const ProductRoute = require("./Routes/ProductRoute")
 connectDb();
 
 const app = express();
+
 app.use(cors({ origin: process.env.FRONTENDLINK, credentials: true }));
 
 app.use(express.json());

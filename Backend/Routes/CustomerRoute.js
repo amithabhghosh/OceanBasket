@@ -51,7 +51,7 @@ router.put("/editAddress", getAuthentication, editAddress)
 router.delete("/deleteAddress", getAuthentication,deleteAddress)
 
 //Get Shops By Pincode
-router.get("/listShopByPincode",listShopByPincode)
+router.get("/listShopByPincode/:zipCode",listShopByPincode)
 
 
 module.exports = router;

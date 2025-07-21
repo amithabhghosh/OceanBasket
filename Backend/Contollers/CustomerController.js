@@ -471,14 +471,20 @@ const deleteAddress = async (req,res)=>{
 
 const listShopByPincode = async (req,res)=>{
   try {
-    const {zipCode} = req.body
-    const shops = await Owner.find({"shopAddress.zipCode":zipCode})
+    const {zipCode} = req.params
+   
+     const limit = parseInt(req.query.limit) || 3;
+    const skip = parseInt(req.query.skip) || 0;
+
+    const shops = await Owner.find({zipCode:zipCode}).select("-password")
+                              .skip(skip)
+                             .limit(limit);
 
     if(shops.length == 0){
-      return res.status(400).json({success:false,message:"No Shops Under This Pincode"})
+      return res.status(200).json({success:false,message:"No Shops Under This Pincode"})
     }
 
-    return res.status(201).json({success:true,shops})
+    return res.status(200).json({success:true,shops})
   } catch (error) {
     res.status(500).json({success:false,message:error.message})
   }

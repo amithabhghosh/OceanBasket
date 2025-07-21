@@ -9,11 +9,17 @@ import { ToastContainer } from 'react-toastify';
 import  {checkTokenExpiration} from "./tokenExpiry"
 import { LoginSignUp } from './CustomerPages/LoginSignUp'
 import { DashboardPage } from './CustomerPages/DashboardPage'
+import { PincodeManager } from './PincodeManager'
 
 
 const router= createBrowserRouter([
   {path:"/",element:<LoginSignUp/>},
-  {path:"/dashboard",element:<DashboardPage/>}
+  
+  {path:"/dashboard",element:<PincodeManager>
+    <DashboardPage/>
+    </PincodeManager>}
+  
+
 ])
 
 function App() {
@@ -24,8 +30,11 @@ function App() {
 
   return (
     <>
-         <RouterProvider router={router} />
+    
+ <RouterProvider router={router} />
       <ToastContainer position="top-right" autoClose={3000} />
+   
+        
     </>
   )
 }

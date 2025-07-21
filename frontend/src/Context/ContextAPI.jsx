@@ -7,9 +7,10 @@ export const ContextAPI = createContext();
 
 const ContextProvider = ({children})=>{
 
+    const [zipCode, setZipCode] = useState(localStorage.getItem("zipCode") || "");
    
     return(
-        <ContextAPI.Provider value={{}}>
+        <ContextAPI.Provider value={{zipCode,setZipCode}}>
 {children}
         </ContextAPI.Provider>
     )

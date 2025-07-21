@@ -6,20 +6,28 @@ const jwt = require('jsonwebtoken');
 require("dotenv").config() 
 
 const registerOwner = async (req,res)=>{
-    const {ownerName,email,password,phone,shopName} = req.body
+    const {ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm} = req.body
         try {
             const existingOwner = await Owner.findOne({email:email}) 
             if(existingOwner){
                 return res.status(400).json({success:false,message:"Email Already Registerd"})
             }
     
-           const hashedPassword = await argon2.hash(password);
+           
             const newUser = new Owner({
                 ownerName,
                 email,
                 password:hashedPassword,
                 phone,
-                shopName
+                shopName,
+                zipCode,
+                addressLine1,
+                 addressLine2,
+                  city,
+                   state,
+                    shopOpenTime,
+                    shopCloseTime,
+                    deliveryRadiusInKm
             })
     await newUser.save()
     

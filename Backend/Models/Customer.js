@@ -10,7 +10,9 @@ const addressSchema = new mongoose.Schema({
   addressLine2: { type: String },
   landmark: { type: String },
   city: { type: String},
+  default:{type:Boolean,default:false}
 }, { _id: false });
+
 
 const userSchema = new mongoose.Schema({
   name: { type: String },
