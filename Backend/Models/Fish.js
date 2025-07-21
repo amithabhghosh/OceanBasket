@@ -26,11 +26,7 @@ const fishSchema = new mongoose.Schema(
       required: true,
       min: 0
     },
-    images: [
-      {
-        type: String
-      }
-    ],
+    image:{type:String} ,
    
     isAvailable: {
       type: Boolean,

@@ -2,6 +2,7 @@ const express = require("express")
 
 const Owner = require("../Models/Owner")
 const Fish = require("../Models/Fish")
+const FIshImage = require("../Models/FIshImage")
 
 require("dotenv").config() 
 
@@ -10,13 +11,16 @@ const addFish = async (req,res)=>{
             const owner = req.user.id
     const {name,description,category,pricePerKg,availableQuantityKg} = req.body
     
+const fishImage = await FIshImage.findOne({FishName:name})
+
    const fish = new Fish({
     owner,
     name,
     description,
     category,
     pricePerKg,
-    availableQuantityKg
+    availableQuantityKg,
+    image:fishImage.image
    })
 
 await fish.save()

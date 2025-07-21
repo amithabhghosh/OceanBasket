@@ -489,6 +489,41 @@ const listShopByPincode = async (req,res)=>{
     res.status(500).json({success:false,message:error.message})
   }
 }
-module.exports = {registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
+const getFishWithHighRating = async (req,res)=>{
+  try {
+    const {zipCode} = req.params
+    const limit = 5; 
+    const skip = parseInt(req.query.skip) || 0;
+
+    const shops = await Owner.find({zipCode:zipCode})
+
+    if(shops.length == 0){
+return res.status(200).json({success:false,message:"No shops In This Pincode"})
+    }
+
+const shopsId = shops.map(shop=>shop._id)
+
+const fishes = await Fish.find({owner:{$in:shopsId}}).sort({rating:-1}).skip(skip)
+                                                                       .limit(limit);
+
+ if (fishes.length === 0) {
+      return res.status(200).json({ success: false, message: "No fishes found in these shops" });
+    }
+
+
+const uniqueFishMap = new Map();
+fishes.forEach(fish => {
+  if (!uniqueFishMap.has(fish.name)) {
+    uniqueFishMap.set(fish.name, fish);
+  }
+});
+const uniqueFishes = Array.from(uniqueFishMap.values());
+   
+    return res.status(200).json({ success: true, fishes,uniqueFishes });
+  } catch (error) {
+    
+  }
+}
+module.exports = {getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
 
 

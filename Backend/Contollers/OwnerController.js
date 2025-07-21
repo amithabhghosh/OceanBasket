@@ -11,9 +11,7 @@ const registerOwner = async (req,res)=>{
             const existingOwner = await Owner.findOne({email:email}) 
             if(existingOwner){
                 return res.status(400).json({success:false,message:"Email Already Registerd"})
-            }
-    
-           
+            }       
             const newUser = new Owner({
                 ownerName,
                 email,
@@ -37,8 +35,6 @@ const registerOwner = async (req,res)=>{
             res.status(500).json({success:false,message:error.message})
         }
 }
-
-
 const loginOwner = async (req,res)=>{
         const {email,password} = req.body
         try {
