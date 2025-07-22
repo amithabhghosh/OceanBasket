@@ -1,12 +1,14 @@
 import React from 'react'
 import "./ShopCard.css"
 import FishStore from "../../assets/images/FishStore.webp"
-export const ShopCard = ({shopName,delivery,id}) => {
+import { useNavigate } from 'react-router-dom'
+export const ShopCard = ({shopName,delivery,id,image}) => {
+  const navigate = useNavigate()
   return (
- <div className="shopCard">
+ <div className="shopCard" onClick={()=>navigate(`/${id}`)}>
       <div className="shopCardImageSection">
         <ion-icon name="storefront-outline" className="shopIcon"></ion-icon>
-        <img src={FishStore} alt="shop" />
+        <img src={image} alt="shop" />
       </div>
 
       <div className="shopCardDetails">

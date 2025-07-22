@@ -57,7 +57,7 @@ const loadMoreRef = useRef();
   {!isLoading && data?.pages?.flatMap(page =>
     page.shops.map(shop => (
         <>
-      <ShopCard key={shop._id} id={shop._id} shopName={shop.shopName} delivery={shop.deliveryRadiusInKm}/>
+      <ShopCard key={shop._id} id={shop._id} shopName={shop.shopName} delivery={shop.deliveryRadiusInKm} image={shop.shopImage}/>
        
       </>
     ))

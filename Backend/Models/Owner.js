@@ -29,6 +29,8 @@ const ownerSchema = new mongoose.Schema({
   shopOpenTime: String,
   shopCloseTime: String,
   deliveryRadiusInKm: Number,
+  shopImage:{type:String},
+  ownerImage:{type:String},
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -10,6 +10,7 @@ import  {checkTokenExpiration} from "./tokenExpiry"
 import { LoginSignUp } from './CustomerPages/LoginSignUp'
 import { DashboardPage } from './CustomerPages/DashboardPage'
 import { PincodeManager } from './PincodeManager'
+import { ShopDetailPage } from './CustomerPages/ShopDetailPage'
 
 
 const router= createBrowserRouter([
@@ -17,6 +18,9 @@ const router= createBrowserRouter([
   
   {path:"/dashboard",element:<PincodeManager>
     <DashboardPage/>
+    </PincodeManager>},
+    {path:"/:ownerId",element:<PincodeManager>
+      <ShopDetailPage/>
     </PincodeManager>}
   
 

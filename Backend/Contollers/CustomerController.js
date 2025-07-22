@@ -524,6 +524,19 @@ const uniqueFishes = Array.from(uniqueFishMap.values());
     res.status(500).json({success:false,message:error.message})
   }
 }
-module.exports = {getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
+
+const getShopByShopId = async (req,res)=>{
+  try {
+    const {ownerId} = req.params
+    const owner = await Owner.findById(ownerId).select("-password")
+    if(!owner){
+      return res.status(201).json({success:false,message:"Shop Not Found"})
+    }
+    res.status(201).json({success:true,owner})
+  } catch (error) {
+    res.status(500).json({success:false,message:error.message})
+  }
+}
+module.exports = {getShopByShopId,getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
 
 

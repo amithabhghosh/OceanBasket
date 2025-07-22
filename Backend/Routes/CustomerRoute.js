@@ -1,7 +1,7 @@
 // routes/auth.js
 const express = require('express');
 const {getAuthentication} = require("../MiddleWare/getAuth");
-const {  loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress, verifyCustomer, otpSending, registerCustomer, listShopByPincode, getFishWithHighRating } = require('../Contollers/CustomerController');
+const {  loginCustomer, getCart, addCart, addCartIfNotadded, deleteCartItem, updateQuantity, getProfile, updateProfile, getAddress, addAddress, editAddress, deleteAddress, verifyCustomer, otpSending, registerCustomer, listShopByPincode, getFishWithHighRating, getShopByShopId } = require('../Contollers/CustomerController');
 const router = express.Router();
 
 
@@ -56,4 +56,6 @@ router.get("/listShopByPincode/:zipCode",listShopByPincode)
 //Get Fishes With High Rating
 router.get("/getFishesWithRating/:zipCode" , getFishWithHighRating)
 
+//Get ShopDetails By ShopId 
+router.get("/getShopByShopId/:ownerId",getShopByShopId)
 module.exports = router;
