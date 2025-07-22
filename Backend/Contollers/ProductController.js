@@ -90,5 +90,27 @@ const getFishByShop = async (req,res)=>{
    }
 }
                                                                                                                      
-
-module.exports = {addFish,getFish,deleteFish,editFish,getFishByShop}
+const getFishByPincode = async (req,res)=>{
+    try {
+         const {zipCode} = req.params
+           
+       
+           const shops = await Owner.find({zipCode:zipCode}).select("-password")
+       
+           if(shops.length == 0){
+       return res.status(200).json({success:false,message:"No shops In This Pincode"})
+           }
+       
+       const shopsId = shops.map(shop=>shop._id)
+       
+       const fishes = await Fish.find({owner:{$in:shopsId}}).sort({rating:-1}).limit(10);
+       
+        if (fishes.length === 0) {
+             return res.status(200).json({ success: false, message: "No fishes found in these shops" });
+           }
+           res.status(200).json({success:true,fishes})
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message})
+    }
+}
+module.exports = {addFish,getFish,deleteFish,editFish,getFishByShop,getFishByPincode}

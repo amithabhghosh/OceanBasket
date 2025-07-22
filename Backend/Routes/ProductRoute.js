@@ -20,4 +20,6 @@ router.put("/editFish/:fishId",getAuthentication,editFish)
 //Get Fishes By Shop
 router.get("/getFishByShop/:ownerId",getFishByShop)
 
+//Get Fish By Pincode to show The 10 Fishes In the Customer Dashboard
+router.get("/getFishByPincode/:zipCode",getFishByPincode)
 module.exports = router
