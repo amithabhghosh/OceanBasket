@@ -19,3 +19,8 @@ export const getFishWithHighRating = async ({ zipCode, skip = 0 }) => {
   const response = await API.get(`/customer/getFishesWithRating/${zipCode}?skip=${skip}`);
   return response.data;
 };
+
+export const getFishesByPincode = async ({ zipCode}) => {
+  const response = await API.get(`/product/getFishByPincode/${zipCode}`);
+  return response.data;
+};

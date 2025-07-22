@@ -2,7 +2,7 @@ const express = require("express")
 const router= express.Router()
 
 const {getAuthentication} = require("../MiddleWare/getAuth");
-const { addFish, getFish, deleteFish, editFish,getFishByShop } = require("../Contollers/ProductController");
+const { addFish, getFish, deleteFish, editFish,getFishByShop, getFishByPincode } = require("../Contollers/ProductController");
 require("dotenv").config() 
 
 //Add Fish By the Owner
