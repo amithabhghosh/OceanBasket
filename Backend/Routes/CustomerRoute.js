@@ -54,6 +54,6 @@ router.delete("/deleteAddress", getAuthentication,deleteAddress)
 router.get("/listShopByPincode/:zipCode",listShopByPincode)
 
 //Get Fishes With High Rating
-router.get("/getFishesWithRating" , getFishWithHighRating)
+router.get("/getFishesWithRating/:zipCode" , getFishWithHighRating)
 
 module.exports = router;

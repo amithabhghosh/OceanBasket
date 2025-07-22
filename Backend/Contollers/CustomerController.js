@@ -521,7 +521,7 @@ const uniqueFishes = Array.from(uniqueFishMap.values());
    
     return res.status(200).json({ success: true, fishes,uniqueFishes });
   } catch (error) {
-    
+    res.status(500).json({success:false,message:error.message})
   }
 }
 module.exports = {getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}

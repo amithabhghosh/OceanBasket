@@ -12,7 +12,7 @@
     flex-direction: column;
     padding: 10px 70px 10px 70px;
     justify-content: center;
-   
+   color: #164863;
 }
 .shopsSectionTexts{
     display: flex;
@@ -21,9 +21,11 @@
 }
 .shopsSectionTexts p{
     font-size: 13px;
+    color: #164863;
 }
 .see-all-button{
     cursor: pointer;
+    color: #164863;
 }
 .see-all-button-smallScreen{
     display: none;
@@ -33,6 +35,9 @@
 .see-all-button ion-icon{
     position: relative;
     top: 1.5px;
+}
+.see-all-button-smallScreen{
+    display: none;
 }
 .shopSectionShopsList{
     display: grid;
@@ -52,7 +57,7 @@
 }
 @media (max-width:800px){
     .shopsSectionTexts{
-        margin: 0px 5px 5px 30px;
+       margin: 0px 5px 15px 8px;
     }
     .shopSectionShopsList{
         grid-template-columns: 1fr 1fr;
@@ -70,10 +75,10 @@
 }
 @media (max-width:500px){
     .ShopsSection{
-        padding: 5px;
+        padding: 15px;
     }
     .shopsSectionTexts{
-        margin: 0px 0px 5px 5px;
+        margin: 0px 5px 15px 5px;
     }
     .shopsSectionTexts p{
         font-size: 10px;

@@ -1,0 +1,112 @@
+.TopSelling{
+    background-color: #eaf6ff;
+    display: flex;
+    flex-direction: column;
+    padding: 70px 70px 10px 70px;
+    justify-content: center;
+color: #164863;
+}
+.topSellingTopSection{
+   display: flex;
+    justify-content: space-between;
+   margin: 0px 50px 15px 50px  ; 
+}
+.topSellingTopSection p{
+    font-size: 14px;
+}
+.seeAllButtonTopFishes{
+     cursor: pointer;
+}
+.seeAllButtonTopFishes ion-icon{
+ position: relative;
+    top: 1.5px;
+}
+.topSellingDownSection {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  
+}
+
+.topSellingFishCard {
+  background-color:#eaf6ff;
+  border-radius: 12px;
+  text-align: center;
+ 
+}
+
+.topSellingFishCardImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.topSellingFishCardImage img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.topSellingFishCard p{
+    font-size: 12px;
+}
+.seeAllButtonTopFishesMobile{
+    display: none;
+}
+@media (max-width:1100px){
+    .TopSelling{
+        padding: 10px;
+    }
+    .topSellingTopSection{
+margin: 0px 15px 15px 15px;
+    }
+}
+@media (max-width:800px){
+    .topSellingTopSection{
+       margin: 0px 5px 15px 8px ;
+    }
+    .TopSelling{
+        padding-left: 40px;
+    }
+    .seeAllButtonTopFishes ion-icon{
+
+    top: 2px;
+}
+.topSellingDownSection{
+    grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.seeAllButtonTopFishesMobile{
+    display: block;
+}
+.seeAllButtonTopFishes{
+    display: none;
+}
+.seeAllButtonTopFishesMobile ion-icon{
+position: relative;
+top: 2px;
+}
+.topSellingDownSection{
+     align-items: center;
+    justify-items: center;
+}
+}
+@media (max-width:500px){
+    .TopSelling{
+        padding: 15px;
+    }
+    .topSellingTopSection p{
+       font-size: 10px; 
+    }
+    .topSellingFishCardImage img{
+        width: 80px;
+        height: 80px;
+    }
+    .topSellingFishCard p{
+        font-size: 10px;
+    }
+    .seeAllButtonTopFishesMobile{
+        font-size: 10px;
+    }
+}

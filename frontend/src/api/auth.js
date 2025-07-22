@@ -14,3 +14,8 @@ export const getShopsByPincode = async ({pageParam = 0, limit,zipCode})=>{
     hasMore: response.data.shops.length === limit,
     }
 }
+
+export const getFishWithHighRating = async ({ zipCode, skip = 0 }) => {
+  const response = await API.get(`/customer/getFishesWithRating/${zipCode}?skip=${skip}`);
+  return response.data;
+};

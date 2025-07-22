@@ -47,7 +47,7 @@ const loadMoreRef = useRef();
     <div className='ShopsSection'>
 <div className="shopsSectionTexts">
     <p>Shops nearby</p>
-    {!showAll && (
+    {!showAll &&  (
         <p onClick={() => setShowAll(true)} className="see-all-button">
           See All<ion-icon name="arrow-forward-outline"></ion-icon>
         </p>

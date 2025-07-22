@@ -9,6 +9,7 @@
   flex-direction: column;
   transition: transform 0.2s ease;
   width: 100%;
+  color: #164863;
   /* margin: 1rem; */
 }
 
@@ -53,12 +54,12 @@
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 4px;
-  color: #222;
+  color: #164863;
 }
 
 .shopCardTextInfo p {
   font-size: 0.95rem;
-  color: #555;
+  color: #164863;
 }
 
 .shopCardDelivery {
@@ -71,7 +72,7 @@
   gap: 6px;
   color: #0077b6;
   font-weight: 500;
-      justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .deliveryNote {
