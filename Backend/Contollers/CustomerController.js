@@ -532,7 +532,11 @@ const getShopByShopId = async (req,res)=>{
     if(!owner){
       return res.status(201).json({success:false,message:"Shop Not Found"})
     }
-    res.status(201).json({success:true,owner})
+    const fishes = await Fish.find({owner:ownerId})
+    if(fishes.length == 0){
+      res.status(200).json({success:false,message:"No Fishes"})
+    }
+    res.status(201).json({success:true,owner,fishes})
   } catch (error) {
     res.status(500).json({success:false,message:error.message})
   }

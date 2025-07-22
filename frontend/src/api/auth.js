@@ -24,3 +24,8 @@ export const getFishesByPincode = async ({ zipCode}) => {
   const response = await API.get(`/product/getFishByPincode/${zipCode}`);
   return response.data;
 };
+
+export const getShopByShopId = async ({ownerId}) =>{
+const response = await API.get(`/customer/getShopByShopId/${ownerId}`)
+return response.data
+}

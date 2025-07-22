@@ -1,0 +1,56 @@
+.ShopPageBanner{
+    background-color:#eaf6ff ;
+    padding: 35px 80px 35px 80px ;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #164863;
+}
+.shopBannerTopSection p{
+    font-size: 14px;
+    cursor: pointer;
+}
+.shopBannerTopSection ion-icon{
+    position: relative;
+    border-radius: 50%;
+    border: .5px solid #164863;
+    top: 2px;
+}
+.shopBannerImageSection{
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+.shopBannerImageSection img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.shopBannerIcon{
+position: absolute;
+top: 14px;
+left: 16px;
+padding: 5px;
+font-size: 18px;
+border-radius: 5px;
+background-color: #eaf6ff;
+}
+@media (max-width:1100px){
+    .ShopPageBanner{
+        padding: 35px 50px 35px 50px ;
+    }
+}
+@media (max-width:800px){
+    .ShopPageBanner{
+        padding: 20px;
+    }
+    .shopBannerTopSection p{
+        display: none;
+    }
+}
+@media (max-width:500px){
+    .ShopPageBanner{
+        padding: 15px;
+    }
+}

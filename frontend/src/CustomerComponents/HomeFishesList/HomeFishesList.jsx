@@ -17,7 +17,7 @@ export const HomeFishesList = () => {
         keepPreviousData: true,
       });
 
-       if (isLoading) return <p>Loading...</p>;
+       if (isLoading) return <p className='loadingError'>Loading...</p>;
   if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
 
   const fishList = data?.fishes || [];

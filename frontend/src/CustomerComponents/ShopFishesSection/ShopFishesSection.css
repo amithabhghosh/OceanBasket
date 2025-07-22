@@ -1,0 +1,110 @@
+.ShopFishesSection{
+    display: flex;
+    flex-direction: column;
+    background-color:#eaf6ff ;
+    padding: 10px 80px 35px 80px ;
+    gap: 30px;
+    color: #164863;
+}
+.shopFishesTopSection{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.shopFishesSectionNamees{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+}
+.shopFishesSectionNamees h3{
+    font-size: 24px;
+    color: #164863;
+    font-weight: 600;
+}
+.shopFishesSectionNamees h4{
+    font-size: 17px;
+    font-weight: 400;
+    position: relative;
+    top: 2px;
+}
+.shopFishesSectionNavigations{
+display: flex;
+gap: 13px;
+}
+.shopFishesSectionNavigations h4{
+    font-size: 17px;
+}
+.shopFishesSectionNavigations ion-icon{
+    position: relative;
+    top: 2px;
+}
+.shopFishesSectionNavigations span{
+    font-size: 14px;
+    position: relative;
+    top: 2.5px;
+}
+.ShopFishesDownSection{
+    display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   gap: 20px;
+}
+@media (max-width:1100px){
+    .ShopFishesSection{
+                padding: 35px 50px 35px 50px;
+    }
+}
+@media (max-width:800px){
+    .ShopFishesSection{
+        padding: 20px;
+    }
+    .ShopFishesDownSection{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .shopFishesSectionNamees h3{
+font-size: 22px;
+    }
+    .shopFishesSectionNamees h4{
+        font-size: 15px;
+    }
+    .shopFishesSectionNavigations h4{
+        font-size: 15px;
+    }
+    .shopFishesSectionNavigations span{
+font-size: 12px;
+    }
+}
+@media (max-width:500px){
+    .ShopFishesSection{
+        padding: 15px;
+    }
+    .ShopFishesDownSection{
+        grid-template-columns: 1fr 1fr;
+    }
+     .shopFishesSectionNamees h3{
+font-size: 21px;
+    }
+    .shopFishesSectionNamees h4{
+        font-size: 14px;
+    }
+    .shopFishesSectionNavigations h4{
+        font-size: 14px;
+    }
+    .shopFishesSectionNavigations span{
+font-size: 11px;
+    }
+}
+@media (max-width:400px){
+     .shopFishesSectionNamees h3{
+font-size: 20px;
+    }
+    .shopFishesSectionNamees h4{
+        font-size: 13px;
+    }
+    .shopFishesSectionNavigations h4{
+        font-size: 13px;
+    }
+    .shopFishesSectionNavigations span{
+font-size: 10px;
+    }
+}

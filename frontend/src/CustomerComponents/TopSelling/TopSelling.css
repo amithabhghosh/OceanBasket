@@ -34,7 +34,9 @@ color: #164863;
   text-align: center;
  
 }
-
+.loadingError{
+    text-align: center;
+}
 .topSellingFishCardImage {
   display: flex;
   justify-content: center;
