@@ -1,0 +1,76 @@
+.bannerContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: #eaf6ff;
+  background-position: center 900px;
+   background-size: 100%;
+  padding-top: 20px;
+  margin-top: 40px;
+  padding-bottom: 10px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  position: absolute;
+  left: 50px;
+}
+
+.searchBar input {
+  padding: 12px 15px;
+  width: 500px;
+  border-radius: 50px;
+  background-color: rgba(238, 242, 255, 0.3);
+  border: .5px solid #eaf6ff;
+  outline: none;
+  color: #eaf6ff;
+  font-size: 16px;
+}
+.searchBar input::placeholder{
+    color: #eaf6ff;
+    font-size: 15px;
+}
+
+
+.searchBar ion-icon {
+  font-size: 20px;
+  color: #eaf6ff;
+  position: absolute;
+  right: 13px;
+  cursor: pointer;
+}
+
+
+.bannerImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+position: absolute;
+top: 40%;
+left: 13%;
+width: 1000px;
+height: 250px;
+overflow: hidden;
+}
+.bannerImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  
+}
+.bannerImage p{
+    position: absolute;
+    color: #eaf6ff;
+    font-size: 35px;
+    right: 100px;
+}
+.rightArrowIcon{
+    position: absolute;
+    top: 50px;
+    color: #eaf6ff;
+    border: .5px solid #eaf6ff;
+    border-radius: 50%;
+}

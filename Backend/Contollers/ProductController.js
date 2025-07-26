@@ -4,6 +4,7 @@ const Owner = require("../Models/Owner")
 const Fish = require("../Models/Fish")
 const FIshImage = require("../Models/FIshImage")
 
+
 require("dotenv").config() 
 
 const addFish = async (req,res)=>{
@@ -13,6 +14,11 @@ const addFish = async (req,res)=>{
     
 const fishImage = await FIshImage.findOne({FishName:name})
 
+const uniqueFish = await Fish.findOne({name,owner})
+
+if(uniqueFish){
+  return res.status(200).json({success:false,message:"Fish is Already Added"})
+}
    const fish = new Fish({
     owner,
     name,
@@ -113,4 +119,80 @@ const getFishByPincode = async (req,res)=>{
         res.status(500).json({success:false,message:error.message})
     }
 }
-module.exports = {addFish,getFish,deleteFish,editFish,getFishByShop,getFishByPincode}
+
+const getFishByFishId = async (req,res)=>{
+    try {
+        const {fishId} = req.params
+        const fishDetails = await Fish.findById(fishId)
+        if(!fishDetails){
+            return res.status(200).json({success:false,message:"Fish Not Found"})
+        }
+        const ownerDetails = await Owner.findById(fishDetails.owner)
+        res.status(201).json({success:true,fishDetails,ownerDetails})
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message})
+    }
+}
+
+const getShopsByFishId = async (req,res)=>{
+    try {
+      const { fishId, zipCode } = req.params;
+console.log(fishId,zipCode)
+    const fish = await Fish.findById(fishId);
+    if (!fish) {
+      return res.status(200).json({ success: false, message: "Fish Not Found" });
+    }
+
+    fishName = fish.name
+
+    const fishes = await Fish.find({name:fishName})
+
+    if(fishes.length==0){
+ return res.status(200).json({ success: false, message: "No fish Found" });
+    }
+
+  const fishExcept = fishes.filter(item => item._id.toString() !== fishId);
+if (fishExcept.length === 0) {
+  return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });
+}
+
+
+   const ownerIds = [...new Set(fishExcept.map(item => item.owner.toString()))];
+
+    if(ownerIds.length == 0){
+      return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });  
+    }
+
+
+   
+const matchingShops = await Owner.find({
+  _id: { $in: ownerIds, $ne: fish.owner },  
+  zipCode: zipCode
+});
+
+
+
+    if (matchingShops.length == 0) {
+      return res.status(200).json({ success: false, message: "This fish not available in shops of this pincode" });
+    }
+
+const matchingShopIds = matchingShops.map(shop => shop._id.toString());
+
+    const fishesWithOwner = await Fish.find({
+      owner: { $in: matchingShopIds },
+      name: fishName
+    
+    });
+console.log(fishesWithOwner)
+
+    return res.status(200).json({
+      success: true,
+     matchingShops,
+     fishesWithOwner 
+    });
+
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message})
+    }
+}
+module.exports = {getShopsByFishId,addFish,getFish,deleteFish,editFish,getFishByShop,getFishByPincode,getFishByFishId}

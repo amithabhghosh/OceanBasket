@@ -1,0 +1,251 @@
+.CartComponent{
+    padding: 90px 100px 30px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #164863;
+}
+.topCartSection p{
+font-size: 14px;
+cursor: pointer;
+}
+.topCartSection p ion-icon{
+    border-radius: 50%;
+    border: .5px solid #164863;
+    position: relative;
+    top: 3px;
+}
+.cartSection{
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 70px;
+}
+.cartListSection h2{
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.cartListSection{
+    min-width: 650px;
+}
+.cartLists{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 350px;
+  overflow: scroll;
+  padding-top: 10px;
+  margin-bottom: 10px;
+   scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;
+}
+.cartTotalSection{
+    margin-top: 5px;
+    border: .5px solid #164863;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px 40px;
+}
+.cartTotalHeading h3{
+     font-size: 30px;
+    font-weight: 400;
+    padding-bottom: 20px;
+    border-bottom: .25px solid #164863;
+}
+.cartTotalDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+    padding-bottom: 60px;
+    border-bottom: .25px solid #164863;
+}
+.cartItemSubTotal {
+     display: flex;
+     justify-content: space-between;
+}
+.cartShippingDetail{
+   display: flex;
+     justify-content: space-between; 
+}  
+.cartGstDetails{
+    display: flex;
+     justify-content: space-between;
+}
+.cartTotalDetailAmount{
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cartShoppingButtons{
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+.cartShoppingButtons button{
+    width: 100%;
+    padding: 12px 15px 12px 15px;
+    color: #ddf2fd;
+    background-color: #164863;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.cartShoppingButtons p{
+    font-size: 14px;
+    cursor: pointer;
+}
+.cartShoppingButtons p ion-icon{
+    border: .5px solid #164863;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    border-radius: 50%;
+}
+.cartCouponSection{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+.cartCouponInputSection{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 50%;
+}
+.cartCouponInputSection p{
+    font-size: 12px;
+    position: relative;
+    left: 5px;
+}
+.cartCouponInputBtns{
+    position: relative;
+}
+.cartCouponInputBtns input{
+width: 100%;
+border: .5px solid #164863;
+border-radius: 20px;
+padding: 10px 10px;
+background-color: transparent;
+color:#164863;
+font-size: 13px;
+outline: none;
+}
+.cartCouponInputBtns button{
+    position: absolute;
+right: 6px;
+top: 6px;
+padding: 5px 20px;
+background-color: #164863;
+color: #ddf2fd;
+cursor: pointer;
+border-radius: 15px;
+outline: none;
+border: none;
+}
+.cartUpdateCart{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.cartUpdateCart p{
+    font-size: 13px;
+}
+.cartUpdateCart ion-icon{
+    font-size: 13px;
+}
+.cartUpdateCartMobile{
+    display: none;
+}
+@media (max-width:1100px){
+    .CartComponent{
+padding: 90px 30px 30px 30px; 
+    }
+   .cartSection{
+    gap: 10px;
+   }
+   .cartTotalSection{
+    padding: 20px 30px;
+   }
+}
+@media (max-width:800px){
+    .cartSection{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .cartTotalDetails{
+        padding-bottom: 40px;
+    }
+    .cartShoppingButtons{
+        padding-top: 40px;
+    }
+    .cartListSection{
+    min-width: 0;
+}
+}
+@media (max-width:500px){
+    .CartComponent{
+padding: 70px 10px 30px 10px; 
+    }
+    .topCartSection p{
+        display: none;
+    }
+    .cartListSection h2{
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+    .cartUpdateCart{
+        display: none;
+    }
+    .cartCouponInputSection{
+        width: 100%;
+    }
+    .cartUpdateCartMobile{
+        display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+    
+    }
+    .cartUpdateCartMobile p{
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .cartUpdateCartMobile ion-icon{
+        font-size: 14px;
+    }
+    .cartCouponInputBtns input{
+        padding: 11px 10px;
+        font-size: 16px;
+        border-radius: 19px;
+    }
+    .cartCouponInputBtns button{
+     padding: 9px 23px; 
+     right: 5px;
+top: 4px;  
+    }
+    .cartTotalSection{
+padding: 25px 25px;
+    }
+    .cartTotalHeading h3{
+        font-size: 20px;
+    }
+    .cartTotalDetails p{
+        font-size: 13px;
+    }
+    .cartTotalDetailAmount p{
+        font-size: 13px;
+    }
+    .cartShoppingButtons button{
+        font-size: 12px;
+    }
+    .cartShoppingButtons p{
+        font-size: 12px;
+    }
+}

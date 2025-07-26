@@ -1,0 +1,141 @@
+.shopCard {
+  background-color: #eaf6ff;
+  border: 1px solid #cce0f5;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 320px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+  width: 100%;
+  color: #164863;
+  /* margin: 1rem; */
+}
+
+.shopCard:hover {
+  transform: translateY(-4px);
+}
+
+.shopCardImageSection {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.shopCardImageSection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shopIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  padding: 6px;
+  border-radius: 50%;
+  font-size: 20px;
+  z-index: 1;
+  color: #0077b6;
+}
+
+.shopCardDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 16px;
+  
+}
+
+.shopCardTextInfo h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #164863;
+}
+
+.shopCardTextInfo p {
+  font-size: 0.95rem;
+  color: #164863;
+}
+
+.shopCardDelivery {
+  text-align: right;
+}
+
+.deliveryTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0077b6;
+  font-weight: 500;
+  justify-content: flex-end;
+}
+
+.deliveryNote {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 4px;
+}
+@media (max-width:800px){
+   .shopCardImageSection{
+    height: 150px;
+} 
+}
+@media (max-width:500px){
+.shopCardDetails{
+    padding: 20px;
+}
+.shopCardTextInfo h3{
+    font-size: 12px;
+}
+.shopCardTextInfo p{
+    font-size: 9px;
+}
+.shopCardImageSection{
+    height: 100px;
+}
+.deliveryTop ion-icon{
+    font-size: 10px;
+}
+.deliveryTop h4{
+    font-size: 10px;
+}
+.deliveryNote{
+    font-size: 10px;
+}
+.shopIcon{
+    font-size: 13px;
+    padding: 4px;
+}
+}
+@media (max-width:400px){
+    .shopCardImageSection{
+        height: 80px;
+    }
+    .shopCardDetails{
+        padding: 10px;
+    }
+    .shopCardTextInfo h3{
+        font-size: 10px;
+    }
+    .shopCardTextInfo p{
+        font-size: 7px;
+    }
+    .deliveryTop ion-icon{
+        font-size: 8px;
+    }
+    .deliveryTop h4{
+        font-size: 8px;
+    }
+    .deliveryNote{
+        font-size: 8px;
+    }
+    .shopIcon{
+    font-size: 10px;
+    padding: 3px;
+}
+}

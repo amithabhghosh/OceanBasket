@@ -1,0 +1,157 @@
+.cart{
+ display: flex;
+ gap: 60px;  
+ position: relative; 
+width: 100%;
+padding-bottom: 20px;
+border-bottom: .25px solid #164863;
+}
+.cartImage{
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+}
+.cartImage img{
+    width: 230px;
+    height: 150px;
+    border-radius: 10px;
+}
+.cartDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.cartDetails h4{
+    font-size: 18px;
+    font-weight: 400;
+}
+.cartDetails p{
+    font-size: 17px;
+     font-weight: 500;
+}
+.cartDetails p span{
+   font-weight: 300;
+}
+.cartPriceQunatitySection{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    bottom: 15px;
+}
+.cartQuantitySection{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.cartQuantitySection p{
+    border: .5px solid #164863;
+    font-size: 17px;
+    padding: 4px 10px 4px 10px;
+    border-radius: 10px;
+}
+.cartQuantitySection span{
+    text-align: center;
+    width: 50px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.cartPriceQunatitySection h4{
+    font-size: 19px;
+    position: relative;
+    top: 15px;
+}
+.cartDeleteIcon{
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    visibility: visible;
+    font-size: 25px;
+    color: red;
+    border: .5px solid red;
+    padding: 7px;
+    border-radius: 9px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+@media (max-width:1100px){
+    .cart{
+        gap: 20px;
+    }
+    .cartImage img{
+        width: 200px;
+        height: 120px;
+    }
+    .cartDetails p{
+        font-size: 15px;
+    }
+    .cartDetails h4{
+        font-size: 16px;
+    }
+}
+@media (max-width:500px){
+    .cart{
+        gap: 10px;
+    }
+    .cartImage img{
+        width: 120px;
+        height: 80px;
+    }
+    .cartDetails{
+        width: 100px;
+    }
+    .cartDetails h4{
+        font-size: 12px;
+    }
+    .cartDetails p{
+        font-size: 10px;
+    }
+    .cartPriceQunatitySection{
+        flex-direction: column-reverse;
+    }
+    .cartQuantitySection{
+        gap: 3px;
+    }
+    .cartQuantitySection p{
+        font-size: 12px;
+            padding: 2px 8px 2px 8px;
+                border-radius: 6px;
+    }
+    .cartQuantitySection span{
+        font-size: 10px;
+    }
+    .cartPriceQunatitySection h4{
+        font-size: 12px;
+    }
+    .cartDeleteIcon{
+font-size: 13px;
+padding: 3px;
+    border-radius: 5px;
+   
+    }
+}
+@media (max-width:400px){
+    .cart{
+        gap: 5px;
+        padding-bottom: 10px;
+    }
+    .cartImage{
+        gap: 5px;
+    }
+    .cartImage img{
+        width: 70px;
+        height: 50px;
+    }
+    .cartDetails{
+        width: 70px;
+        margin-top: 10px;
+        gap: 5px;
+    }
+    .cartDetails h4{
+        font-size: 8px;
+    }
+    .cartDetails p{
+        font-size: 8px;
+    }
+}

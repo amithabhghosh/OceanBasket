@@ -21,7 +21,7 @@ export const ShopPageBanner = () => {
 
   
   if (isLoading) return <p className='loadingError'>Loading...</p>;
-  if (isError || data?.success === false) return <p style={{textAlign:center}}>{data?.message || "Error fetching fishes"}</p>;
+  if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
 console.log(data)
   return (
     <div className='ShopPageBanner'>

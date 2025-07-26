@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from 'react'
+import "./CartComponent.css"
+import fish from "../../assets/images/fish4.jpg"
+import { getCart } from '../../api/auth';
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
+import { useQuery } from '@tanstack/react-query';
+import { Cart } from '../Cart/Cart';
+export const CartComponent = () => {
+const token = localStorage.getItem("userToken");
+const [totalPrice, setTotalPrice] = useState(0);
+  const {
+      data,
+      isLoading,
+      isError,
+      refetch,
+    } = useQuery({
+      queryKey: ['getCart',token],
+      queryFn: () => getCart({token}),
+      keepPreviousData: true,
+    });
+
+
+      const calculateTotalPrice = () => {
+    if (data?.cart?.[0]?.items?.length > 0) {
+      const total = data.cart[0].items.reduce((sum, item) => {
+        return sum + item.price;
+      }, 0);
+      setTotalPrice(total);
+    } else {
+      setTotalPrice(0);
+    }
+  };
+
+useEffect(() => {
+  if (data) {
+    calculateTotalPrice();
+  }
+}, [data]);
+
+const handleCartChange = async () => {
+  await refetch(); 
+};
+
+
+
+      if (isLoading) return<LoadingSpinner/>
+  if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
+console.log(data)
+
+  return (
+    <div className='CartComponent'>
+        <div className="topCartSection">
+             <p><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
+        </div>
+        <div className="cartSection">
+            <div className="cartListSection">
+<h2>Your Basket</h2>
+<div className="cartLists">
+{data.cart[0]?.items?.map((item)=>(
+  <Cart image={item.image} name={item.name} fishPrice={item.fishPrice} price={item.price} quantity={item.quantity} productId={item.productId} refetch={refetch} id={item._id} handleCartChange={handleCartChange}/>
+))}
+</div>
+
+<div className="cartUpdateCartMobile">
+<ion-icon name="repeat-outline"></ion-icon>
+<p>Update cart</p>
+              </div>
+
+<div className="cartCouponSection">
+              <div className="cartCouponInputSection">
+                <p>Have a coupon? Enter your code</p>
+                <div className="cartCouponInputBtns">
+ <input type="text" placeholder='Coupon Code'/>
+ <button>Apply</button>
+                </div>
+               
+              </div>
+              <div className="cartUpdateCart">
+<ion-icon name="repeat-outline"></ion-icon>
+<p>Update cart</p>
+              </div>
+              
+            </div>
+
+            </div>
+
+            
+            <div className="cartTotalSection">
+<div className="cartTotalHeading">
+  <h3>Your Total</h3>
+</div>
+<div className="cartTotalDetails">
+  <div className="cartItemSubTotal">
+    <p>Item Total</p>
+    <p>₹{data.cart[0]?.totalPrice}</p>
+  </div>
+  <div className="cartShippingDetail">
+    <p>Shipping</p>
+    <p>₹30</p>
+  </div>
+  <div className="cartGstDetails">
+    <p>GST & Other Charges</p>
+    <p>₹10</p>
+  </div>
+</div>
+<div className="cartTotalDetailAmount">
+  <p>Total</p>
+  <p>₹{data.cart[0]?.totalPrice + 30 + 10}</p>
+</div>
+<div className="cartShoppingButtons">
+  <button>Proceed to Checkout</button>
+  <p><ion-icon name="arrow-back-outline"></ion-icon>Continue Shopping</p>
+</div>
+            </div>
+        </div>
+    </div>
+  )
+}

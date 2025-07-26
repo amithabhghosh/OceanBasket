@@ -161,7 +161,7 @@ try {
 
 const addCart = async(req,res)=>{
 try {
-    const { productId,quantity } = req.body;
+    const { productId,quantity,shopId } = req.body;
     const userId = req.user.id;
 
     if (!productId || !quantity) {
@@ -181,9 +181,11 @@ let cart = await Cart.findOne({ userId });
       const newItem = {
         productId,
         name: fish.name,
-        image: fish.images[0] || '',
-        price: fish.pricePerKg,
+        image: fish.image || '',
+        fishPrice: fish.pricePerKg,
+        price:fish.pricePerKg*quantity,
         quantity,
+        shopId
       };
 
       const totalPrice = quantity * fish.pricePerKg;
@@ -196,30 +198,33 @@ let cart = await Cart.findOne({ userId });
       });
 
       await cart.save();
-      return res.status(201).json(cart);
+      return res.status(201).json({success:true,cart});
     }
 
-    const itemIndex = cart.items.findIndex(item=>item.productId.toString() == productId)
+   const itemExists = cart.items.some(item => item.productId.toString() === productId);
 
-    if (itemIndex > -1) {
-     
-      cart.items[itemIndex].quantity = quantity;
-    } else {
-      
-      cart.items.push({
-        productId,
-        name: fish.name,
-        image: fish.images[0] || '',
-        price: fish.pricePerKg,
-        quantity,
-      });
-    }
+if (itemExists) {
+  return res.status(400).json({
+    success: false,
+    message: 'Product already exists in cart',
+  });
+}
+
+cart.items.push({
+  productId,
+  name: fish.name,
+  image: fish.image || '',
+   fishPrice: fish.pricePerKg,
+  price:fish.pricePerKg*quantity*2,
+  quantity,
+  shopId,
+});
 
     cart.totalQuantity = cart.items.reduce((sum, item) => sum + item.quantity, 0);
     cart.totalPrice = cart.items.reduce((sum, item) => sum + item.price*item.quantity, 0);
 
     await cart.save();
-    res.status(200).json(cart);
+    res.status(200).json({success:true,cart});
   } catch (error) {
     res.status(500).json({ success: false, message: "Error adding to cart", error: error.message });
   }
@@ -263,18 +268,24 @@ const addCartIfNotadded = async (req,res)=>{
 
 const deleteCartItem = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
     const { productId } = req.params;
 
-    let cart = await Cart.findOne({ userId });
+    console.log("USER:", userId);
+    console.log("PRODUCT TO DELETE:", productId);
+
+    const cart = await Cart.findOne({ userId });
     if (!cart) {
+      console.log("Cart not found");
       return res.status(404).json({ success: false, msg: 'Cart not found' });
     }
 
     const itemIndex = cart.items.findIndex(
       item => item.productId.toString() === productId
     );
+
     if (itemIndex === -1) {
+      console.log("Item not found in cart");
       return res.status(404).json({ success: false, msg: 'Item not found in cart' });
     }
 
@@ -287,6 +298,7 @@ const deleteCartItem = async (req, res) => {
 
     res.status(200).json({ success: true, msg: 'Item removed from cart', cart });
   } catch (error) {
+    console.error("DELETE CART ERROR:", error);
     res.status(500).json({
       success: false,
       message: 'Error deleting item',
@@ -295,25 +307,48 @@ const deleteCartItem = async (req, res) => {
   }
 };
 
-const updateQuantity =async (req,res)=>{
-     try {
-        const { productId, quantity, price } = req.body;
-        const userId = req.user.id;
+
+const updateQuantity = async (req, res) => {
+  try {
+    const { productId, quantity, price } = req.body;
+    const userId = req.user.id;
+
+    const cart = await Cart.findOneAndUpdate(
+      {
+        userId,
+        'items.productId': productId
+      },
+      {
+        $set: {
+          'items.$.quantity': quantity,
+          'items.$.price': price * quantity
+        }
+      },
+      { new: true }
+    );
+
+    if (!cart) {
+      return res.status(404).json({ success: false, message: 'Cart item not found' });
+    }
     
-        const updated = await Cart.findOneAndUpdate(
-          { user: userId, productId },
-          {
-            quantity,
-            price: price * quantity * 2
-          },
-          { new: true }
-        );
-    
-        res.status(200).json({ success: true, cartItem: updated });
-      } catch (error) {
-        res.status(500).json({ success: false, message: "Update failed", error: error.message });
-      }
+const updatedCart = await Cart.findOne({ userId });
+
+if (updatedCart) {
+  const newTotalPrice = updatedCart.items.reduce((sum, item) => sum + item.price, 0);
+  const newTotalQuantity = updatedCart.items.reduce((sum, item) => sum + item.quantity, 0);
+
+  updatedCart.totalPrice = newTotalPrice;
+  updatedCart.totalQuantity = newTotalQuantity;
+  await updatedCart.save();
 }
+
+
+    res.status(200).json({ success: true, cartItem: cart });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Update failed", error: error.message });
+  }
+};
+
 
 const getProfile = async (req,res)=>{
  try {
@@ -534,7 +569,7 @@ const getShopByShopId = async (req,res)=>{
     }
     const fishes = await Fish.find({owner:ownerId})
     if(fishes.length == 0){
-      res.status(200).json({success:false,message:"No Fishes"})
+      return res.status(200).json({success:false,message:"No Fishes"})
     }
     res.status(201).json({success:true,owner,fishes})
   } catch (error) {

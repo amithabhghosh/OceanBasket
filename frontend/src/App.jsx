@@ -11,6 +11,8 @@ import { LoginSignUp } from './CustomerPages/LoginSignUp'
 import { DashboardPage } from './CustomerPages/DashboardPage'
 import { PincodeManager } from './PincodeManager'
 import { ShopDetailPage } from './CustomerPages/ShopDetailPage'
+import { FishDetailPage } from './CustomerPages/FishDetailPage'
+import { CartPage } from './CustomerPages/CartPage'
 
 
 const router= createBrowserRouter([
@@ -19,8 +21,14 @@ const router= createBrowserRouter([
   {path:"/dashboard",element:<PincodeManager>
     <DashboardPage/>
     </PincodeManager>},
-    {path:"/:ownerId",element:<PincodeManager>
+    {path:"shop/:ownerId",element:<PincodeManager>
       <ShopDetailPage/>
+    </PincodeManager>},
+    {path:"fish/:fishId",element:<PincodeManager>
+      <FishDetailPage/>
+    </PincodeManager>},
+    {path:"/cart",element:<PincodeManager>
+      <CartPage/>
     </PincodeManager>}
   
 

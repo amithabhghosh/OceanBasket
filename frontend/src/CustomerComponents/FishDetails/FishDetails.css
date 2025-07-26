@@ -1,0 +1,275 @@
+.FishDetails{
+  display: flex;
+    flex-direction: column;
+    background-color:#eaf6ff ;
+    padding: 30px 100px 35px 100px ;
+    gap: 30px;
+    color: #164863; 
+    margin-top: 60px; 
+}
+.fishDetailTopSection p{
+     font-size: 14px;
+    cursor: pointer;
+}
+.fishDetailTopSection ion-icon{
+  position: relative;
+    border-radius: 50%;
+    border: .5px solid #164863;
+    top: 2px;
+}
+.fishDetailMidSection{
+    display: flex;
+    gap: 60px;
+}
+.fishDetailSectionImage{
+    overflow: hidden;
+    width:400px;
+    height: 300px;
+}
+.fishDetailSectionImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.fishMidSectionFullDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+}
+.fishMidSectionFullDetails h3{
+    font-size: 30px;
+    font-weight: 500;
+}
+.fishMidSectionPriceDetails{
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.fishMidSectionPriceDetails span{
+    font-weight: 300;
+}
+.fishMidSectionQuantityDetails{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    
+}
+.fishMidQuantity{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    /* padding-top: 20px; */
+}
+.fishMidQuantity p{
+    background-color: #164863;
+    color: #eaf6ff;
+    padding: 10px 20px 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+font-size: 20px;
+}
+.fishMidQuantity span{
+    font-size: 17px;
+    font-weight: 500;
+    width: 80px;
+    text-align: center;
+}
+.fishMidItemTotalSection{
+    position: relative;
+    top: 10px;
+}
+.fishMidItemTotalSection p{
+    font-size: 18px;
+}
+.fishMidItemTotalSection span{
+    font-weight: 500;
+}
+.fishMidSectionAddtoCarts{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.fishMidSectionAddToCartBtn{
+padding: 15px 120px 15px 120px;
+border-radius: 15px;
+border: none;
+outline: none;
+background-color: #164863;
+color: #eaf6ff;
+font-size: 15px;
+font-weight: 300;
+cursor: pointer;
+}
+.fishMidShopSelectSection{
+    display: flex;
+    gap: 15px;
+    border: .5px solid #164863;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+ 
+    align-items: center;
+}
+.fishMidShopSelectSection button{
+    margin-left: 30px;
+    padding: 3px 17px 3px 17px;
+    border: .5px solid #164863;
+    background-color: #eaf6ff;
+    border-radius: 5px;
+    color: #164863;
+    font-size: 10px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.switchShopBox {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding: 1rem;
+  backdrop-filter: blur(1px);
+  background-color: rgba(255, 255, 255, 0.1); /* glass effect */
+  border-radius: 16px 0px 16px 16px;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  border: .5px solid #164863;
+  position: relative;
+  bottom: 75px;
+  margin: 0px 160px 0px 100px;
+  z-index: 1;
+}
+
+.switchShopBox::-webkit-scrollbar {
+  height: 8px;
+}
+
+.switchShopBox::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* Card style (you can place this inside ShopCardRelated.css) */
+
+
+/* Responsive layout for small screens */
+
+
+@media (max-width:1100px){
+    .FishDetails{
+                padding: 30px 30px 35px 30px;
+    }
+    .fishMidSectionAddtoCarts{
+gap:20px;
+    }
+    .fishMidSectionAddToCartBtn{
+padding: 15px 70px 15px 70px;
+    }
+    .fishMidShopSelectSection{
+        gap: 10px;
+    }
+    .fishMidShopSelectSection button{
+        margin-left: 10px;
+    }
+    .switchShopBox{
+        bottom: 75px;
+  margin: 0px 30px 0px 140px;
+    }
+}
+@media (max-width:800px){
+    .fishDetailMidSection{
+        flex-direction: column;
+        gap: 10px;
+        
+    }
+    .fishDetailSectionImage{
+        width: 100%;
+        height: 250px;
+    }
+    .fishMidSectionAddToCartBtn{
+        width: 50%;
+   
+
+    }
+    .fishMidShopSelectSection{
+        width: 50%;
+        justify-content: space-around;
+    }
+     .switchShopBox {
+    flex-wrap: wrap;
+    overflow-x: unset;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+      margin: 0px 5px 0px 140px;
+      padding: 5px;
+  }
+}
+
+@media (max-width:500px){
+     .FishDetails{
+                padding: 30px 20px 35px 20px;
+                gap: 15px;
+    }
+    .fishDetailTopSection{
+        display: none;
+    }
+    .fishMidSectionHeadings h3{
+font-size: 15px;
+    }
+    .fishMidSectionPriceDetails{
+        font-size: 15px;
+    }
+    .fishMidQuantity{
+        gap: 5px;
+    }
+    .fishMidSectionQuantityDetails{
+        gap: 15px;
+    }
+    .fishMidQuantity p{
+        padding: 5px 10px 5px 10px;
+    }
+    .fishMidQuantity span{
+        font-size: 10px;
+        width: 40px;
+    }
+    .fishMidItemTotalSection{
+        top: 5px;
+    }
+    .fishMidItemTotalSection p{
+        font-size: 12px;
+    }
+    .fishMidSectionAddtoCarts{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .fishMidSectionAddToCartBtn{
+        width: 100%;
+    }
+    .fishMidShopSelectSection{
+        width: 100%;
+    }
+    .fishDetailDownSection{
+        font-size: 12px;
+    }
+    .switchShopBox{
+           bottom: 40px;
+  margin: 0px 5px 0px 60px;
+  padding: 5px;
+    }
+}
+@media (max-width:400px){
+    .FishDetails{
+                padding: 30px 10px 20px 10px;
+                gap: 10px;
+    }
+    .fishMidSectionHeadings h3{
+        font-size: 12px;
+    }
+    .fishMidSectionPriceDetails{
+        font-size: 12px;
+    }
+    .fishDetailSectionImage{
+        height: 200px;
+    }
+}

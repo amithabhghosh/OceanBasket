@@ -24,6 +24,7 @@ const ownerSchema = new mongoose.Schema({
       default: [0, 0]
     }
   },
+
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
   isActive: { type: Boolean, default: true },
   shopOpenTime: String,

@@ -29,3 +29,32 @@ export const getShopByShopId = async ({ownerId}) =>{
 const response = await API.get(`/customer/getShopByShopId/${ownerId}`)
 return response.data
 }
+
+export const getFishByFishId = async ({fishId})=>{
+  const response = await API.get(`/product/getFishByFishId/${fishId}`)
+  return response.data
+}
+
+export const getShopsByFishId = async ({fishId,zipCode})=>{
+  const response = await API.get(`/product/getShopByFishId/${fishId}/${zipCode}`)
+  return response.data
+}
+
+export const addtoCart = async ({productId,quantity,shopId,token})=>{
+  const response = await API.post("/customer/cart",{productId,quantity,shopId},{headers:{token:token}})
+  return response.data;
+}
+
+export const getCart = async ({token})=>{
+  const response = await API.get("/customer/cart",{headers:{token:token}})
+  return response.data
+}
+
+export const updateCart = async ({token,productId, quantity, price})=>{
+  const response = await API.put("/customer/cart",{productId, quantity, price},{headers:{token:token}})
+  return response.data
+}
+export const deleteCart = async ({token,productId})=>{
+  const response = await API.delete(`/customer/cart/${productId}`,{headers:{token:token}})
+  return response.data
+}

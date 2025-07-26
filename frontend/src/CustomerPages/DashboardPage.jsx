@@ -3,6 +3,7 @@ import { Navbar } from '../CustomerComponents/Navbar/Navbar'
 import { ShopsSection } from '../CustomerComponents/ShopsSection/ShopsSection'
 import { TopSelling } from '../CustomerComponents/TopSelling/TopSelling'
 import { HomeFishesList } from '../CustomerComponents/HomeFishesList/HomeFishesList'
+import { HomeBanner } from '../CustomerComponents/HomeBanner/HomeBanner'
 
 export const DashboardPage = () => {
     
@@ -10,6 +11,7 @@ export const DashboardPage = () => {
 
     <div>
         <Navbar/>
+        <HomeBanner/>
         <ShopsSection/>
         <TopSelling/>
         <HomeFishesList/>
