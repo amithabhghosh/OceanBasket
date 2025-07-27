@@ -58,3 +58,27 @@ export const deleteCart = async ({token,productId})=>{
   const response = await API.delete(`/customer/cart/${productId}`,{headers:{token:token}})
   return response.data
 }
+
+export const getProfile = async ({token})=>{
+  const response = await API.get("/customer/getprofile",{headers:{token:token}})
+  return response.data
+}
+
+export const updateProfile = async ({token,name, email, alternativeNumber})=>{
+  const response = await API.put("/customer/updateProfile",{name,email,alternativeNumber},{headers:{token:token}})
+  return response.data
+}
+
+export const updateAddress = async ({token, addressLine1, addressLine2, city, zipCode, landmark})=>{
+  const response = await API.put("/customer/editAddress",{ addressLine1,addressLine2,city,zipCode,landmark},{headers:{token:token}})
+  return response.data
+}
+export const addAddress = async ({token, addressLine1,addressLine2,city,zipCode,landmark})=>{
+  const response = await API.post("/customer/addAddress",{ addressLine1,addressLine2,city,zipCode,landmark},{headers:{token:token}})
+  return response.data
+}
+
+export const deleteAddress = async ({token})=>{
+  const response = await API.delete("/customer/deleteAddress",{headers:{token:token}})
+    return response.data
+}

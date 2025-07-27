@@ -13,6 +13,7 @@ import { PincodeManager } from './PincodeManager'
 import { ShopDetailPage } from './CustomerPages/ShopDetailPage'
 import { FishDetailPage } from './CustomerPages/FishDetailPage'
 import { CartPage } from './CustomerPages/CartPage'
+import { ProfilePage } from './CustomerPages/ProfilePage'
 
 
 const router= createBrowserRouter([
@@ -29,6 +30,9 @@ const router= createBrowserRouter([
     </PincodeManager>},
     {path:"/cart",element:<PincodeManager>
       <CartPage/>
+    </PincodeManager>},
+    {path:"/profile",element:<PincodeManager>
+      <ProfilePage/>
     </PincodeManager>}
   
 

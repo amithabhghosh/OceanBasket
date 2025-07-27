@@ -369,7 +369,7 @@ const getProfile = async (req,res)=>{
 const updateProfile = async (req,res)=>{
      try {
         const userId = req.user.id;
-        const { name, phone, altPhone } = req.body;
+        const { name, email, alternativeNumber } = req.body;
     
         const user = await User.findById(userId);
         if (!user) {
@@ -378,8 +378,8 @@ const updateProfile = async (req,res)=>{
     
         // Update fields
         user.name = name || user.name;
-        user.phone = phone || user.phone;
-        user.altPhone = altPhone || user.altPhone;
+        user.email = email || user.email;
+        user.alternativeNumber = alternativeNumber || user.alternativeNumber;
     
         await user.save();
     
@@ -437,7 +437,8 @@ const addAddress =async (req,res)=>{
           addressLine1,
           addressLine2,
           landmark,
-          city
+          city,
+          default:true
         };
     
         // Add to the address array
@@ -458,17 +459,23 @@ const addAddress =async (req,res)=>{
 const editAddress = async (req,res)=>{
       try {
         const userId = req.user.id;
-        const { index, updatedAddress } = req.body;
+        const { addressLine1,
+      addressLine2,
+      city,
+      zipCode,
+      landmark } = req.body;
     
         const user = await User.findById(userId);
     
         if (!user) return res.status(404).json({ success: false, message: "User not found" });
     
-        if (!user.address || index >= user.address.length)
-          return res.status(400).json({ success: false, message: "Invalid address index" });
-    
+       
         // Update the specific address
-        user.address[index] = updatedAddress;
+        user.address[0] = {addressLine1,
+      addressLine2,
+      city,
+      zipCode,
+      landmark};
     
         await user.save();
     
@@ -482,20 +489,15 @@ const editAddress = async (req,res)=>{
 const deleteAddress = async (req,res)=>{
       try {
     const userId = req.user.id;
-    const { index } = req.body;
-
-    // Validate index
-    if (index === undefined || isNaN(index)) {
-      return res.status(400).json({ success: false, message: "Invalid address index" });
-    }
+   
 
     const user = await User.findById(userId);
-    if (!user || !user.address || index >= user.address.length) {
+    if (!user || user.address.length == 0) {
       return res.status(404).json({ success: false, message: "Address not found" });
     }
 
-    // Remove address from array
-    user.address.splice(index, 1);
+    
+    user.address.splice(0, 1);
     await user.save();
 
     res.status(200).json({ success: true, addresses: user.address });

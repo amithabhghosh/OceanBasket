@@ -18,7 +18,7 @@ const navigate = useNavigate()
         <>
 <ion-icon name="location-outline"></ion-icon>
     <ion-icon name="cart-outline" onClick={()=>navigate("/cart")}></ion-icon>
-    <ion-icon name="person-outline"></ion-icon>
+    <ion-icon name="person-outline" onClick={()=>navigate("/profile")}></ion-icon>
         </>
     )
 : (

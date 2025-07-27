@@ -1,0 +1,216 @@
+.Profile{
+  margin: 90px 100px 0px 100px ;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+    color: #164863;
+    border-bottom: .5px solid #164863;
+}
+.profileTop p{
+    cursor: pointer;
+font-size: 14px;
+}
+
+.profileTop ion-icon{
+    position: relative;
+    top: 2px;
+    border: .5px solid #164863;
+    border-radius: 50%;
+}
+.profileMainSection{
+    display: flex;
+    justify-content: space-between;
+}
+.profilePersonalPortion{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.profilePersonalPortion h2{
+    font-size: 30px;
+    font-weight: 500;
+}
+.profilePersonalInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.profilePersonalInfo p{
+    font-size: 14px;
+}
+.profilePersonalButton button{
+padding: 10px 35px 10px 35px;
+background-color: #eaf6ff;
+border: .5px solid #164863;
+color: #164863;
+outline: none;
+border-radius: 12px;
+font-weight: 300;
+}
+.profileInfoEditSection{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    border: .5px solid #164863;
+border-radius: 20px;
+min-width: 350px;
+}
+.profileInfoEditSection input{
+    padding: 10px;
+    border: .5px solid #164863;
+    border-radius: 10px;
+
+}
+.profileInfoEditSection button{
+    background-color: #164863;
+    color: #eaf6ff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.profileAddressSection{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+}
+.profileAddressList{
+    border: .5px solid #164863;
+    min-width: 350px;
+    min-height: 230px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.alignBottom {
+    justify-content: flex-start;
+  align-items: flex-end;
+  padding: 29px;
+}
+.addressOne{
+    display: flex;
+    flex-direction: column;
+   gap: 20px;
+   align-items: flex-end;
+}
+.addressNumberOne{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.addressOneButtons{
+    display: flex;
+    gap: 15px;
+align-items: center;
+}
+.addressOneButtons ion-icon{
+    font-size: 20px;
+    border: .5px solid red;
+    color: red;
+    padding: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.addressOneButtons button{
+    padding: 10px 35px 10px 35px;
+background-color: #eaf6ff;
+border: .5px solid #164863;
+color: #164863;
+outline: none;
+border-radius: 12px;
+font-weight: 300;
+}
+.profileAddressList button{
+    padding: 8px 35px 8px 35px;
+    border-radius: 10px;
+    border: .5px solid #164863;
+    background-color:#eaf6ff;
+    
+    outline: none;
+    cursor: pointer;
+}
+.editAddress{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 350px; 
+    padding: 15px;
+    border-radius: 20px;
+    border: .5px solid #164863;
+}
+.editAddress input{
+     padding: 10px;
+    border: .5px solid #164863;
+    border-radius: 10px;
+}
+.editAddress button{
+     padding: 8px 35px 8px 35px;
+    border-radius: 10px;
+    border: .5px solid #eaf6ff;
+    background-color:#164863;
+    color: #eaf6ff;
+    outline: none;
+    cursor: pointer;
+}
+@media (max-width:1100px){
+    .Profile{
+        margin: 90px 70px 0px 70px;
+    }
+}
+@media (max-width:800px){
+    .Profile{
+        margin: 90px 50px 0px 50px;
+    }
+    .profileInfoEditSection{
+        min-width: 250px;
+    }
+}
+@media(max-width:500px){
+    .Profile{
+        margin: 90px 20px 0px 20px;
+    }
+    .profileMainSection{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .profilePersonalButton{
+        display: flex;
+        justify-content: center;
+    }
+    .profileTop{
+        display: none;
+    }
+    .profilePersonalPortion h2{
+        font-size: 25px;
+    }
+    .profilePersonalPortion{
+        gap: 20px;
+    }
+    .profileAddressSection{
+        gap: 10px;
+    }
+    .profileAddressList{
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .editAddress{
+        min-width: 100%;
+    }
+    .addressNumberOne p{
+        font-size: 15px;
+    }
+}
+@media (max-width:400px){
+    .Profile{
+        margin: 90px 10px 0px 10px;
+    }
+    .alignBottom{
+        padding: 15px;
+    }
+}
