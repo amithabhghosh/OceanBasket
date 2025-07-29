@@ -13,8 +13,9 @@
 @media (max-width:800px){
     .HomeFishesList{
         grid-template-columns: 1fr 1fr 1fr;
-                padding-left: 45px;
+                padding-left: 35px;
                 padding-top: 30px;
+                padding-right: 35px;
     }
 }
 @media (max-width:500px){

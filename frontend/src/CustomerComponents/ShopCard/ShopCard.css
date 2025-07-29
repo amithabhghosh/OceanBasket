@@ -10,7 +10,7 @@
   transition: transform 0.2s ease;
   width: 100%;
   color: #164863;
-  /* margin: 1rem; */
+  
 }
 
 .shopCard:hover {
@@ -30,7 +30,7 @@
   object-fit: cover;
 }
 
-.shopIcon {
+.shopCardImageSection ion-icon {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -38,7 +38,7 @@
   padding: 6px;
   border-radius: 50%;
   font-size: 20px;
-  z-index: 1;
+  z-index: 0;
   color: #0077b6;
 }
 
@@ -107,7 +107,7 @@
 .deliveryNote{
     font-size: 10px;
 }
-.shopIcon{
+.shopCardImageSection ion-icon{
     font-size: 13px;
     padding: 4px;
 }
@@ -134,7 +134,7 @@
     .deliveryNote{
         font-size: 8px;
     }
-    .shopIcon{
+    .shopCardImageSection ion-icon{
     font-size: 10px;
     padding: 3px;
 }

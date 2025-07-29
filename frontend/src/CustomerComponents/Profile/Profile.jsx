@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import {  useNavigate } from 'react-router-dom';
 import "./Profile.css"
 import { addAddress, deleteAddress, getProfile, updateProfile } from '../../api/auth';
 import { useQuery } from '@tanstack/react-query';
@@ -7,6 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { ContextAPI } from '../../Context/ContextAPI';
 export const Profile = () => {
+  const navigate = useNavigate();
     const {zipCode,setZipCode} = useContext(ContextAPI)
     const [isProfileEdit,setIsProfileEdit] = useState(false)
 const [isEditAddress,setIsEditAddress] = useState(false)
@@ -174,8 +176,8 @@ useEffect(() => {
     
   return (
     <div className='Profile'>
-<div className="profileTop">
-     <p><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
+<div className="profileTop" >
+     <p onClick={() => navigate(-1)}><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
 </div>
 <div className="profileMainSection">
     <div className="profilePersonalPortion">

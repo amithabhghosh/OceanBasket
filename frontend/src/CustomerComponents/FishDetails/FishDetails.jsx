@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./FishDetails.css"
 import { ContextAPI } from '../../Context/ContextAPI';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { addtoCart, getFishByFishId, getShopsByFishId } from '../../api/auth';
 import { useMutation } from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import { FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 export const FishDetails = () => {
+  const navigate = useNavigate()
   const token = localStorage.getItem("userToken");
     const {zipCode,setZipCode} = useContext(ContextAPI)
        const {fishId} = useParams()
@@ -80,7 +81,7 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
     <>
     <div className='FishDetails'>
 <div className="fishDetailTopSection">
- <p><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
+ <p><ion-icon name="arrow-back-outline" onClick={() => navigate(-1)}></ion-icon> Back</p>
 </div>
 <div className="fishDetailMidSection">
 

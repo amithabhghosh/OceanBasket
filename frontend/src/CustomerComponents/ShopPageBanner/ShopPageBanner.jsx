@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import "./ShopPageBanner.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ContextAPI } from '../../Context/ContextAPI'
 import { getShopByShopId } from '../../api/auth'
 import { useQuery } from '@tanstack/react-query';
 export const ShopPageBanner = () => {
+  const navigate = useNavigate()
     const {zipCode,setZipCode} = useContext(ContextAPI)
     const {ownerId} = useParams()
     console.log(ownerId)
@@ -27,7 +28,7 @@ console.log(data)
     <div className='ShopPageBanner'>
         <div className="shopBannerTopSection">
             
-            <p><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
+            <p onClick={() => navigate(-1)}><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
         </div>
         <div className="shopBannerImageSection">
             <img src={data.owner.shopImage} alt="" />

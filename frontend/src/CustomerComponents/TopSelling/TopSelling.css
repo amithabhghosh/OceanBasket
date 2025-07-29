@@ -22,17 +22,28 @@ color: #164863;
     top: 1.5px;
 }
 .topSellingDownSection {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  
+  gap: 16px; */
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem; /* spacing between cards */
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+.topSellingDownSection::-webkit-scrollbar {
+  display: none; /* Optional: Hide scrollbar */
 }
 
 .topSellingFishCard {
   background-color:#eaf6ff;
   border-radius: 12px;
   text-align: center;
- 
+
+ min-width: 200px; /* or whatever width fits your card */
+  flex-shrink: 0;
+  
 }
 .loadingError{
     text-align: center;
@@ -112,5 +123,8 @@ top: 2px;
     }
     .seeAllButtonTopFishesMobile{
         font-size: 10px;
+    }
+    .topSellingFishCard{
+         min-width: 110px;
     }
 }

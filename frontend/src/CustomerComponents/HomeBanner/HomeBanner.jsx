@@ -9,11 +9,14 @@ export const HomeBanner = () => {
         <input type="text" placeholder="Search" />
           <ion-icon name="search-outline"></ion-icon>
       </div>
-<div className="bannerImage">
-    <img src={banner} alt="" />
+      <div className="bannerImageContainer">
+<div className="bannerImage" style={{backgroundImage:`url(${banner})`}}>
+  
     <p>Pre <br />Book  <ion-icon name="arrow-forward-outline" className="rightArrowIcon"></ion-icon></p>
     
 </div>
+      </div>
+
       
     </div>
   )

@@ -5,7 +5,9 @@ import { getCart } from '../../api/auth';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { useQuery } from '@tanstack/react-query';
 import { Cart } from '../Cart/Cart';
+import { useNavigate } from 'react-router-dom';
 export const CartComponent = () => {
+  const navigate = useNavigate();
 const token = localStorage.getItem("userToken");
 const [totalPrice, setTotalPrice] = useState(0);
   const {
@@ -50,7 +52,7 @@ console.log(data)
   return (
     <div className='CartComponent'>
         <div className="topCartSection">
-             <p><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
+             <p onClick={() => navigate(-1)}><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
         </div>
         <div className="cartSection">
             <div className="cartListSection">

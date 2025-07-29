@@ -129,10 +129,11 @@ const { phone, password } = req.body;
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
+
     res.status(201).json({
       success:true,
       token,
-      user: { id: user._id, email: user.email,address:user.address },
+      user: { id: user._id, email: user.email,address:user.address,zipCode : user.zipCode },
       refreshToken
     });
   } catch (err) {
@@ -541,7 +542,7 @@ return res.status(200).json({success:false,message:"No shops In This Pincode"})
 const shopsId = shops.map(shop=>shop._id)
 
 const fishes = await Fish.find({owner:{$in:shopsId}}).sort({rating:-1}).skip(skip)
-                                                                       .limit(limit);
+                                                                      
 
  if (fishes.length === 0) {
       return res.status(200).json({ success: false, message: "No fishes found in these shops" });
@@ -554,8 +555,9 @@ fishes.forEach(fish => {
     uniqueFishMap.set(fish.name, fish);
   }
 });
+
 const uniqueFishes = Array.from(uniqueFishMap.values());
-   
+   console.log(shops)
     return res.status(200).json({ success: true, fishes,uniqueFishes });
   } catch (error) {
     res.status(500).json({success:false,message:error.message})

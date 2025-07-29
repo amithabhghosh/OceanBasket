@@ -36,10 +36,10 @@ export const TopSelling = () => {
 <div className="topSellingTopSection">
   <p>Top Selling Items</p>
 
-   {!seeAllClicked && fishList.length >= 5 && (
+   {/* {!seeAllClicked && fishList.length >= 5 && (
       <p onClick={handleSeeAll} className='seeAllButtonTopFishes'>See All<ion-icon name="arrow-forward-outline"></ion-icon></p>  
       )}
-  
+   */}
 </div>
 <div className="topSellingDownSection">
 {fishList.map((fish)=>(
@@ -51,9 +51,9 @@ export const TopSelling = () => {
   </div>
 ))}
 
-{!seeAllClicked && fishList.length >= 5 && (
+{/* {!seeAllClicked && fishList.length >= 5 && (
       <p onClick={handleSeeAll} className='seeAllButtonTopFishesMobile'>See All<ion-icon name="arrow-forward-outline"></ion-icon></p>  
-      )}
+      )} */}
 
 </div>
     </div>
