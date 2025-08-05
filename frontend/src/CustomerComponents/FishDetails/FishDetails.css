@@ -6,6 +6,7 @@
     gap: 30px;
     color: #164863; 
     margin-top: 60px; 
+  min-height: 500px;
 }
 .fishDetailTopSection p{
      font-size: 14px;

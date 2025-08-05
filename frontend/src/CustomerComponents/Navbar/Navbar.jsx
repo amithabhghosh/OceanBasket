@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
+  const location = useLocation();
+const currentPath = location.pathname;
+
   const [isLogin, setIsLogin] = useState(!!localStorage.getItem("userToken"));
   const [addressText, setAddressText] = useState('');
   const [showAddress, setShowAddress] = useState(false);
@@ -45,8 +48,8 @@ export const Navbar = () => {
               )}
             </div>
 
-            <ion-icon name="cart-outline" onClick={() => navigate("/cart")}></ion-icon>
-            <ion-icon name="person-outline" onClick={() => navigate("/profile")}></ion-icon>
+            <ion-icon name="cart-outline" onClick={() => navigate("/cart")} style={{ color: currentPath === '/cart' ? '#5fbaff' : '#eaf6ff' }}></ion-icon>
+            <ion-icon name="person-outline" onClick={() => navigate("/profile")} style={{ color: currentPath === '/profile' ? '#5fbaff' : '#eaf6ff' }}></ion-icon>
           </>
         ) : (
           <button className='Navbar-Sign-In-Button' onClick={() => navigate("/")}>Sign In</button>

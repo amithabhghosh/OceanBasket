@@ -1,0 +1,295 @@
+.fish-details-container{
+ padding-left: 90px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: space-between;
+ position: relative;
+ 
+ 
+}
+
+.fish-details-backbutton{
+    display: flex;
+    position: absolute;
+    left: 100px;
+    top: 40px;
+    font-size: larger;
+}
+
+.fish-details-backbutton ion-icon{
+  font-size: 30px;
+}
+
+.fish-details-backbutton p{
+    font-size: 20px;
+    position: relative;
+    bottom: 16px;
+    left: 3px;
+}
+
+
+.fish-details-items{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 70px;
+    position: absolute;
+    top: 110px;
+    
+   
+}
+
+
+
+.fish-details-image{
+    
+   height: 330px;
+   width: 441px;
+   border: 1px solid #ccc;
+   border-radius: 25px;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.fish-details-image img{
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+   border-radius: 20px;
+}
+
+
+.fish-details-detail{
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+    grid-column: span 2;
+    
+}
+
+.fish-details-fishname{
+   display: flex;
+   flex-direction: column;
+}
+
+.fish-details-fishname h3{
+    font-size: 40px;
+    color: #164863;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    font-weight: 500;
+}
+
+.fish-details-fishname span{
+  font-size: 40px;
+   font-family: 'Quicksand', sans-serif;
+   margin: 0;
+   color: #164863;
+   font-weight: lighter;
+}
+
+
+.fish-details-items h4{
+    font-size: x-large;
+    color: #164863;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+}
+
+.fish-details-price{
+  display: flex;
+     color: #164863;
+     font-family: 'Quicksand', sans-serif;
+     margin: 0;
+     font-size: x-large;
+}
+
+
+.fish-details-price p {
+  font-weight: 500;
+}
+
+.fish-details-price span{
+  position: relative;
+  top: 1px;
+  left: 4px;
+}
+
+
+.fish-details-detail p{
+  margin: 0;
+  color: #164863;
+}
+
+
+.fish-details-button{
+    width: 447px;
+    height: 58px;
+    border: 1px;
+    border-radius: 15px;
+}
+
+.fish-details-button button{
+    width: 100%;
+    height: 100%;
+    border: 1px;
+    border-radius: 15px;
+    background-color: #164863;
+    color:#ddf2fd;
+    font-size: larger;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+
+@media (max-width: 400px) {
+  .fish-details-container {
+    padding: 20px;
+    flex-direction: column;
+    position: relative;
+    bottom: 130px;
+    margin: 30px;
+  }
+
+  .fish-details-backbutton {
+    display: none;
+  }
+
+  .fish-details-items {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    position: relative;
+  }
+
+  .fish-details-image {
+    height: 230px;
+    width: 230px;
+  }
+
+ 
+  .fish-details-fishname h3,.fish-details-fishname span{
+     font-size: 5px;
+  }
+
+  .fish-details-detail p {
+    font-size: small;
+  }
+
+  .fish-details-price p,
+  .fish-details-price span {
+    font-size: 12px;
+  }
+
+  .fish-details-button {
+    width: 243px;
+  }
+}
+
+
+
+@media (max-width: 500px) {
+  .fish-details-container {
+    padding: 20px;
+    flex-direction: column;
+    position: relative;
+    bottom: 144px;
+    
+   
+  }
+
+  .fish-details-backbutton {
+    display: none;
+  }
+
+  .fish-details-items {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    position: relative;
+  }
+
+  
+
+  .fish-details-image {
+    height: 230px;
+    width: 341px;
+  }
+
+  .fish-details-items h3,
+  .fish-details-fishname span {
+    font-size: 20px;
+  }
+
+  .fish-details-detail p {
+    font-size: medium;
+  }
+
+  .fish-details-price p,
+  .fish-details-price span {
+    font-size: 20px;
+  }
+
+  .fish-details-button {
+    width: 343px;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .fish-details-container {
+    padding: 30px;
+    flex-direction: column;
+    bottom: 144px;
+    margin: 8px;
+   
+  }
+
+  .fish-details-backbutton {
+    display: none;
+  }
+
+  .fish-details-items {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    position: relative;
+    margin-top: 40px;
+  }
+
+  .fish-details-items h3 {
+    font-size: 20px;
+  }
+
+  .fish-details-image,
+  .fish-details-detail {
+    grid-column: span 1;
+    width: 100%;
+  }
+
+  .fish-details-button {
+    width: 100%;
+  }
+
+  .fish-details-button button {
+    font-size: medium;
+  }
+}
+
+
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .fish-details-container {
+    padding-left: 30px;
+    padding-right: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .fish-details-backbutton {
+    position: absolute;
+    left: 24px;
+  }
+
+  .fish-details-detail h3 {
+    font-size: 30px;
+  }
+}

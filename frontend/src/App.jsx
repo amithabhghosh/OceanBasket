@@ -14,6 +14,12 @@ import { ShopDetailPage } from './CustomerPages/ShopDetailPage'
 import { FishDetailPage } from './CustomerPages/FishDetailPage'
 import { CartPage } from './CustomerPages/CartPage'
 import { ProfilePage } from './CustomerPages/ProfilePage'
+import { FishPage } from './CustomerPages/FishPage'
+import { OwnerSignUp } from './OwnerPage/OwnerSignUp'
+import { OwnerDashboard } from './OwnerPage/OwnerDashboard'
+import { OwnerProfilePage } from './OwnerPage/OwnerProfilePage'
+import { OwnerFishDetails } from './OwnerPage/OwnerFishDetails'
+import { OwnerFishAdd } from './OwnerPage/OwnerFishAdd'
 
 
 const router= createBrowserRouter([
@@ -33,8 +39,15 @@ const router= createBrowserRouter([
     </PincodeManager>},
     {path:"/profile",element:<PincodeManager>
       <ProfilePage/>
-    </PincodeManager>}
-  
+    </PincodeManager>},
+    {path:"/Name/:fishName",element:<PincodeManager>
+      <FishPage/>
+    </PincodeManager>},
+    {path:"/ownerSignUp",element:<OwnerSignUp/>},
+  {path:"/ownerDashboard",element:<OwnerDashboard/>}
+  ,{path:"/ownerProfile",element:<OwnerProfilePage/>},
+  {path:"/owner/fish/:fishId",element:<OwnerFishDetails/>},
+  {path:"/owner/addFish",element:<OwnerFishAdd/>}
 
 ])
 

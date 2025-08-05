@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { ShopCardRelated } from '../ShopCardRelated/ShopCardRelated';
 import { FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 export const FishDetails = () => {
   const navigate = useNavigate()
@@ -72,7 +73,7 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
   },
 });
 
-  if (fishLoading) return <p className='loadingError'>Loading...</p>;
+  if (fishLoading) return <LoadingSpinner/>
   if (fishError || fishData?.success === false) return <p >{fishData?.message || "Error fetching fishes"}</p>;
 
 
@@ -81,7 +82,7 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
     <>
     <div className='FishDetails'>
 <div className="fishDetailTopSection">
- <p><ion-icon name="arrow-back-outline" onClick={() => navigate(-1)}></ion-icon> Back</p>
+ <p onClick={() => navigate(-1)}><ion-icon name="arrow-back-outline" ></ion-icon> Back</p>
 </div>
 <div className="fishDetailMidSection">
 

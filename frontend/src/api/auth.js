@@ -82,3 +82,8 @@ export const deleteAddress = async ({token})=>{
   const response = await API.delete("/customer/deleteAddress",{headers:{token:token}})
     return response.data
 }
+
+export const getFishesByName = async({zipCode,fishName})=>{
+  const response = await API.get(`/product/getFishByName/${fishName}/${zipCode}`)
+  return response.data
+}

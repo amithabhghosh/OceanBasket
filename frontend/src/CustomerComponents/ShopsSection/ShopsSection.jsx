@@ -4,22 +4,24 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getShopsByPincode } from '../../api/auth';
 import { ShopCard } from '../ShopCard/ShopCard';
 import { ContextAPI } from '../../Context/ContextAPI';
-export const ShopsSection = () => {
+export const ShopsSection = ({ data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch,showAll,setShowAll ,isLoading}) => {
 const {zipCode,setZipCode} = useContext(ContextAPI)
 
- const [showAll, setShowAll] = useState(false);
-  const limit = showAll ? 10 : 3;
-const {data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-    refetch,} = useInfiniteQuery({
-   queryKey: ['shops',zipCode, showAll],
-    queryFn: ({ pageParam = 0 }) => getShopsByPincode({ pageParam, limit, zipCode }),
-    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextPage : undefined,
-    enabled: !!zipCode,
-})
+
+  // const limit = showAll ? 10 : 3;
+// const {data,
+//     fetchNextPage,
+//     hasNextPage,
+//     isFetchingNextPage,
+//     isLoading,
+//     refetch,} = useInfiniteQuery({
+//    queryKey: ['shops',zipCode, showAll],
+//     queryFn: ({ pageParam = 0 }) => getShopsByPincode({ pageParam, limit, zipCode }),
+//     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextPage : undefined,
+//     enabled: !!zipCode,
+// })
+
+
 const loadMoreRef = useRef();
 
 
@@ -43,6 +45,8 @@ const loadMoreRef = useRef();
     };
   }, [loadMoreRef.current, hasNextPage, showAll]);
 
+
+  
   return (
     <div className='ShopsSection'>
 <div className="shopsSectionTexts">

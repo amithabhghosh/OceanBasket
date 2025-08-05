@@ -1,0 +1,189 @@
+.owner-card {
+    height: 155px;
+    background-color: #ddf2fd;
+    border: .5px solid #164863;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition:  0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.owner-card:hover {
+    transform: scale(1.02);
+  
+}
+
+.owner-card-image img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+   
+}
+
+.owner-card-price {
+   padding: 5px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    gap: 5px;
+    color: #164863;
+}
+
+.owner-card-price p {
+    font-weight: 500;
+}
+.owner-card-price p span{
+    font-weight: 300;
+}
+@media (max-width:1100px){
+
+    .owner-card {
+    
+height: 140px;
+   
+}
+
+.owner-card-image img {
+    width: 100%;
+    height: 85px;
+    object-fit: cover;
+ 
+}
+
+.owner-card-price {
+   padding: 5px 10px 7px 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    color: #164863;
+    gap: 4px;
+}
+
+}
+
+
+@media (max-width:800px){
+
+.owner-card {
+    
+   
+    height: 130px; 
+    
+}
+
+.owner-card-image img {
+
+    height: 85px;
+
+   
+}
+
+.owner-card-price {
+   
+    
+    font-size: 9px;
+    color: #164863;
+   
+}
+
+}
+
+
+@media (max-width:500px){
+
+
+
+.owner-card {
+    
+
+    height: 105px;
+   
+    border-radius: 12px;
+   
+}
+
+.owner-card-image img {
+    width: 100%;
+    height: 68px;
+    object-fit: cover;
+   
+}
+
+.owner-card-price {
+           padding: 0px 0px 0px 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 8px;
+    color: #164863;
+    
+}
+
+
+
+}
+
+
+
+@media (max-width:400px){
+
+
+
+.owner-card {
+    
+    border-radius: 10px;
+    height: 85px;
+    
+}
+
+.owner-card-image img {
+    width: 100%;
+    height: 55px;
+    object-fit: cover;
+  
+}
+
+.owner-card-price {
+  padding: 0px 0px 0px 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 7px;
+    color: #164863;
+    gap: 2px;
+   
+}
+
+
+
+
+}
+
+
+@media (max-width:350px){
+
+.owner-card {
+ 
+    height: 70px;
+   
+}
+
+.owner-card-image img {
+    width: 100%;
+    height: 44px;
+    object-fit: cover;
+   
+}
+
+.owner-card-price {
+    display: flex;
+    flex-direction: column;
+    font-size: 6px;
+    color: #164863;
+
+    
+}
+
+}

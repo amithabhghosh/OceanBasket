@@ -9,12 +9,12 @@ const fishSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true
+      
     },
     category: {
       type: String,
       enum: ['Bony Fish', 'Cartilaginous Fish', 'Freshwater Fish', 'Saltwater Fish', 'Oily Fish'],
-      required: true
+    
     },
  
     pricePerKg: {
@@ -27,7 +27,7 @@ const fishSchema = new mongoose.Schema(
       min: 0
     },
     image:{type:String} ,
-   
+   type: { type: String, enum: ["Small", "Medium", "Large"] },
     isAvailable: {
       type: Boolean,
       default: true

@@ -1,0 +1,238 @@
+.fish-table-wrapper {
+    margin: 90px 60px 30px 60px;
+  padding: 20px;
+  background-color: #ddf2fd;
+  color: #164863;
+}
+
+.fish-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ddf2fd;
+  border-radius: 10px;
+  overflow: hidden;
+  
+}
+
+.fish-table th{
+    padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  color: #164863; 
+  font-weight: 500;
+}
+.fish-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: .5px solid #164863;
+  color: #164863;
+}
+.ownerFishAddSectionNameTd{
+      padding: 12px;
+  text-align: left;
+  border-bottom: .5px solid #164863;
+  color: #164863;
+}
+.fishTypeSelectTd{
+    display: flex;
+    justify-content: center;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.input-group input {
+  padding: 8px;
+  border: .5px solid #164863;
+  border-radius: 10px;
+  width: 100px;
+  outline: none;
+}
+
+.fish-type-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #164863;
+  background-color: #f0f8ff;
+
+}
+
+.add-btn {
+  background-color: #164863;
+  color: white;
+  border: none;
+  padding: 8px 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.OwnerfishAddButtonSection{
+  text-align: center;
+}
+
+.add-btn:hover {
+  background-color: #112d4e;
+}
+
+.na-placeholder {
+  display: inline-block;
+  padding: 6px 10px;
+  border: .5px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  background-color: #f0f0f0;
+  min-width: 100px;
+  text-align: center;
+}
+.ownerFishAddMobileParent{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+
+
+
+
+.ownerFishAddMobile {
+  display: none;
+  align-items: center;
+  background-color: #e6f3fa;
+  padding: 15px;
+  border-radius: 12px;
+  border: .5px solid #164863;
+  gap: 10px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.ownerFishAddMobile-info {
+  flex: 1 1 150px;
+}
+
+.ownerFishAddMobile-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.ownerFishAddMobile-inputs {
+  display: flex;
+  gap: 8px;
+  flex: 1 1 200px;
+}
+
+.ownerFishAddMobile-inputs input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #164863;
+  outline: none;
+  width: 100px;
+}
+
+.ownerFishAddMobile-select select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100px;
+}
+
+.ownerFishAddMobile-btn {
+  padding: 8px 35px;
+  border: none;
+  background-color: #103a56;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+
+margin-left: 244px;
+}
+
+.ownerFishAddMobile-btn:hover {
+  background-color: #0d2d45;
+}
+
+
+@media (max-width:1100px){
+    .fish-table-wrapper{
+        margin: 90px 40px 20px 40px;
+    }
+    .ownerFishAddSectionNameTd{
+      font-size: 13px;
+    }
+}
+
+@media (max-width:800px){
+  .fish-table-wrapper{
+    margin: 90px 10px 20px 10px;
+  }
+  .ownerFishAddSectionNameTd{
+      font-size: 10px;
+    }
+    .input-group{
+      gap: 5px;
+    }
+    .input-group input{
+      width: 70px;
+      border-radius: 7px;
+      font-size: 11px;
+    }
+    .input-group span{
+      font-size: 12px;
+    }
+    .fish-table td{
+      padding: 10px;
+    }
+    .add-btn{
+          padding: 8px 28px;
+    }
+    .fish-table th{
+      font-size: 13px;
+      font-weight: 500;
+    }
+}
+@media (max-width:500px){
+  .fish-table-wrapper{
+    margin: 80px 5px 20px 5px;
+  }
+  .OwnerAddFishTableFishName{
+    display: none;
+  }
+  .OwnerAddFishTypeHead{
+    display: none;
+  }
+
+  .fish-table td{
+    border: none;
+  }
+  .ownerFishAddMobile{
+    display: flex;
+  }
+  .fish-table{
+    display: none;
+  }
+}
+@media (max-width:400px){
+    .fish-table-wrapper{
+    margin: 80px 0px 20px 0px;
+  }
+  .ownerFishAddMobile-btn{
+    
+margin-left: 150px;
+  }
+  .ownerFishAddMobile-inputs{
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,151 @@
+
+.ownerLoginMainSection{
+    background-color: #DDF2FD;
+    color: #164863;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+.ownerMainDiv{
+    background-color: white;
+    margin: 15px;
+    border-radius: 20px;
+    display: grid;
+    gap: 20px;
+    padding: 110px 40px;
+    width: 30%;
+    box-shadow: 1px 1px 20px 10px rgba(0, 0, 0, 0.119)
+}
+.ownerMainTextDiv{
+    display: grid;
+    justify-items: center;
+    row-gap: 10px;
+}
+.ownerFormTag{
+    display: grid;
+    gap: 10px;
+}
+.ownerLoginDetailsDiv{
+    display: grid;
+    gap: 15px;
+}
+.ownerPhoneNumberDiv{
+    display: grid;
+    gap: 5px;
+    position: relative;
+}
+.ownerPhoneNumberInputTag{
+    border: 1px solid #164863;
+    border-radius: 10px;
+    height: 50px;
+    font-size: 18px;
+    padding-left: 40px;
+}
+.ownerPhoneNumberInputTag::placeholder{
+    font-size: medium;
+}
+#phoneicon{
+    position: absolute;
+    top: 40px;
+    left: 12px;
+}
+.ownerPasswordDiv{
+    display: grid;
+    gap: 5px;
+    position: relative;
+}
+.ownerPasswordInputTag{
+    border: 1px solid #164863;
+    border-radius: 10px;
+    height: 50px;
+    padding-left: 40px;
+    font-size: 18px;
+}
+.ownerPasswordInputTag::placeholder{
+    font-size: medium;
+}
+#passwordicon{
+    position: absolute;
+    top: 40px;
+    left: 12px;
+}
+.ownerCheckBoxMainDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+}
+.ownerCheckBoxinputDiv{
+    display: flex;
+    gap: 8px;
+}
+.ownerForgotPasswordTag{
+    text-decoration: none;
+    color: #164863;
+}
+.ownerForgotPasswordTag:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.ownerSignInDiv{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+.ownerSignInButton{
+    background-color: #164863;
+    color: white;
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+@media(max-width:1255px){
+    .ownerMainDiv{
+        padding:122px 30px;
+        width: 35%;
+    }
+}
+@media(max-width:820px){
+    .ownerLoginMainSection{
+        background-color: white;
+        align-items: center;
+    }
+    .ownerMainDiv{
+        box-shadow: none;
+        height: 100%;
+        width: 50%;
+        gap: 100px;
+        padding: 90px 30px;
+    }
+  
+}
+@media(max-width:541px){
+    .ownerMainDiv{
+        width: 100%;
+        padding: 100px 15px;
+    }
+    .ownerCheckBoxMainDiv{
+        font-size: 15px;
+    }
+}
+@media(max-width:400px){
+    
+    .ownerCheckBoxMainDiv{
+        font-size: 13px;
+    }
+}
+@media(max-width:325px){
+    .ownerMainDiv{
+        width: 100%;
+        padding: 80px 10px;
+    }
+    .ownerPhoneNumberInputTag{
+        font-size: 15px;
+    }
+}

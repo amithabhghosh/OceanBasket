@@ -1,0 +1,173 @@
+
+.ownerProfileMainSection{
+    background-color: #DDF2FD;
+    color: #164863;
+}
+.ownerProfileDetailsMainSection{
+    display: grid;
+}
+.ownerProfileBackgroundAndProfileImageSection{
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+.ownerProfileImage{
+    position: absolute;
+    top: 180px;
+    left: 130px;
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    object-fit: cover;
+    box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.619)
+}
+.ownerProfileDetailsSection{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    justify-items: center;
+}
+.ownerProfileNameAndAddressSection{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 25px;
+    padding: 50px;
+}
+.ownerProfileShopDetailsSection{
+    display: grid;
+    gap: 20px;
+    border: 0.1px solid #164863;
+    border-radius: 15px;
+    padding: 30px 40px;
+    margin: 40px 10px;
+}
+.ownerShopOwnerSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopNameSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopAddressSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopLiscenseNumberSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopDetailsToBeAddedSection1{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopDetailsToBeAddedSection2{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+.ownerShopDetailsToBeAddedSection3{
+    display: grid;
+    grid-template-columns: repeat(2,0.4fr);
+}
+@media(max-width:1250px){
+    .ownerProfileImage{
+        top: 390px;
+        left: 80px;
+        height: 320px;
+        width: 320px;
+    }
+    .ownerProfileNameAndAddressSection{
+        padding: 40px;
+    }
+    .ownerProfileShopDetailsSection{
+        margin: 40px 60px;
+    }
+    .ownerShopOwnerSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopNameSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopAddressSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopLiscenseNumberSection{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopDetailsToBeAddedSection1{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopDetailsToBeAddedSection2{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+    .ownerShopDetailsToBeAddedSection3{
+    display: grid;
+    grid-template-columns: repeat(2,0.5fr);
+    }
+}
+@media(max-width:1025px){
+    .ownerProfileImage{
+        top: 210px;
+        left: 70px;
+        height: 300px;
+        width: 300px;
+    }
+}
+@media(max-width:820px){
+    .ownerProfileDetailsSection{
+        display: flex;
+        flex-direction: column;
+        margin: 130px 0px;
+    }
+    .ownerProfileShopDetailsSection{
+        margin: 20px;
+    }
+    .ownerProfileImage{
+        top: 180px;
+        left: 225px;
+        height: 300px;
+        width: 300px;
+        box-shadow: none;
+    }
+}
+@media(max-width:541px){
+    .ownerProfileImage{
+       
+        left: 85px;
+        height: 250px;
+        width: 250px;
+    }
+    .ownerProfileShopDetailsSection{
+        padding: 20px 17px;
+    }
+}
+@media(max-width:400px){
+    .ownerProfileImage{
+        top: 200px;
+        left: 65px;
+        height: 250px;
+        width: 250px;
+    }
+    .ownerProfileShopDetailsSection{
+        padding: 20px 16px;
+    }
+}
+@media(max-width:325px){
+    .ownerProfileImage{
+        top: 230px;
+        left: 63px;
+        height: 180px;
+        width: 180px;
+    }
+    .ownerShopLiscenseNumberSection{
+        grid-template-columns: 1fr 1fr;
+    }
+}

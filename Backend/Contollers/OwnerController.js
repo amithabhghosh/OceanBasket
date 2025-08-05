@@ -36,9 +36,9 @@ const registerOwner = async (req,res)=>{
         }
 }
 const loginOwner = async (req,res)=>{
-        const {email,password} = req.body
+        const {phone,password} = req.body
         try {
-            const owner = await Owner.findOne({email:email})
+            const owner = await Owner.findOne({phone:phone})
             if(!owner){
                 res.status(400).json({success:false,message:"Owner Doesn't Exist"})
             }

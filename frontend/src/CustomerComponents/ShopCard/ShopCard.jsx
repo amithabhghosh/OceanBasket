@@ -8,7 +8,7 @@ export const ShopCard = ({shopName,delivery,id,image}) => {
  <div className="shopCard" onClick={()=>navigate(`/shop/${id}`)}>
       <div className="shopCardImageSection">
         <ion-icon name="storefront-outline" className="shopIcon"></ion-icon>
-        <img src={image} alt="shop" />
+        <img src={image} alt="shop" />    
       </div>
 
       <div className="shopCardDetails">

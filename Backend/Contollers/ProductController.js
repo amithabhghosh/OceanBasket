@@ -10,9 +10,13 @@ require("dotenv").config()
 const addFish = async (req,res)=>{
      try {
             const owner = req.user.id
-    const {name,description,category,pricePerKg,availableQuantityKg} = req.body
+    const {name,description,category,pricePerKg,availableQuantityKg,type} = req.body
     
+console.log(availableQuantityKg,pricePerKg)
+
 const fishImage = await FIshImage.findOne({FishName:name})
+
+console.log(fishImage)
 
 const uniqueFish = await Fish.findOne({name,owner})
 
@@ -26,7 +30,8 @@ if(uniqueFish){
     category,
     pricePerKg,
     availableQuantityKg,
-    image:fishImage.image
+    image:fishImage.image,
+    type
    })
 
 await fish.save()
@@ -195,4 +200,35 @@ console.log(fishesWithOwner)
         res.status(500).json({success:false,message:error.message})
     }
 }
-module.exports = {getShopsByFishId,addFish,getFish,deleteFish,editFish,getFishByShop,getFishByPincode,getFishByFishId}
+
+
+const getFishByName = async (req,res)=>{
+  try {
+         const {zipCode} = req.params
+           const {fishName} = req.params
+       
+           const shops = await Owner.find({zipCode:zipCode}).select("-password")
+       
+           if(shops.length == 0){
+       return res.status(200).json({success:false,message:"No shops In This Pincode"})
+           }
+       
+       const shopsId = shops.map(shop=>shop._id)
+       
+       const fishes = await Fish.find({
+  owner: { $in: shopsId },
+  name: { $regex: `/${fishName}$`, $options: 'i' } 
+}).sort({ rating: -1 });
+
+       
+        if (fishes.length === 0) {
+             return res.status(200).json({ success: false, message: "No fishes found" });
+           }
+
+
+           res.status(200).json({success:true,fishes})
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message})
+    }
+}
+module.exports = {getFishByName,getShopsByFishId,addFish,getFish,deleteFish,editFish,getFishByShop,getFishByPincode,getFishByFishId}
