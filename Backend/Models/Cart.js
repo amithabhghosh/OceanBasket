@@ -18,6 +18,7 @@ const cartItemSchema = new mongoose.Schema({
     min: [.5, 'Quantity can not be less than .5.'],
     default: .5
   },
+  type:{type:String},
   shopId:{
      type: mongoose.Schema.Types.ObjectId,
     ref: 'Owner',

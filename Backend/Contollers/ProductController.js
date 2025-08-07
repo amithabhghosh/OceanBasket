@@ -45,8 +45,8 @@ const getFish = async (req,res)=>{
     try {
         const owner = req.user.id
        const fishes = await Fish.find({owner:owner})
-      if(fishes.length <= 0){
-        return res.status(400).json({success:false,message:"No Fishes Added Yet"})
+      if(fishes.length == 0){
+        return res.status(200).json({success:false,message:"No Fishes Added Yet"})
       }
 
       return res.status(201).json({succes:true,fishes})

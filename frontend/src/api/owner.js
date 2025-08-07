@@ -24,3 +24,8 @@ export const addFishByOwner = async ({name,availableQuantityKg,pricePerKg,type,o
     const response = await API.post("/product/addFish",{name,availableQuantityKg,pricePerKg,type},{headers:{token:ownerToken}})
     return response.data
 }
+
+export const getOwnerData = async ({ownerToken})=>{
+    const response = await API.get("/owner/getOwnerData",{headers:{token:ownerToken}})
+    return response.data
+}

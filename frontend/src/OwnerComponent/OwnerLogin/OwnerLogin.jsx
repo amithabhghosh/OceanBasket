@@ -24,7 +24,7 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
     onSuccess:(data)=>{
         localStorage.setItem("ownerToken",data.token)
         localStorage.setItem("ownerRefreshToken",data.refreshToken)
-    
+    console.log(data.token)
     toast.success("Login Success")
     navigate("/ownerDashboard")
 

@@ -19,7 +19,7 @@ if(getOwnerFishImageList.isLoading){
   return (
     <div>
         <OwnerNavbar/>
-        <FishAdd data={getOwnerFishImageList.data} isLoading={getOwnerFishImageList.isLoading} errors={getOwnerFishImageList.isError} />
+        <FishAdd data={getOwnerFishImageList.data} isLoading={getOwnerFishImageList.isLoading} errors={getOwnerFishImageList.isError} refetch= {getOwnerFishImageList.refetch}/>
     </div>
   )
 }

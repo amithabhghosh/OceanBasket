@@ -16,7 +16,11 @@ cursor: pointer;
 }
 .ownerOwnFishesContainer{
     border: .5px solid #164863;
+    min-height: 400px;
     border-radius: 0px 15px 15px 15px;
+}
+.OwnerNoFishesHeading{
+text-align: center;
 }
 .onwerFishesLists{
     padding: 40px;

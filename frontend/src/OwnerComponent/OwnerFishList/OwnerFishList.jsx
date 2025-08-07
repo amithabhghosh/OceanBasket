@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom'
 export const OwnerFishList = ({data,isLoading,isError}) => {
 
   const navigate = useNavigate()
-const fishes = data?.fishes
+const fishes = data?.fishes || [];
+console.log(fishes)
   return (
     <div className='OwnerFishList'>
 <div className="ownerFishAddButton">
@@ -14,7 +15,7 @@ const fishes = data?.fishes
 </div>
 
 <div className="ownerOwnFishesContainer">
-{fishes.length == 0 ? <p>No Fishes In the Store</p> : (
+{fishes.length === 0 ? <p className='OwnerNoFishesHeading'>No Fishes In the Store</p> : (
  <div className="onwerFishesLists">
   {fishes.map((item)=>(
 <OwnerCard image={item.image} name={item.name} price={item.pricePerKg} id={item._id}/>

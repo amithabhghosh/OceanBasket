@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./OwnerFishDetail.css"
 import { useParams } from 'react-router-dom'
 export const OwnerFishDetail = ({data,isLoading,isError}) => {
+  const [isEdit,setIsEdit] = useState(false)
     const fishDetail = data?.fishDetails
   return (
     <>
     <div className="fish-details-container">
        <div className="fish-details-backbutton">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>
-        <p>Back</p>
+        
+        <p> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
        </div>
        <div className="fish-details-items">
         <div className="fish-details-image">
@@ -17,19 +18,29 @@ export const OwnerFishDetail = ({data,isLoading,isError}) => {
         <div className='fish-details-detail'>
           <div className='fish-details-fishname'>
             <h3>{fishDetail?.name} </h3>
-             <span>Curry cut</span>    
+             
              </div>
+                <span>Type : Medium</span> 
           <div className='fish-details-price'>
-            <p>₹{fishDetail?.pricePerKg/2} /</p> <span>500g</span>
+            <p>₹{fishDetail?.pricePerKg/2} /<span>500g</span></p>
+            
           </div>
-          
-          <p>{fishDetail?.description}</p>
+          <p className='OwnerFishDetailQuantity'>Quantity Balance: <span>{fishDetail?.availableQuantityKg}</span>Kg</p>
+          <p className='ownerFishDetailsDescription'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatibus quae explicabo veniam officia repellendus consectetur laboriosam, atque maiores sint?</p>
           <div className='fish-details-button'>
-            <button>Edit Details</button>
+            <button onClick={()=>setIsEdit((prev)=>!prev)}>Edit Details</button>
           </div>
           
         </div>
        </div>
+{isEdit ? (
+<>
+<div className="OwnerFishQuantityEditSection">
+  <input type="number" placeholder='Extra Quantity'/>
+  <button>Add</button>
+</div>
+</>
+):(null)}
        </div>
     </>
   )

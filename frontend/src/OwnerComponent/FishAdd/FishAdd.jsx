@@ -3,7 +3,7 @@ import './FishAdd.css';
 import { toast } from 'react-toastify'
 import { addFishByOwner } from '../../api/owner';
 import { useMutation } from '@tanstack/react-query';
-export const FishAdd = ({data,isLoading,errors}) => {
+export const FishAdd = ({data,isLoading,errors,refetch}) => {
 const ownerToken = localStorage.getItem("ownerToken")
   const [filteredFishes, setFilteredFishes] = useState([]);
 
@@ -51,10 +51,8 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
       
     
     toast.success("Fish Added")
-setFilteredFishes(prev =>
-      prev.filter(fish => fish.name !== data.fish.name)
-    );
-    
+
+refetch()
     },
     onError:(err)=>{
         toast.error('Login error:', err.response?.data?.message || err.message)
@@ -83,7 +81,7 @@ setFilteredFishes(prev =>
     <td>
       <div className="input-group">
         <input
-          type="text"
+          type="number"
           placeholder="min. 10kg"
           onChange={(e) =>
             setFishInputs((prev) => ({
@@ -103,7 +101,7 @@ setFilteredFishes(prev =>
     <td>
       <div className="input-group">
         <input
-          type="text"
+          type="number"
           placeholder="Enter price"
           onChange={(e) =>
             setFishInputs((prev) => ({
@@ -171,21 +169,47 @@ setFilteredFishes(prev =>
         <input
           type="text"
           placeholder="Price (₹)"
-        
+        onChange={(e) =>
+            setFishInputs((prev) => ({
+              ...prev,
+              [fish._id]: {
+                ...prev[fish._id],
+                price: e.target.value,
+                name: fish.FishName,
+              },
+            }))
+          }
         />
         <input
           type="text"
           placeholder="Quantity (kg)"
-         
+          onChange={(e) =>
+            setFishInputs((prev) => ({
+              ...prev,
+              [fish._id]: {
+                ...prev[fish._id],
+                quantity: e.target.value,
+                name: fish.FishName,
+              },
+            }))
+          }
         />
       </div>
 
       <div className="ownerFishAddMobile-select">
 
 
-<select
-       
-        >
+<select   onChange={(e) =>
+          setFishInputs((prev) => ({
+            ...prev,
+            [fish._id]: {
+              ...prev[fish._id],
+              type: e.target.value,
+              name: fish.FishName,
+            },
+          }))
+        } >
+          <option value="">Select type</option>
           <option value="Small">Small</option>
           <option value="Medium">Medium</option>
           <option value="Large">Large</option>
@@ -196,7 +220,7 @@ setFilteredFishes(prev =>
 
       </div>
 
- <button className="ownerFishAddMobile-btn" >Add</button>
+ <button className="ownerFishAddMobile-btn" onClick={() => handleAddFish(fish._id)} >Add</button>
 
      
     </div>
