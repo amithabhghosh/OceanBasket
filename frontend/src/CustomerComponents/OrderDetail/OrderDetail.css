@@ -1,0 +1,142 @@
+.OrderDetail{
+    display: flex;
+    flex-direction: column;
+    margin: 90px 90px 20px 90px;
+    color: #164863;
+    gap: 20px;
+}
+.OrderDetail span{
+    cursor: pointer;
+}
+.OrderDetail span ion-icon{
+    position: relative;
+    top: 2px;
+    border-radius: 50%;
+  
+    border: .5px solid #164863;
+}
+.OrderDetail h2{
+    font-size: 25px;
+    font-weight: 500;
+}
+.orderDetailLists{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.orderDetailListCard{
+    display: flex;
+    gap: 20px;
+    border: .5px solid #164863;
+    padding: 5px;
+    border-radius: 10px;
+}
+.orderDetailCardImage{
+    overflow: hidden;
+       width: 240px;
+        height: 150px;
+}
+.orderDetailCardImage img{
+   height: 100%;
+ width: 100%;
+    border-radius: 10px;
+}
+.orderDetailCardDetail{
+    display: flex;
+    flex-direction: column;
+ justify-content: space-around;
+    
+}
+.orderDetailCardQuantityDetails{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.orderDeatilCardName p{
+    font-size: 25px;
+}
+.orderDetailCardQuantityDetails p{
+    font-size: 15px;
+}
+@media (max-width:1100px){
+.OrderDetail{
+        margin: 90px 60px 20px 60px;
+}
+.orderDetailCardImage{
+    width: 170px;
+}
+
+.orderDeatilCardName p{
+    font-size: 20px;
+}
+.orderDetailCardQuantityDetails p{
+    font-size: 14px;
+}
+.orderDetailCardQuantityDetails{
+    flex-direction: column;
+    gap: 15px;
+}
+
+}
+@media (max-width:800px){
+    .orderDetailPageBackButton{
+        display: none;
+    }
+    .OrderDetail{
+        margin: 90px 40px 20px 40px;
+}
+.orderDetailCardImage{
+    width: 140px;
+     height:110px;
+}
+
+.orderDeatilCardName p{
+    font-size: 18px;
+}
+.orderDetailCardQuantityDetails{
+    gap: 7px;
+}
+.orderDetailCardDetail{
+  gap: 15px;
+}
+}
+@media (max-width:500px){
+    .OrderDetail{
+        margin: 80px 20px 20px 20px;
+            gap: 10px;
+    }
+    .orderDetailLists{
+        grid-template-columns: 1fr;
+    }
+    .orderDetailListCard{
+        gap: 15px;
+    }
+        .orderDetailCardImage {
+        width: 130px;
+        height: 100px;
+    }
+    .orderDeatilCardName p{
+        font-size: 15px;
+    }
+.orderDetailCardQuantityDetails p{
+font-size: 10px;
+}
+.OrderDetail h2{
+font-size: 20px;
+}
+}
+@media (max-width:400px){
+    .OrderDetail{
+        margin: 80px 8px 20px 8px;
+    }
+    .orderDetailCardQuantityDetails{
+        gap: 5px;
+    }
+    .orderDetailCardImage{
+      width: 120px;
+        height: 90px;   
+    }
+    .orderDetailCardDetail{
+        gap: 10px;
+    }
+}

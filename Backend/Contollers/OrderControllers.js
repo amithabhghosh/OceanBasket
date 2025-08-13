@@ -4,7 +4,7 @@ const Cart = require('../Models/Cart');
 const { getIO } = require('../Socket'); // Make sure path is correct
 
 const createOrder = async (req,res)=>{
-  const userId = req.user.id; // Assuming auth middleware sets this
+  const userId = req.user.id; 
   const { paymentMethod} = req.body;
 
   try {
@@ -29,7 +29,7 @@ const createOrder = async (req,res)=>{
     for (const shopId in shopGroups) {
       const items = shopGroups[shopId];
       const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
-const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const totalPrice = items.reduce((sum, item) => sum + item.price , 0);
 
 const newOrder = new Order({
   userId,
@@ -70,4 +70,93 @@ io.to(shopId).emit('new-order', {
     res.status(500).json({ message: "Server error" });
   }
 }
-module.exports = {createOrder}
+
+
+const getOrderByOwner = async (req, res) => {
+  try {
+    const ownerId = req.user.id;
+
+    const orders = await Order.find({
+      shopsNotified: ownerId
+    });
+if(orders.length == 0){
+  return res.status(201).json({success:false,message:"No Orders in Shops"})
+}
+    res.status(200).json({success:true,orders});
+  } catch (error) {
+    console.error("Error fetching orders by owner:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+const getOrdersByUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const orders = await Order.find({ userId })
+      .populate({
+        path: 'shopsNotified', 
+        select: 'shopName shopImage' 
+      });
+
+    if (orders.length == 0) {
+      return res.status(201).json({ success: false, message: "No Orders" });
+    }
+
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.error("Error fetching orders by user:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+const getOrderByOrderId = async (req,res)=>{
+  try {
+    const {orderId} = req.params
+    const order = await Order.findById(orderId)
+    
+    if(!order){
+      return res.status(201).json({success:false,message:"Order Not Found"})
+    }
+    res.status(200).json({success:true,order})
+  } catch (error) {
+     console.error("Error fetching orders by user:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+
+const getOrderByShopId = async (req,res)=>{
+try {
+  const ownerId = req.user.id;
+  const orders = await Order.find({shopsNotified:ownerId})
+  if(orders.length == 0){
+    return res.status(200).json({success:false,message:"No Orders"})
+  }
+
+  res.status(200).json({success:true,orders})
+} catch (error) {
+   console.error("Error fetching orders by user:", error);
+    res.status(500).json({ error: "Server error" });
+}
+}
+
+const updateOrderStatusByOwner = async (req,res)=>{
+  try {
+    const {status} = req.body
+    const {orderId} = req.params
+
+console.log(orderId,status)
+
+    const order = await Order.findByIdAndUpdate(orderId,{orderStatus:status},{new:true})
+    if(!order){
+      return res.status(200).json({success:false,message:"Order Not Found"})
+    }
+    res.status(201).json({success:true,order})
+  } catch (error) {
+       console.error("Error fetching orders by user:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+module.exports = {createOrder,getOrderByOwner,getOrdersByUser,getOrderByOrderId,getOrderByShopId,updateOrderStatusByOwner}

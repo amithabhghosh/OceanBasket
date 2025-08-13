@@ -87,3 +87,23 @@ export const getFishesByName = async({zipCode,fishName})=>{
   const response = await API.get(`/product/getFishByName/${fishName}/${zipCode}`)
   return response.data
 }
+
+export const getTimeOfClosing = async ({shopId})=>{
+  const response = await API.get(`/customer/shop-status/${shopId}`)
+  return response.data
+}
+
+export const createPayment = async ({token,paymentMethod})=>{
+  const response = await API.post("/order/create",{paymentMethod},{headers:{token:token}})
+  return response.data
+}
+
+export const getOrderByCustomer = async ({token})=>{
+const response = await API.get("/order/getOrderByUser",{headers:{token:token}})
+return response.data
+}
+
+export const getOrderById = async ({token,orderId})=>{
+  const response = await API.get(`/order/getOrderByOrderId/${orderId}`,{headers:{token:token}})
+  return response.data
+}

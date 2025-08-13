@@ -29,3 +29,24 @@ export const getOwnerData = async ({ownerToken})=>{
     const response = await API.get("/owner/getOwnerData",{headers:{token:ownerToken}})
     return response.data
 }
+
+export const getEditTime = async () => {
+    const response = await API.get("/owner/getTime")
+    return response.data
+}
+
+export const updateQuantity = async ({ownerToken,quantity,fishId})=>{
+    const response = await API.put(`/owner/updateQuantity/${fishId}`,{quantity},{headers:{token:ownerToken}})
+    return response.data
+}
+
+export const getOrdersByOwner = async ({ownerToken})=>{
+const response = await API.get("/order/getOrderByShop",{headers:{token:ownerToken}})
+return response.data
+}
+
+export const updateOrderByOwner = async ({ownerToken,status,orderId})=>{
+    console.log(ownerToken,status,orderId)
+    const response = await API.put(`/order/updateOrderByOwner/${orderId}`,{status},{headers:{token:ownerToken}})
+    return response.data
+}

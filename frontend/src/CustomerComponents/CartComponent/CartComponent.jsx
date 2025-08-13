@@ -110,8 +110,8 @@ console.log(data)
   <p>₹{data.cart[0]?.totalPrice + 30 + 10}</p>
 </div>
 <div className="cartShoppingButtons">
-  <button>Proceed to Checkout</button>
-  <p><ion-icon name="arrow-back-outline"></ion-icon>Continue Shopping</p>
+  <button onClick={()=>navigate("/checkout")} disabled={data.cart[0]?.items.length == 0} >Proceed to Checkout</button>
+  <p onClick={()=>navigate("/dashboard")}><ion-icon name="arrow-back-outline"></ion-icon >Continue Shopping</p>
 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./ShopFishesSection.css"
 import { ContextAPI } from '../../Context/ContextAPI'
-import { getShopByShopId } from '../../api/auth'
+import { getShopByShopId, getTimeOfClosing } from '../../api/auth'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import { FishCard } from '../FishCard/FishCard'
 export const ShopFishesSection = () => {
+  const [available,setAvailable] = useState()
         const {zipCode,setZipCode} = useContext(ContextAPI)
         const {ownerId} = useParams()
         console.log(ownerId)
@@ -20,6 +21,23 @@ export const ShopFishesSection = () => {
         keepPreviousData: true,
       });
     
+const checkStatus = async () => {
+  try {
+    const res = await getTimeOfClosing({shopId:ownerId});
+    setAvailable(res.isBlocked);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  useEffect(() => {
+  if (ownerId) {
+    checkStatus();
+    const interval = setInterval(checkStatus, 1000); 
+    return () => clearInterval(interval);
+  }
+}, [ownerId]);
+
       
       if (isLoading) return <p className='loadingError'>Loading...</p>;
       if (isError || data?.success === false) return <p >{data?.message || "Error fetching fishes"}</p>;
@@ -33,7 +51,7 @@ export const ShopFishesSection = () => {
     </div>
     <div className="shopFishesSectionNavigations">
         <h4><ion-icon name="location-outline"></ion-icon> {data.owner.deliveryRadiusInKm} Km </h4>
-        <span>Delivery Available</span>
+        <span>{available ? "Currently Not Accepting Orders" : "Delivery Available"}</span>
     </div>
 </div>
 <div className="ShopFishesDownSection">

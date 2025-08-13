@@ -97,6 +97,11 @@ cursor: pointer;
     cursor: pointer;
     font-size: 14px;
 }
+.cartShoppingButtons button:disabled{
+    background-color: gray; /* color when disabled */
+  cursor: not-allowed;
+  opacity: 0.7; 
+}
 .cartShoppingButtons p{
     font-size: 14px;
     cursor: pointer;

@@ -20,6 +20,9 @@ import { OwnerDashboard } from './OwnerPage/OwnerDashboard'
 import { OwnerProfilePage } from './OwnerPage/OwnerProfilePage'
 import { OwnerFishDetails } from './OwnerPage/OwnerFishDetails'
 import { OwnerFishAdd } from './OwnerPage/OwnerFishAdd'
+import { CheckoutPage } from './CustomerPages/CheckoutPage'
+import { OrderDetailPage } from './CustomerPages/OrderDetailPage'
+import { OrderList } from './OwnerPage/OrderList'
 
 
 const router= createBrowserRouter([
@@ -43,11 +46,14 @@ const router= createBrowserRouter([
     {path:"/Name/:fishName",element:<PincodeManager>
       <FishPage/>
     </PincodeManager>},
+    {path:"/checkout",element:<CheckoutPage/>},
+    {path:"/order/:orderId",element:<OrderDetailPage/>},
     {path:"/ownerSignUp",element:<OwnerSignUp/>},
   {path:"/ownerDashboard",element:<OwnerDashboard/>}
   ,{path:"/ownerProfile",element:<OwnerProfilePage/>},
   {path:"/owner/fish/:fishId",element:<OwnerFishDetails/>},
-  {path:"/owner/addFish",element:<OwnerFishAdd/>}
+  {path:"/owner/addFish",element:<OwnerFishAdd/>},
+  {path:"/owner/orders",element:<OrderList/>}
 
 ])
 

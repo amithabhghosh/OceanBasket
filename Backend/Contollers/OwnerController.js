@@ -1,6 +1,7 @@
 const express = require("express")
-
+const { isInEditWindow } = require('../utils/timeWindow');
 const Owner = require("../Models/Owner")
+const Fish = require("../Models/Fish")
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 require("dotenv").config() 
@@ -40,13 +41,13 @@ const loginOwner = async (req,res)=>{
         try {
             const owner = await Owner.findOne({phone:phone})
             if(!owner){
-                res.status(400).json({success:false,message:"Owner Doesn't Exist"})
+               return res.status(400).json({success:false,message:"Owner Doesn't Exist"})
             }
     
               const isMatch = await argon2.verify(owner.password, password);
-                if (!isMatch)
+                if (!isMatch){
                   return res.status(400).json({success:false, msg: 'Invalid credentials' });
-            
+                }
                 const token = jwt.sign({ id: owner._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
     const refreshToken = jwt.sign({ id: owner._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
                 res.status(201).json({success:true,message:"Owner Login SuccessFull",token,refreshToken})
@@ -67,4 +68,46 @@ const getOwnerData = async (req,res)=>{
         res.status(500).json({success:false,message:error.message})
     }
 }
-module.exports = {registerOwner,loginOwner,getOwnerData}
+
+const editTime = async (req,res)=>{
+    try {
+            const isBlocked = isInEditWindow();
+            
+    res.json({ isBlocked });
+    } catch (err) {
+        console.error(err);
+    res.status(500).json({ message: "Server error" });
+    }
+}
+
+
+const updateQuantity  = async (req, res) => {
+  try {
+    const { fishId } = req.params;
+    const { quantity } = req.body;
+
+ 
+    const fish = await Fish.findById(fishId);
+
+    if (!fish) {
+      return res.status(404).json({ message: "Fish not found" });
+    }
+
+   console.log(fishId,quantity)
+    const newQuantity = fish.availableQuantityKg + Number(quantity);
+
+
+    fish.availableQuantityKg = newQuantity;
+    await fish.save();
+
+    res.status(200).json({ 
+      message: "Quantity updated successfully", 
+      newQuantity 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = {registerOwner,loginOwner,getOwnerData,editTime,updateQuantity}

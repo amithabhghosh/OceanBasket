@@ -12,7 +12,8 @@ const sendOTP = require('../utils/sendOTP');
 const Customer = require('../Models/Customer');
 const { default: axios } = require('axios');
 const Owner = require('../Models/Owner');
-
+const { isInEditWindow } = require('../utils/timeWindow');
+const moment = require("moment-timezone");
 require("dotenv").config() 
 
 let otpStore = {};
@@ -186,6 +187,7 @@ let cart = await Cart.findOne({ userId });
         fishPrice: fish.pricePerKg,
         price:fish.pricePerKg*quantity,
         quantity,
+        type:fish.type,
         shopId
       };
 
@@ -216,13 +218,14 @@ cart.items.push({
   name: fish.name,
   image: fish.image || '',
    fishPrice: fish.pricePerKg,
-  price:fish.pricePerKg*quantity*2,
+  price:fish.pricePerKg*quantity,
   quantity,
+      type:fish.type,
   shopId,
 });
 
     cart.totalQuantity = cart.items.reduce((sum, item) => sum + item.quantity, 0);
-    cart.totalPrice = cart.items.reduce((sum, item) => sum + item.price*item.quantity, 0);
+    cart.totalPrice = cart.items.reduce((sum, item) => sum + item.price, 0);
 
     await cart.save();
     res.status(200).json({success:true,cart});
@@ -572,14 +575,34 @@ const getShopByShopId = async (req,res)=>{
       return res.status(201).json({success:false,message:"Shop Not Found"})
     }
     const fishes = await Fish.find({owner:ownerId})
-    if(fishes.length == 0){
-      return res.status(200).json({success:false,message:"No Fishes"})
-    }
+   
     res.status(201).json({success:true,owner,fishes})
   } catch (error) {
     res.status(500).json({success:false,message:error.message})
   }
 }
-module.exports = {getShopByShopId,getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
+
+const getClosingTime = async (req,res)=>{
+  try {
+    const shop = await Owner.findById(req.params.shopId);
+    if (!shop) return res.status(404).json({ message: "Shop not found" });
+
+    const now = moment().tz("Asia/Kolkata");
+
+
+    const [closeHour, closeMinute] = shop.shopCloseTime.split(":").map(Number);
+    const closeTime = moment().tz("Asia/Kolkata").set({ hour: closeHour, minute: closeMinute, second: 0 });
+    const isClosed = now.isAfter(closeTime);
+
+
+    const isBlocked = isClosed || isInEditWindow();
+
+    res.json({ isBlocked });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+module.exports = {getClosingTime,getShopByShopId,getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
 
 

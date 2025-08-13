@@ -3,7 +3,7 @@ import "./FishDetails.css"
 import { ContextAPI } from '../../Context/ContextAPI';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { addtoCart, getFishByFishId, getShopsByFishId } from '../../api/auth';
+import { addtoCart, getFishByFishId, getShopsByFishId, getTimeOfClosing } from '../../api/auth';
 import { useMutation } from '@tanstack/react-query';
 import { ShopCardRelated } from '../ShopCardRelated/ShopCardRelated';
 import { FaSpinner } from 'react-icons/fa';
@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 export const FishDetails = () => {
+   const [isBlocked, setIsBlocked] = useState(false);
   const navigate = useNavigate()
   const token = localStorage.getItem("userToken");
     const {zipCode,setZipCode} = useContext(ContextAPI)
@@ -40,6 +41,30 @@ export const FishDetails = () => {
         keepPreviousData: true,
         enabled: switchShop
       });
+
+      // const getTime = useQuery({
+      //   queryKey: ['getTime'],
+      //   queryFn: () => getFishByFishId({shopId:fishData.ownerDetails._id}),
+      //   keepPreviousData: true,
+      // });
+
+
+const checkStatus = async () => {
+  try {
+    const res = await getTimeOfClosing({shopId:fishData.ownerDetails._id});
+    setIsBlocked(res.isBlocked);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  useEffect(() => {
+  if (fishData?.ownerDetails?._id) {
+    checkStatus();
+    const interval = setInterval(checkStatus, 6000); // every 1 min
+    return () => clearInterval(interval);
+  }
+}, [fishData]);
 
 
       useEffect(() => {
@@ -94,7 +119,13 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
   <h3>{fishData.fishDetails.name}</h3>
     <h4 className='fishMidSectionPriceDetails'>₹{fishData.fishDetails.pricePerKg/2}<span> /500g</span></h4>
   </div>
-  
+  <div className="fishMidSectionTypeAndAvailability">
+    {isBlocked ? (
+<h4>Out of Stock</h4>
+    ) : (
+<h4>Type:{fishData?.fishDetails?.type || null}</h4>
+    ) }
+  </div>
     <div className="fishMidSectionQuantityDetails">
         <div className="fishMidQuantity">
             <p onClick={handleDecrement}>-</p>
@@ -110,8 +141,9 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
       productId: fishData.fishDetails._id,
       quantity: quantity,
       shopId: fishData.ownerDetails._id,
+
     })}
-    disabled={buttonLoading}
+    disabled={buttonLoading || isBlocked}
     >{buttonLoading?( <FaSpinner className="spin" />):"Add to Cart" }</button>
       <div className="fishMidShopSelectSection">
         <ion-icon name="storefront-outline" ></ion-icon>

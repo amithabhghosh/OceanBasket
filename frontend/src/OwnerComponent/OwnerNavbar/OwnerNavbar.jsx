@@ -10,7 +10,7 @@ export const OwnerNavbar = () => {
             <p>My <br />Ocean <br />basket </p>
         </div>
         <div className="owner-nav-items">
-            <a href="">Orders</a>
+            <a onClick={()=>navigate("/owner/orders")}>Orders</a>
             <a onClick={()=>navigate("/ownerProfile")}>Profile</a>
         </div>
 
@@ -22,7 +22,7 @@ export const OwnerNavbar = () => {
              <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
           <div className="owner-nav-dropdown">
-               <a href="">Orders</a>
+               <a onClick={()=>navigate("/owner/orders")}>Orders</a>
             <a onClick={()=>navigate("/ownerProfile")}>Profile</a>
         </div>
     </>

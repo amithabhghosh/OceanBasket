@@ -5,6 +5,7 @@ import { getFishDetail } from '../api/owner'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
 import {OwnerFishDetail} from "../OwnerComponent/OwnerFishDetail/OwnerFishDetail"
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+
 export const OwnerFishDetails = () => {
     const {fishId} = useParams()
     const getOwnerFishDetail = useQuery({
@@ -19,7 +20,7 @@ export const OwnerFishDetails = () => {
     <div>
         <OwnerNavbar/>
 
-        <OwnerFishDetail data={getOwnerFishDetail.data} isLoading={getOwnerFishDetail.isLoading} isError={getOwnerFishDetail.isError}/>
+        <OwnerFishDetail data={getOwnerFishDetail.data} isLoading={getOwnerFishDetail.isLoading} isError={getOwnerFishDetail.isError} refetch = {getOwnerFishDetail.refetch}/>
     </div>
   )
 }

@@ -10,8 +10,9 @@ const CustomerRoute = require("./Routes/CustomerRoute")
 const OwnerRoute = require("./Routes/OwnerRoute")
 const ProductRoute = require("./Routes/ProductRoute")
 const fishImage = require("./Routes/FishImageRoute")
+const cronSchedule = require("./utils/cronSchecdule")
 connectDb();
-
+cronSchedule()
 const app = express();
 
 app.use(cors({ origin: process.env.FRONTENDLINK, credentials: true }));

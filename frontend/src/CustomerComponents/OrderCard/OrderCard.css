@@ -1,0 +1,223 @@
+
+.order-card{
+    padding: 12px;
+    display: flex;   
+    border: 1px solid #164863;
+    border-radius: 15px;
+    gap: 50px;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+}
+
+
+.order-card-img{
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 200px;
+    
+}
+
+.order-card-texts{
+   display: flex;
+   gap: 110px;
+  
+}
+
+.order-card-items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+    color:#164863 ;
+}
+
+.order-card-shopname{
+    font-size: x-large;
+}
+
+.order-card-fishname{
+    font-size: larger;
+}
+
+.order-card-price{
+    font-size: small;
+    
+}
+
+.order-card-date{
+    font-size: smaller;
+}
+
+.order-card-date span{
+    font-weight: 700;
+}
+
+
+.order-card-price{
+    display: flex;
+    gap: 20px;
+}
+
+.order-card-status{
+    display: flex;
+   justify-content: space-between;
+   
+    align-items: center;
+   gap: 250px;
+    color:#164863 ;
+
+}
+
+.order-card-delivery{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-card-order{
+     /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    border: .5px solid #164863;
+    padding: 4px 10px 4px 10px;
+    border-radius: 8px;
+}
+@media (max-width:1100px){
+.order-card-status{
+  gap: 30px;
+}
+.order-card-shopname{
+  font-size: 17px;
+}
+.order-card-fishname{
+  font-size: 17px;
+}
+}
+
+@media (max-width: 800px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .order-card-img {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+  }
+
+  .order-card-texts {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .order-card-items {
+    gap: 8px;
+  }
+
+  .order-card-price{
+    font-size: large;
+    
+}
+
+  .order-card-status {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+
+  .order-heading {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 10px;
+  }
+
+  .order-card-img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+  }
+
+  .order-card-texts {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .order-card-items {
+    gap: 6px;
+    font-size: 0.95rem;
+  }
+
+  .order-card-shopname {
+    font-size: 1.2rem;
+  }
+
+  .order-card-fishname {
+    font-size: 1rem;
+  }
+.order-card-delivery-status{
+  font-size: 13px;
+}
+.order-card-order-status{
+  font-size: 13px;
+}
+  /* .order-card-price {
+    flex-direction: column;
+    gap: 5px;
+  } */
+
+  /* .order-card-status {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    font-size: 0.95rem;
+  } */
+.order-card-price p{
+  font-size: 14px;
+}
+  .order-card-delivery,
+  .order-card-order {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width:400px){
+    .order-card-img {
+
+    height: 150px;
+
+  }
+  .order-card-fishname{
+    font-size: 14px;
+  }
+  .order-card-shopname{
+    font-size: 14px;
+  }
+    .order-card-texts{
+      gap: 10px;
+    }
+}

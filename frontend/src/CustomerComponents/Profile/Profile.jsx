@@ -172,7 +172,9 @@ useEffect(() => {
 }, [data]);
       console.log(data)
     if(isLoading)return <LoadingSpinner/>
-    if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
+    if (isError){
+      return navigate("/")
+    }
     
   return (
     <div className='Profile'>

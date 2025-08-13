@@ -102,6 +102,11 @@ font-size: 15px;
 font-weight: 300;
 cursor: pointer;
 }
+.fishMidSectionAddToCartBtn:disabled {
+  background-color: gray; /* color when disabled */
+  cursor: not-allowed;
+  opacity: 0.7; /* slightly faded */
+}
 .fishMidShopSelectSection{
     display: flex;
     gap: 15px;
