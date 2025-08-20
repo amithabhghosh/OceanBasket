@@ -21,7 +21,22 @@ const userSchema = new mongoose.Schema({
   address: [addressSchema], 
   phone: { type: String,unique:true,required:true},
   alternativeNumber: { type: String },
-  verified:{type:Boolean}
+
+location: {
+  type: {
+    type: String,
+    enum: ['Point'],
+    default: 'Point'
+  },
+  coordinates: {
+    type: [Number], 
+    default: [0, 0]
+  }
+}
+,
+  verified:{type:Boolean,default:true}
 }, { timestamps: true });
+
+userSchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model('User', userSchema);

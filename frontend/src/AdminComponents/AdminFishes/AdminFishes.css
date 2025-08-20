@@ -1,0 +1,46 @@
+.AdminFishes {
+  padding: 20px;
+  width: 100%;
+}
+
+.adminFishesHeading h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.adminFishesList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 cards in large devices */
+  gap: 20px; /* spacing between cards */
+}
+
+/* Tablet: 3 cards per row */
+@media (max-width: 1100px) {
+  .adminFishesList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Small devices: 2 cards per row */
+@media (max-width: 800px) {
+  .adminFishesList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra small devices: 1 card */
+@media (max-width: 500px) {
+  .adminFishesList {
+    grid-template-columns: 1fr 1fr;
+  }
+  .AdminFishes{
+    margin-top: 35px;
+  }
+}
+@media (max-width:400px){
+    .AdminFishes{
+        padding: 10px;
+    }
+}

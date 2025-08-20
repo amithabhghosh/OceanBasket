@@ -12,7 +12,8 @@ const registerOwner = async (req,res)=>{
             const existingOwner = await Owner.findOne({email:email}) 
             if(existingOwner){
                 return res.status(400).json({success:false,message:"Email Already Registerd"})
-            }       
+            }     
+             const hashedPassword = await argon2.hash(password);  
             const newUser = new Owner({
                 ownerName,
                 email,

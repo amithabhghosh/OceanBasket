@@ -1,0 +1,33 @@
+import React from 'react'
+import { AdminNavbar } from '../AdminComponents/AdminNavbar/AdminNavbar'
+import { AdminOwner } from '../AdminComponents/AdminOwner/AdminOwner'
+import { useNavigate } from 'react-router-dom'
+import { getAllOwners } from '../api/Admin'
+import { useQuery } from '@tanstack/react-query'
+import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
+
+export const AdminOwnerPage = () => {
+
+  const navigate = useNavigate()
+  const adminToken = localStorage.getItem("adminToken")
+const owners = useQuery({
+    queryKey: ['owners'],
+    queryFn: () => getAllOwners({adminToken}),
+    keepPreviousData: true,
+  });
+if(owners.isLoading){
+  return <LoadingSpinner/>
+}
+if(owners.isError){
+  return navigate("/admin/login")
+}
+  return (
+    <div>
+      <div style={{display:"flex"}}>
+ <AdminNavbar/>
+      <AdminOwner data = {owners.data}/>
+      </div>
+     
+    </div>
+  )
+}

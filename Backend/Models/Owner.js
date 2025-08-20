@@ -32,7 +32,8 @@ const ownerSchema = new mongoose.Schema({
   deliveryRadiusInKm: Number,
   shopImage:{type:String},
   ownerImage:{type:String},
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  verified:{type:Boolean,default:true}
 });
 
 module.exports = mongoose.model("Owner", ownerSchema);

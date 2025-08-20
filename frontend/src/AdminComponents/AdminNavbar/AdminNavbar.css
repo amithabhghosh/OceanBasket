@@ -1,0 +1,69 @@
+/* Sidebar (default hidden) */
+.adminNavbar {
+  position: fixed;
+  top: 0;
+  left: -100%; /* hide fully */
+  width: 100%;   /* cover entire screen */
+  height: 100vh; /* full height */
+  background: #164863;
+  color: white;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  align-items: center;   /* center items vertically */
+  justify-content: center; /* center horizontally */
+}
+
+.adminNavbar.open {
+  left: -100px; /* show */
+}
+
+.adminNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.adminNavList div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.adminNavList div:hover {
+  color: #5fbaff;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100; /* above sidebar */
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* Show only on mobile */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .adminNavbar {
+    left: 0;
+    width: 230px;
+    position: relative;
+  }
+}

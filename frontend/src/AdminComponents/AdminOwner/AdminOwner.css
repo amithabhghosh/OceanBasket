@@ -1,0 +1,64 @@
+.AdminOwner {
+  padding: 20px;
+width: 100%;
+position: relative;
+
+}
+
+.adminOwnerHeading h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #222;
+ 
+}
+.adminAddOwnerButton{
+  margin-bottom: 10px;
+}
+.adminAddOwnerButton button{
+  background-color: #164863;
+color: #ddf2fd;
+border-radius: 10px 10px 10px 0px;
+padding: 20px 70px 20px 70px;
+border: none;
+font-size: 20px;
+cursor: pointer;
+}
+.adminOwnersLists {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr); /* default: 3 cards */
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width:800px) {
+  .adminOwnersLists {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .AdminOwner{
+    padding: 15px;
+  }
+  .adminAddOwnerButton button{
+     padding: 10px 40px 10px 40px;
+        font-size: 15px;
+  }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 500px) {
+  .AdminOwner{
+    top: 50px;
+  }
+    .adminOwnerHeading h2{
+         margin-bottom: 10px;
+         text-align: center;
+    }
+  .adminOwnersLists {
+    grid-template-columns: 1fr 1fr;
+        gap: 10px;
+  }
+  .adminAddOwnerButton button{
+      padding: 10px 25px 10px 25px;
+        font-size: 10px;
+  }
+}

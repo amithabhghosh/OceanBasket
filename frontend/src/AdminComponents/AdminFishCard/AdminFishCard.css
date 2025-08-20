@@ -1,0 +1,85 @@
+.AdminFishCard {
+  display: flex;
+  flex-direction: column;        /* Image left, details right */
+  
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+height: 220px;
+  margin: 5px auto;
+  width: 100%;
+}
+
+.AdminFishCard:hover {
+  transform: translateY(-5px);
+}
+
+/* Image part */
+.adminFishCardImage {
+ width: 100%;
+}
+
+.adminFishCardImage img {
+ width: 100%;
+ height: 130px;
+  object-fit: cover;            /* Fill nicely without distortion */
+}
+
+.adminFishCardDetails{
+    padding: 0px 10px;
+}
+.adminFishCardDetails span{
+    font-weight: 500;
+}
+.adminFishCardDetails p {
+
+  font-size: 14px;
+  
+  color:#164863;
+}
+@media (max-width:1100px){
+.AdminFishCard{
+    height: 180px;
+}
+.adminFishCardImage img{
+    height: 100px;
+}
+.adminFishCardDetails p{
+    font-size: 13px;
+}
+}
+/* Make it responsive on smaller screens */
+@media (max-width: 800px) {
+ .AdminFishCard{
+    height: 160px;
+   
+ }
+.adminFishCardImage img{
+    height: 90px;
+}
+  .adminFishCardImage, 
+  .adminFishCardDetails {
+
+    width: 100%;
+  }
+
+.adminFishCardDetails p{
+    font-size: 12px;
+}
+}
+
+@media (max-width:500px){
+    .adminFishCardDetails p{
+        font-size: 11px;
+    }
+}
+@media (max-width:400px){
+    .AdminFishCard{
+        height: 140px;
+    }
+    .adminFishCardImage img{
+        height: 75px;
+    }
+}

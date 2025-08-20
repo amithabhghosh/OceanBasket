@@ -1,0 +1,125 @@
+.AdminCustomerCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 15px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+
+  margin: 10px auto;
+}
+
+.AdminCustomerCard:hover {
+  transform: translateY(-3px);
+}
+
+.adminCustomerImage img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.adminCustomerDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.adminCustomerDetails p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.adminCustomerDetailName p {
+  font-weight: bold;
+  font-size: 15px;
+  color: #222;
+}
+
+.adminCustomerActivateButton button {
+  padding: 8px 16px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.adminCustomerActivateButton button:hover {
+  background: #d32f2f;
+}
+@media (max-width:1100px){
+
+    .AdminCustomerCard{
+        padding: 8px;
+        gap: 10px;
+    }
+.adminCustomerImage img{
+    width: 50px;
+    height: 50px;
+}
+.adminCustomerDetailName p{
+    font-size: 10px;
+}
+.adminCustomerDetails p{
+    font-size: 10px;
+}
+.adminCustomerActivateButton button{
+    font-size: 10px;
+    padding: 7px 13px;
+}
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+  .AdminCustomerCard {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .adminCustomerImage img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .adminCustomerActivateButton {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .AdminCustomerCard {
+    padding: 7px;
+    margin: 0 auto;
+  }
+
+  .adminCustomerImage img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .adminCustomerDetails p {
+    font-size: 10px;
+  }
+
+  .adminCustomerActivateButton button {
+    font-size: 10px;
+    padding: 5px 11px;
+  }
+}
+@media (max-width:350px){
+        .adminCustomerDetails p{
+            font-size: 7px;
+        }
+}

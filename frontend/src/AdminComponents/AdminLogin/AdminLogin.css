@@ -1,0 +1,126 @@
+/* Page background */
+/* body {
+  background-color: #ddf2fd;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+} */
+
+/* Outer login wrapper */
+.AdminLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 15px;
+}
+
+/* Container box */
+.adminLoginContainer {
+  background-color: white;
+  padding: 30px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 380px;
+  width: 100%;
+}
+
+/* Title */
+.adminLoginContainer h3 {
+  text-align: center;
+  color: #164863;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+/* Input container styling */
+.adminLoginPhone,
+.adminLoginPassword {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.adminLoginPhone input,
+.adminLoginPassword input {
+  width: 100%;
+  padding: 12px 20px 12px 40px;
+  border: .5px solid #164863;
+cursor: pointer;
+  border-radius: 12px;
+  font-size: 18px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.adminLoginPhone input:focus,
+.adminLoginPassword input:focus {
+  border-color: #164863;
+  box-shadow: 0 0 5px rgba(22, 72, 99, 0.3);
+}
+
+/* Icons inside inputs */
+#phoneicon,
+#passwordicon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #164863;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/* Forgot password */
+.adminLoginForgot {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.adminLoginForgot a {
+  color: #164863;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.adminLoginForgot a:hover {
+  text-decoration: underline;
+}
+
+/* Login button */
+.adminLoginButton button {
+  width: 100%;
+  padding: 12px;
+  background-color: #164863;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.adminLoginButton button:hover {
+  background-color: #0f3245;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .adminLoginContainer {
+    padding: 20px 0px;
+    border-radius: 0;
+    max-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: none;
+  }
+
+  .adminLoginContainer h3 {
+    font-size: 1.3rem;
+  }
+  .AdminLogin{
+    background-color: #fff;
+  }
+}

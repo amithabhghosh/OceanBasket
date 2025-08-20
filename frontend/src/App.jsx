@@ -23,6 +23,12 @@ import { OwnerFishAdd } from './OwnerPage/OwnerFishAdd'
 import { CheckoutPage } from './CustomerPages/CheckoutPage'
 import { OrderDetailPage } from './CustomerPages/OrderDetailPage'
 import { OrderList } from './OwnerPage/OrderList'
+import { AdminLoginPage } from './AdminPages/AdminLoginPage'
+import { AdminDashboard } from './AdminPages/AdminDashboard'
+import { AdminCustomerPage } from './AdminPages/AdminCustomerPage'
+import { AdminOwnerPage } from './AdminPages/AdminOwnerPage'
+import { AdminFishesPage } from './AdminPages/AdminFishesPage'
+
 
 
 const router= createBrowserRouter([
@@ -53,7 +59,17 @@ const router= createBrowserRouter([
   ,{path:"/ownerProfile",element:<OwnerProfilePage/>},
   {path:"/owner/fish/:fishId",element:<OwnerFishDetails/>},
   {path:"/owner/addFish",element:<OwnerFishAdd/>},
-  {path:"/owner/orders",element:<OrderList/>}
+  {path:"/owner/orders",element:<OrderList/>},
+
+
+
+
+  {path:"/admin/login",element:<AdminLoginPage/>},
+  {path:"/admin/analatics",element:<AdminDashboard/>},
+  {path:"/admin/customer",element:<AdminCustomerPage/>},
+  {path:"/admin/owner",element:<AdminOwnerPage/>},
+  {path:"/admin/fishes",element:<AdminFishesPage/>},
+{path:"admin/adminOwner",element:<AdminAddOwnerPage/>}
 
 ])
 

@@ -16,7 +16,7 @@ export const OrderCard = ({id,totalQuantity,totalPrice,orderStatus,paymentStatus
                     <p className='order-card-size'>Payment :{paymentMethod}</p>
                  </div>
                  <p className='order-card-date'>
-                <span>Date:</span>   {new Date(order.createdAt).toLocaleString()}
+                <span>Date:</span>   {new Date(createdAt).toLocaleString()}
                  </p>
               </div>
               <div className='order-card-status'>

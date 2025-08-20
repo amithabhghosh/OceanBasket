@@ -1,0 +1,129 @@
+.AdminOwnerCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 15px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+width: 100%;
+  margin: 10px auto;
+}
+
+.AdminOwnerCard:hover {
+  transform: translateY(-3px);
+}
+
+.adminOwnerImage img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.adminOwnerDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adminOwnerDetails p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.adminOwnerNameDetails p {
+  font-weight: bold;
+  font-size: 15px;
+  color: #222;
+}
+.adminOwnerButton button{
+  padding: 8px 16px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+.adminOwnerButton button:hover{
+     background: #d32f2f;
+}
+@media (max-width:1100px){
+    .adminOwnerImage img{
+            width: 60px;
+    height: 60px;
+    }
+
+.adminOwnerNameDetails p {
+    font-size: 12px;
+}
+.adminOwnerDetails p{
+    font-size: 11px;
+}
+.adminOwnerButton button{
+     font-size: 10px;
+    padding: 7px 13px;
+}
+}
+/* Responsive Design */
+@media (max-width: 800px) {
+    
+  .AdminOwnerCard {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .adminOwnerImage img {
+    width: 50px;
+    height: 50px;
+  }
+
+.adminOwnerNameDetails p {
+    font-size: 11px;
+}
+.adminOwnerDetails p{
+    font-size: 10px;
+}
+.adminOwnerButton{
+     align-self: flex-end;
+    margin-top: 10px;
+}
+}
+
+@media (max-width: 500px) {
+  .AdminOwnerCard {
+    padding: 8px;
+   gap: 10px;
+    margin: 0px auto;
+  }
+
+  .adminOwnerImage img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .adminOwnerDetails p {
+    font-size: 10px;
+  }
+  .adminOwnerButton button{
+        font-size: 10px;
+    padding: 5px 11px;
+  }
+}
+@media (max-width:350px){
+     .AdminOwnerCard {
+    padding: 8px;
+   gap: 5px;
+  }
+  .adminOwnerDetails p {
+    font-size: 8px;
+  }
+}
