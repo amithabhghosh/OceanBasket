@@ -2,12 +2,23 @@ const express = require('express');
 const Order = require('../Models/Order');
 const Cart = require('../Models/Cart');
 const { getIO } = require('../Socket'); // Make sure path is correct
+const Fish = require('../Models/Fish');
+const Customer = require('../Models/Customer');
 
 const createOrder = async (req,res)=>{
   const userId = req.user.id; 
   const { paymentMethod} = req.body;
 
   try {
+
+const user = await Customer.findById(userId)
+if(!user){
+  return res.status(200).json({success:false,message:"User Not Found"})
+}
+if(!user.verified){
+  return res.status(200).json({success:false,message:"Account Disabled"})
+}
+
     const cart = await Cart.findOne({ userId }).populate('items.productId');
 
     if (!cart || cart.items.length === 0) {
@@ -30,6 +41,31 @@ const createOrder = async (req,res)=>{
       const items = shopGroups[shopId];
       const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
 const totalPrice = items.reduce((sum, item) => sum + item.price , 0);
+      
+
+  for (const item of items) {
+    const fish = await Fish.findById(item.productId);
+
+    if (!fish) {
+      return res.status(404).json({ message: `Fish not found: ${item.name}` });
+    }
+
+    // check if enough stock
+    if (fish.availableQuantityKg < item.quantity) {
+      return res.status(400).json({ message: `Not enough stock for ${fish.name}` });
+    }
+
+    fish.availableQuantityKg -= item.quantity;
+
+    // update availability if stock runs out
+    if (fish.availableQuantityKg <= 0) {
+      fish.availableQuantityKg = 0;
+      fish.isAvailable = false;
+    }
+
+    await fish.save();
+  }
+
 
 const newOrder = new Order({
   userId,
@@ -45,9 +81,12 @@ const newOrder = new Order({
 });
 
 
-      await newOrder.save();
+
+  await newOrder.save();
       createdOrders.push(newOrder);
 
+
+      
      const io = getIO();
 io.to(shopId).emit('new-order', {
   orderId: newOrder._id,
@@ -55,6 +94,14 @@ io.to(shopId).emit('new-order', {
   sound: true,
   message: "New Order Received!"
 });
+
+
+io.to("adminRoom").emit("admin-notification", {
+      orderId: newOrder._id,
+      userId: userId,
+      shopId: shopId,
+      message: "An order has been confirmed!"
+    });
 
     }
 

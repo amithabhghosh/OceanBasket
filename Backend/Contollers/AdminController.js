@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Customer = require("../Models/Customer");
 const Owner = require("../Models/Owner");
 const Fish = require("../Models/Fish");
+const Order = require("../Models/Order");
 const registerAdmin = async (req,res)=>{
 try {
     const {phoneNumber,password} = req.body
@@ -79,4 +80,59 @@ const getAllFishes = async (req,res)=>{
          res.status(500).json({success:false,message:error.message}) 
     }
 }
-module.exports = {registerAdmin,loginAdmin,getAllCustomers,getAllOwners,getAllFishes}
+
+const getAllOrders = async (req,res)=>{
+    try {
+        const orders = await Order.find()
+        if(orders.length == 0){
+            return res.status(201).json({success:false,message:"No Orders"})
+        } 
+        res.status(200).json({success:true,orders})
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message}) 
+    }
+}
+
+const updateOrderDelivered = async (req,res)=>{
+    try {
+      const {status} = req.body
+         const {orderId} = req.params
+          const order = await Order.findByIdAndUpdate(orderId,{orderStatus:status},{new:true})
+             if(!order){
+               return res.status(200).json({success:false,message:"Order Not Found"})
+             }
+             res.status(201).json({success:true,order})
+
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message}) 
+    }
+}
+
+const updateCustomerVerify = async (req,res)=>{
+    try {
+        const {verified} = req.body
+       const {userId} = req.params
+       const user = await Customer.findByIdAndUpdate(userId,{verified:!verified},{new:true}) 
+       if(!user){
+        return res.status(200).json({success:false,message:"User Not Found"})
+       }
+       res.status(200).json({success:true,user})
+    } catch (error) {
+        res.status(500).json({success:false,message:error.message}) 
+    }
+}
+
+const updateOwnerverify = async (req,res)=>{
+    try {
+        const {verified} = req.body
+        const {ownerId}  = req.params
+        const owner = await Owner.findByIdAndUpdate(ownerId,{verified:!verified},{new:true})
+        if(!owner){
+            return res.status(200).json({success:false,message:"No Owner Found"})
+        }
+        res.status(200).json({success:true,owner})
+    } catch (error) {
+              res.status(500).json({success:false,message:error.message}) 
+    }
+}
+module.exports = {registerAdmin,loginAdmin,getAllCustomers,getAllOwners,getAllFishes,getAllOrders,updateOrderDelivered,updateCustomerVerify,updateOwnerverify}

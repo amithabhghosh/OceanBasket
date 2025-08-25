@@ -88,13 +88,17 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
   mutationFn: (cartData) => addtoCart({ ...cartData, token }),
   onSuccess: (data) => {
     console.log('Added to cart:', data);
-    toast.success("Item Added")
-   
+    toast.success("Item Added") 
   },
   onError: (err) => {
-    
-    const message = err?.response?.data?.message || err.message || "Something went wrong";
-  toast.error(message);
+   const errorMessage =
+    err.response?.data?.message || 
+    err.message ||                 
+    "Something went wrong";        
+
+  toast.error(errorMessage);
+  console.log(errorMessage);
+  
   },
 });
 

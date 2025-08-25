@@ -86,8 +86,16 @@ const updateQuantity  = async (req, res) => {
   try {
     const { fishId } = req.params;
     const { quantity } = req.body;
+const ownerId = req.user.id
 
- 
+const owner = await Owner.findById(owner)
+if(!owner){
+  return res.status(200).json({success:false,message:"Owner Not Found"})
+}
+if(!owner.verified){
+  return res.status(200).json({success:false,message:"Account Disabled"})
+}
+
     const fish = await Fish.findById(fishId);
 
     if (!fish) {

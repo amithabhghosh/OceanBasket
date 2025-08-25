@@ -1,0 +1,108 @@
+/* === Admin Add Owner Form === */
+.AdminAddOwner {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.AdminAddOwnerHeading {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #333;
+}
+
+/* Form Grid Layout */
+.AdminAddOwnerForm {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Each field */
+.AdminAddOwnerField {
+  display: flex;
+  flex-direction: column;
+}
+
+.AdminAddOwnerField label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.AdminAddOwnerField input,
+.AdminAddOwnerField select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.AdminAddOwnerField input:focus,
+.AdminAddOwnerField select:focus {
+  border-color: #007bff;
+}
+
+/* Full-width field (like Address, Delivery Radius) */
+.AdminAddOwnerFull {
+  grid-column: span 3;
+}
+
+/* Submit button */
+.AdminAddOwnerButton {
+  grid-column: span 3;
+  padding: 12px;
+  background: #164863;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.AdminAddOwnerButton:hover {
+  background: #0056b3;
+}
+
+/* === Responsive === */
+
+/* Tablets: 2 columns */
+@media (max-width: 992px) {
+  .AdminAddOwnerForm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .AdminAddOwnerFull {
+    grid-column: span 2;
+  }
+  .AdminAddOwnerButton {
+    grid-column: span 2;
+  }
+}
+
+/* Mobiles: 1 column */
+@media (max-width: 600px) {
+  .AdminAddOwner{
+    width: 100%;
+    margin: 50px 20px 10px 20px;
+    padding: 15px;
+  }
+  .AdminAddOwnerForm {
+    grid-template-columns: 1fr;
+  }
+  .AdminAddOwnerFull {
+    grid-column: span 1;
+  }
+  .AdminAddOwnerButton {
+    grid-column: span 1;
+  }
+}

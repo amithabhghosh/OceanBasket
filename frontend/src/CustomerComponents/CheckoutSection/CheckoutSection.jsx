@@ -25,8 +25,13 @@ const Payments = useMutation({
        navigate("/profile")
     },
     onError: (err) => {
-        const message = err?.response?.data?.message || err.message || "Something went wrong";
-        toast.error(message);
+       const errorMessage =
+          err.response?.data?.message || 
+          err.message ||                 
+          "Something went wrong";        
+      
+        toast.error(errorMessage);
+        console.log(errorMessage);
     },
 });
 

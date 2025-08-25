@@ -25,7 +25,7 @@ if(owners.isError){
     <div>
       <div style={{display:"flex"}}>
  <AdminNavbar/>
-      <AdminOwner data = {owners.data}/>
+      <AdminOwner data = {owners.data}  refetch={owners.refetch}/>
       </div>
      
     </div>

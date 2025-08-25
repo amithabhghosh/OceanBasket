@@ -2,9 +2,10 @@
 .adminNavbar {
   position: fixed;
   top: 0;
+  bottom: 0;
   left: -100%; /* hide fully */
   width: 100%;   /* cover entire screen */
-  height: 100vh; /* full height */
+  min-height: 100vh;
   background: #164863;
   color: white;
   transition: left 0.3s ease-in-out;

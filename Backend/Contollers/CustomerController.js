@@ -166,6 +166,14 @@ try {
     const { productId,quantity,shopId } = req.body;
     const userId = req.user.id;
 
+const user = await Customer.findById(userId)
+if(!user){
+  return res.status(400).json({success:false,message:"User Not Found"})
+}
+if(!user.verified){
+  return res.status(400).json({success:false,message:"Account Disabled"})
+}
+
     if (!productId || !quantity) {
       return res.status(400).json({ success: false, message: "Product ID and Qunatity required" });
     }
@@ -316,6 +324,14 @@ const updateQuantity = async (req, res) => {
   try {
     const { productId, quantity, price } = req.body;
     const userId = req.user.id;
+
+const user = await Customer.findById(userId)
+if(!user){
+  return res.status(200).json({success:false,message:"User Not Found"})
+}
+if(!user.verified){
+  return res.status(200).json({success:false,message:"Account Disabled"})
+}
 
     const cart = await Cart.findOneAndUpdate(
       {

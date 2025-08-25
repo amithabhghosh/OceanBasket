@@ -29,7 +29,7 @@ const currentPath = location.pathname;
             <ion-icon name="fish"></ion-icon>
             <p>Fishes</p>
           </div>
-          <div className="adminOrdersNav">
+          <div className="adminOrdersNav" onClick={()=>navigate("/admin/orders")} style={{color:currentPath === "/admin/orders"? "#5fbaff " : "white"}}>
             <ion-icon name="briefcase"></ion-icon>
             <p>Orders</p>
           </div>

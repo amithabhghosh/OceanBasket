@@ -24,7 +24,7 @@ if(Customers.isError){
     <div>
       <div className="adminCustomerPageDesign" style={{display:"flex"}}>
   <AdminNavbar/>
-        <AdminCustomer data={Customers.data} isError={Customers.isError} />
+        <AdminCustomer data={Customers.data} isError={Customers.isError} refetch={Customers.refetch}/>
       </div>
       
     </div>

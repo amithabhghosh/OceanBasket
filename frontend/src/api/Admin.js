@@ -19,3 +19,29 @@ export const getAllFishes = async ({adminToken})=>{
     const response = await API.get("/admin/getAllFishes",{headers:{token:adminToken}})
     return response.data
 }
+
+export const getAllOrders = async ({adminToken})=>{
+    const response = await API.get("/admin/getAllOrders",{headers:{token:adminToken}})
+    return response.data
+}
+
+export const updatedeleiveryStatus = async ({adminToken,orderId,status})=>{
+    const response = await API.put(`/admin/updateDelivered/${orderId}`,{status},{headers:{token:adminToken}})
+    return response.data
+}
+
+
+export const registerOwner = async ({adminToken,ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm})=>{
+    const response = await API.post("/admin/registerOwner",{ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm},{headers:{token:adminToken}})
+    return response.data
+}
+
+export const updateVerifyCustomer = async ({userId,adminToken,verified})=>{
+    const response = await API.put(`/admin/updateVerifyCustomer/${userId}`,{verified},{headers:{token:adminToken}})
+    return response.data
+}
+
+export const updateVerifyOwner = async ({ownerId,adminToken,verified})=>{
+    const response = await API.put(`/admin/updateVerifyOwner/${ownerId}`,{verified},{headers:{token:adminToken}})
+    return response.data
+}

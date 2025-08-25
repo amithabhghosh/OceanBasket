@@ -55,7 +55,13 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
 refetch()
     },
     onError:(err)=>{
-        toast.error('Login error:', err.response?.data?.message || err.message)
+        const errorMessage =
+           err.response?.data?.message || 
+           err.message ||                 
+           "Something went wrong";        
+       
+         toast.error(errorMessage);
+         console.log(errorMessage);
     }
 })
 

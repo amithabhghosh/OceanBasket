@@ -1,7 +1,7 @@
 import React from 'react'
 import "./AdminCustomer.css"
 import { AdminCustomerCard } from '../AdminCustomerCard/AdminCustomerCard'
-export const AdminCustomer = ({data}) => {
+export const AdminCustomer = ({data,refetch}) => {
   return (
     <div className='AdminCustomer'>
 <div className="adminCustomerHeading">
@@ -9,7 +9,7 @@ export const AdminCustomer = ({data}) => {
 </div>
 <div className="adminCustomersLists">
   {data.customers.map((customer)=>(
-  <AdminCustomerCard name={customer.name} email={customer.email} phone={customer.phone} verified={customer.verified}/>
+  <AdminCustomerCard refetch={refetch} id={customer._id} name={customer.name} email={customer.email} phone={customer.phone} verified={customer.verified}/>
   ))}
 
 </div>

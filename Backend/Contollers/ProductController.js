@@ -10,6 +10,15 @@ require("dotenv").config()
 const addFish = async (req,res)=>{
      try {
             const owner = req.user.id
+
+const shop = await Owner.findById(owner)
+if(!shop){
+  return res.status(400).json({success:false,message:"Owner Not Found"})
+}
+if(!shop.verified){
+  return res.status(400).json({success:false,message:"Account Disabled"})
+}
+
     const {name,description,category,pricePerKg,availableQuantityKg,type} = req.body
     
 console.log(availableQuantityKg,pricePerKg)
@@ -70,6 +79,17 @@ const editFish = async (req,res)=>{
         try {
         const {availableQuantityKg} = req.body
         const owner = req.user.id
+
+const shop = await Owner.findById(owner)
+if(!shop){
+  return res.status(200).json({success:false,message:"Owner Not Found"})
+}
+if(!shop.verified){
+  return res.status(200).json({success:false,message:"Account Disabled"})
+}
+
+
+
         const {fishId} = req.params
        
        

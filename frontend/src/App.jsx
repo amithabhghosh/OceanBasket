@@ -28,6 +28,9 @@ import { AdminDashboard } from './AdminPages/AdminDashboard'
 import { AdminCustomerPage } from './AdminPages/AdminCustomerPage'
 import { AdminOwnerPage } from './AdminPages/AdminOwnerPage'
 import { AdminFishesPage } from './AdminPages/AdminFishesPage'
+import { AdminAddOwnerPage } from './AdminPages/AdminAddOwnerPage'
+import { AdminOrderPage } from './AdminPages/AdminOrderPage'
+import { AdminOrderTracking } from './AdminComponents/AdminOrderTracking/AdminOrderTracking'
 
 
 
@@ -66,10 +69,15 @@ const router= createBrowserRouter([
 
   {path:"/admin/login",element:<AdminLoginPage/>},
   {path:"/admin/analatics",element:<AdminDashboard/>},
-  {path:"/admin/customer",element:<AdminCustomerPage/>},
-  {path:"/admin/owner",element:<AdminOwnerPage/>},
-  {path:"/admin/fishes",element:<AdminFishesPage/>},
-{path:"admin/adminOwner",element:<AdminAddOwnerPage/>}
+  {path:"/admin/customer",element:<AdminOrderTracking>
+    <AdminCustomerPage/>
+    </AdminOrderTracking>},
+  {path:"/admin/owner",element:<AdminOrderTracking>
+    <AdminOwnerPage/>
+  </AdminOrderTracking>},
+  {path:"/admin/fishes",element:<AdminOrderTracking><AdminFishesPage/></AdminOrderTracking>},
+{path:"admin/addOwner",element:<AdminOrderTracking><AdminAddOwnerPage/></AdminOrderTracking>},
+{path:"/admin/orders",element:<AdminOrderTracking><AdminOrderPage/></AdminOrderTracking>}
 
 ])
 

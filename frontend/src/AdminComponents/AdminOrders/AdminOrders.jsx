@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import "./OwnerOrderCard.css";
-import { updateOrderByOwner } from '../../api/owner';
-import {LoadingSpinner} from "../../CustomerComponents/LoadingSpinner/LoadingSpinner"
+import React, { useState } from 'react'
+import "./AdminOrders.css"
 import { useNavigate } from 'react-router-dom';
+import { updatedeleiveryStatus } from '../../api/Admin';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-export const OwnerOrderCard = ({ data, refetch }) => {
-  const orders = data?.orders || [];
+import { LoadingSpinner } from '../../CustomerComponents/LoadingSpinner/LoadingSpinner';
+export const AdminOrders = ({data,refetch}) => {
+const orders = data?.orders || []
+
   const [expandedOrder, setExpandedOrder] = useState(null);
-const ownerToken = localStorage.getItem("ownerToken")
+const adminToken = localStorage.getItem("ownerToken")
  const navigate = useNavigate()
   const toggleItems = (orderId) => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
@@ -17,21 +18,19 @@ const ownerToken = localStorage.getItem("ownerToken")
   const handleStatusChange = async (orderId, newStatus) => {
  mutate({
   orderId,
-ownerToken,
+adminToken,
 status:newStatus
  })
   };
 
   const {mutate,isPending,isSuccess,isError,error} = useMutation({
-      mutationFn:updateOrderByOwner,
+      mutationFn:updatedeleiveryStatus,
       onSuccess:(data)=>{
-      
       toast.success("Status Updated")
   refetch()
       },
       onError:(err)=>{
-          toast.error('Login error:', err.response?.data?.message || err.message)
-          navigate("/ownerSignup");
+          navigate("/admin/login");
       }
   })
 if(isPending){
@@ -40,7 +39,8 @@ if(isPending){
 
 
   return (
-    <div className="ownerOrdersContainer">
+    <div className="adminOrdersContainer">
+      <h2 className='adminOrderHeading'>Orders</h2>
       {orders.map((order) => (
         <div className="orderCard" key={order._id}>
           <div className="orderSummary">
@@ -50,19 +50,20 @@ if(isPending){
 
             <div className="statusDropdown">
               <label><strong>Order Status :</strong></label>
-              {order.orderStatus === "delivered" ? <p>Delivered</p> : <>
-                    <select
+             <select
   className="customDropdown"
   value={order.orderStatus}
   onChange={(e) => handleStatusChange(order._id, e.target.value)}
 >
-
-  <option value="preparing">Preparing</option>
-  <option value="out for delivery">Out for Delivery</option>
+  {order.orderStatus === "delivered" ? (
+null
+  ) : (
+<option value={order.orderStatus}>{order.orderStatus}</option>
+  )}
+  
+  <option value="delivered">Delivered</option>
+  
 </select>
-              
-              </>}
-       
 
             </div>
 
@@ -97,5 +98,5 @@ if(isPending){
         </div>
       ))}
     </div>
-  );
-};
+  )
+}

@@ -11,13 +11,12 @@ router.post("/register",registerOwner)
 
 //Login Owner/Shop
 router.post("/login",loginOwner)
-
 //Get Owner/Shop Data
 router.get("/getOwnerData",getAuthentication,getOwnerData)
 
-
 router.get("/getTime",editTime)
 
-
 router.put("/updateQuantity/:fishId",getAuthentication, updateQuantity)
+
+
 module.exports = router

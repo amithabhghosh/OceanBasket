@@ -1,7 +1,35 @@
 import React from 'react'
 import "./AdminCustomerCard.css"
 import avatar from "../../assets/images/avatar.jpg"
-export const AdminCustomerCard = ({name,email,phone,verified}) => {
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { updateVerifyCustomer } from '../../api/Admin'
+import { LoadingSpinner } from '../../CustomerComponents/LoadingSpinner/LoadingSpinner'
+export const AdminCustomerCard = ({id,name,email,phone,verified,refetch}) => {
+
+const adminToken = localStorage.getItem("adminToken")
+    
+      const {mutate,isPending,isSuccess,isError,error} = useMutation({
+        mutationFn:updateVerifyCustomer,
+        onSuccess:(data)=>{
+        data.user.verified ? toast.success("Enabled"):toast.error("Disabled")
+      refetch()
+    
+        },
+        onError:(err)=>{
+          toast.error(err.message)
+         
+        }
+    })
+
+    const handleUpdate = (id,verified)=>{
+        mutate({userId:id,adminToken,verified})
+    }
+
+if(isPending){
+    return <LoadingSpinner/>
+}
+
   return (
     <div className='AdminCustomerCard'>
 <div className="adminCustomerImage">
@@ -19,7 +47,7 @@ export const AdminCustomerCard = ({name,email,phone,verified}) => {
     </div>
 </div>
 <div className="adminCustomerActivateButton">
-    <button>{verified ? "Disable" : "Enable"}</button>
+    <button onClick={()=>handleUpdate(id,verified)}>{verified ? "Disable" : "Enable"}</button>
 </div>
     </div>
   )
