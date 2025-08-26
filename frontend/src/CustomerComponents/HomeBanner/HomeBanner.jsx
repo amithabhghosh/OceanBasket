@@ -2,11 +2,12 @@ import React from 'react'
 import "./HomeBanner.css"
 import oceanImageReverse from "../../assets/images/oceanImageReverse.png"
 import banner from "../../assets/images/banner.webp"
-export const HomeBanner = () => {
+export const HomeBanner = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="bannerContainer" style={{ backgroundImage: `url(${oceanImageReverse})` }}>
       <div className="searchBar">
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search Shops" value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}/>
           <ion-icon name="search-outline"></ion-icon>
       </div>
       <div className="bannerImageContainer">

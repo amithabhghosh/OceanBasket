@@ -619,6 +619,42 @@ const getClosingTime = async (req,res)=>{
     res.status(500).json({ message: "Server error" });
   }
 }
-module.exports = {getClosingTime,getShopByShopId,getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
+
+const getShopsBySearch = async (req, res) => {
+  try {
+    const { zipCode } = req.params;
+    let { search } = req.query;
+
+    console.log("zipCode:", zipCode, "search:", search);
+
+    if (!search) search = ""; // fallback if no search given
+
+    // escape regex special chars to avoid 500 errors
+    const safeSearch = escapeRegex(search);
+
+    const shops = await Owner.find({
+      zipCode: String(zipCode),
+      shopName: { $regex: safeSearch, $options: "i" }
+    });
+console.log("shops List",shops)
+
+    if (!shops || shops.length === 0) {
+      return res.status(200).json({ success: false, message: "No Shops Found" });
+    }
+
+    res.status(200).json({ success: true, shops });
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// helper function
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+
+module.exports = {getShopsBySearch,getClosingTime,getShopByShopId,getFishWithHighRating,registerCustomer,verifyCustomer,otpSending,loginCustomer,getCart,addCart,addCartIfNotadded,deleteCartItem,updateQuantity,getProfile,updateProfile,getAddress,addAddress,editAddress,deleteAddress,listShopByPincode}
 
 

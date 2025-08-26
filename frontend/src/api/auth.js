@@ -107,3 +107,8 @@ export const getOrderById = async ({token,orderId})=>{
   const response = await API.get(`/order/getOrderByOrderId/${orderId}`,{headers:{token:token}})
   return response.data
 }
+
+export const getShopBySearch = async ({ zipCode, search }) => {
+  const response = await API.get(`/customer/shopsBySearch/${zipCode}?search=${search}`);
+  return response.data;  // <-- this means data = { success, shops }
+};
