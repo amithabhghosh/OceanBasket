@@ -12,6 +12,7 @@ const ProductRoute = require("./Routes/ProductRoute")
 const fishImage = require("./Routes/FishImageRoute")
 const adminRoute = require("../Backend/Routes/adminRoute")
 const cronSchedule = require("./utils/cronSchecdule")
+const locationRoute = require("./Routes/LocationRoute")
 connectDb();
 // cronSchedule()
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/product",ProductRoute)
 app.use("/api/fishImage",fishImage)
 app.use("/api/order",OrderRoute)
 app.use("/api/admin",adminRoute)
+app.use("/api/location",locationRoute)
 const PORT=process.env.PORT || 5000
 
 

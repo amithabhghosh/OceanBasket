@@ -14,6 +14,8 @@
     position: relative;
     width: 100%;
     height: 400px;
+    background-position: center;
+    background-size: cover;
 }
 .ownerProfileImage{
     position: absolute;
@@ -39,7 +41,7 @@
     gap: 25px;
     padding: 0px 50px;
     position: relative;
-    bottom: 30px;
+   
     font-size: 18px;
 }
 .ownerProfileName{
@@ -120,6 +122,32 @@ grid-template-columns: 1fr 2fr;
     font-weight: 300;
     font-size: 14px;
 }
+.setLocationBtn {
+  background: linear-gradient(135deg, #0077ff, #00c6ff);
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
+}
+
+.setLocationBtn:hover {
+  background: linear-gradient(135deg, #005ce6, #0094cc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 119, 255, 0.4);
+}
+
+.setLocationBtn:active {
+  transform: scale(0.96);
+}
+
 @media(max-width:1250px){
     .ownerProfileBackgroundAndProfileImageSection{
         height: 300px;

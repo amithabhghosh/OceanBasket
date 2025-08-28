@@ -62,7 +62,7 @@ const getOwnerData = async (req,res)=>{
         const ownerId = req.user.id
         const owner = await Owner.findById(ownerId).select("-password")
         if(!owner){
-            return res.status(400).json({success:false,message:"Owner Not Found"})
+            return res.status(200).json({success:false,message:"Owner Not Found"})
         }
         res.status(201).json({success:true,owner})
     } catch (error) {

@@ -176,6 +176,50 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+.locationPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.locationPopup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+}
+
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.popupButtons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popupButtons button:first-child {
+  background: #007bff;
+  color: #fff;
+}
+
+.popupButtons button:last-child {
+  background: #ccc;
+}
+
 @media(max-width:1250px){
     .checkoutSection{
         padding: 13.47% 60px;

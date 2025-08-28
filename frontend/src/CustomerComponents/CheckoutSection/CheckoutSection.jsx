@@ -1,45 +1,93 @@
 import React, { useState } from 'react'
 import "./CheckoutSection.css"
 import razor from "../../assets/images/razorpay_logo.png"
-import { createPayment } from '../../api/auth'
+import { createPayment, updatelocationByCustomer } from '../../api/auth'
 import { toast } from 'react-toastify'
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom'
 export const CheckoutSection = ({cartData,personalData}) => {
-    console.log(cartData,personalData)
-    const navigate = useNavigate()
- const token = localStorage.getItem("userToken");
+     const navigate = useNavigate();
+  const token = localStorage.getItem("userToken");
 
+  const [showLocationPopup, setShowLocationPopup] = useState(false);
+  const [deliveryLocation, setDeliveryLocation] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState("");
 
+const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
 
-    const [paymentMethod, setPaymentMethod] = useState("");
-
-    const handlePaymentSelect = (method)=>{
-        setPaymentMethod(method)
-    }
-
-const Payments = useMutation({
-    mutationFn: ({ token, paymentMethod }) => createPayment({ token, paymentMethod }),
+  // ✅ Payment API
+  const Payments = useMutation({
+    mutationFn: ({ token, paymentMethod, deliveryLocation }) =>
+      createPayment({ token, paymentMethod, deliveryLocation }),
     onSuccess: () => {
-        toast.success("Order Placed");
-       navigate("/profile")
+      toast.success("Order Placed");
+      navigate("/profile");
     },
     onError: (err) => {
-       const errorMessage =
-          err.response?.data?.message || 
-          err.message ||                 
-          "Something went wrong";        
-      
-        toast.error(errorMessage);
-        console.log(errorMessage);
+      const errorMessage =
+        err.response?.data?.message || err.message || "Something went wrong";
+      toast.error(errorMessage);
+      console.error(errorMessage);
     },
-});
+  });
 
+  // ✅ Location Update API
+  const Location = useMutation({
+    mutationFn: ({ lat, lng, token }) =>
+      updatelocationByCustomer({ lat, lng, token }),
+    onSuccess: (data) => {
+         localStorage.setItem("lat", deliveryLocation.lat);
+          localStorage.setItem("lng", deliveryLocation.lng);
+      toast.success("Location updated in profile");
+    },
+    onError: (err) => {
+      const errorMessage =
+        err.response?.data?.message || err.message || "Something went wrong";
+      toast.error(errorMessage);
+      console.error(errorMessage);
+    },
+  });
 
-const handlePayments = (e) => {
-    e.preventDefault(); // prevent page reload
-    Payments.mutate({ token, paymentMethod });
-};
+  // ✅ Handle Payments
+  const handlePayments = (e) => {
+    e.preventDefault();
+    if (!deliveryLocation) {
+      setShowLocationPopup(true);
+      return;
+    }
+    if (!paymentMethod) {
+      toast.error("Please select a payment method");
+      return;
+    }
+
+    Payments.mutate({ token, paymentMethod, deliveryLocation });
+  };
+
+  // ✅ Fetch Current Location
+  const fetchCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error("Geolocation not supported by your browser");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const newLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        setDeliveryLocation(newLocation);
+        toast.success("Location set successfully!");
+        setShowLocationPopup(false);
+
+        // update in DB as well
+        Location.mutate({ ...newLocation, token });
+      },
+      (error) => {
+        toast.error("Failed to fetch location");
+        console.error(error);
+      }
+    );
+  };
 
   return (
  <div className='checkoutSection'>
@@ -127,6 +175,18 @@ const handlePayments = (e) => {
         </div>
     </div>
 </div>
+ {showLocationPopup && (
+        <div className="locationPopupOverlay">
+          <div className="locationPopup">
+            <h3>Use Current Location as Delivery Location?</h3>
+            <div className="popupButtons">
+              <button onClick={fetchCurrentLocation}>Yes, Use Current Location</button>
+              <button onClick={() => setShowLocationPopup(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
 </div>
   )
 }

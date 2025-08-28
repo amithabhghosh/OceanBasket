@@ -9,17 +9,18 @@ export const AdminOrders = ({data,refetch}) => {
 const orders = data?.orders || []
 
   const [expandedOrder, setExpandedOrder] = useState(null);
-const adminToken = localStorage.getItem("ownerToken")
+const adminToken = localStorage.getItem("adminToken")
  const navigate = useNavigate()
   const toggleItems = (orderId) => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
   };
 
+  
   const handleStatusChange = async (orderId, newStatus) => {
  mutate({
   orderId,
 adminToken,
-status:newStatus
+orderStatus:newStatus
  })
   };
 
@@ -30,9 +31,22 @@ status:newStatus
   refetch()
       },
       onError:(err)=>{
-          navigate("/admin/login");
+          navigate("/admin/login")
       }
   })
+
+const handleCopy = (order) => {
+    if (order?.googleMapLink) {
+      navigator.clipboard.writeText(order.googleMapLink)
+        .then(() => {
+          toast.success("Google Maps link copied to clipboard ✅");
+        })
+        .catch(err => {
+          console.error("Failed to copy: ", err);
+        });
+    }
+  };
+
 if(isPending){
   return <LoadingSpinner/>
 }
@@ -43,7 +57,10 @@ if(isPending){
       <h2 className='adminOrderHeading'>Orders</h2>
       {orders.map((order) => (
         <div className="orderCard" key={order._id}>
-          <div className="orderSummary">
+          <div className="AdminOrderSummary">
+            <div className='AdminOrderLeftSide'>
+
+           
             <p><strong>Total Quantity :</strong> {order.totalQuantity}Kg</p>
             <p><strong>Total Price :</strong> ₹{order.totalPrice}</p>
             <p><strong>Payment Status :</strong> {order.paymentStatus}</p>
@@ -71,14 +88,60 @@ null
               <strong>Created:</strong>{" "}
               {new Date(order.createdAt).toLocaleString()}
             </p>
-          </div>
 
-          <button
+  <button
             className="viewItemsBtn"
             onClick={() => toggleItems(order._id)}
           >
             {expandedOrder === order._id ? "Hide Items" : "View Items"}
           </button>
+
+          </div>
+
+        
+           <div className="OrderLocationDetails">
+<div className="adminOrderCustomerAddress">
+  <p>{order?.deliveryAddress?.addressLine1}</p>
+</div>
+<div className="adminOrderCustomerAddress">
+  <p>{order?.deliveryAddress?.addressLine2}</p>
+</div>
+<div className="adminOrderCustomerAddress">
+  <p>{order?.deliveryAddress?.city}</p>
+</div>
+<div className="adminOrderCustomerAddress">
+  <p>{order?.deliveryAddress?.landmark}</p>
+</div>
+<div className="adminOrderCustomerAddress">
+  <p>{order?.deliveryAddress?.zipCode}</p>
+</div>
+<div className="adminOrderCustomerAddress">
+  <p>{order?.phone},{order?.alternativeNumber}</p>
+</div>
+ <div className="adminGmapLocationClipBoard">
+      {order?.googleMapLink ? (
+        <div>
+          {/* Clickable link */}
+          <a 
+            href={order.googleMapLink} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ marginRight: "10px" }}
+          >
+            Open in Maps
+          </a>
+
+          {/* Copy button */}
+          <button onClick={()=>handleCopy(order)}>
+            Copy Link
+          </button>
+        </div>
+      ) : (
+        <p>No location available</p>
+      )}
+    </div>
+ </div>
+ </div>
 
           {expandedOrder === order._id && (
             <div className="itemsList">

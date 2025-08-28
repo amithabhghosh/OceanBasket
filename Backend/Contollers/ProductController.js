@@ -123,10 +123,29 @@ const getFishByShop = async (req,res)=>{
                                                                                                                      
 const getFishByPincode = async (req,res)=>{
     try {
-         const {zipCode} = req.params
+        const { lat, lng } = req.query; 
            
        
-           const shops = await Owner.find({zipCode:zipCode}).select("-password")
+             if (!lat || !lng) {
+                 return res.status(400).json({ success: false, message: "Location Required" });
+               }
+           
+                const shops = await Owner.aggregate([
+                 {
+                   $geoNear: {
+                     near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+                     distanceField: "distance", // distance in meters
+                     spherical: true,
+                   },
+                 },
+                 {
+                   $match: {
+                     $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
+                   },
+                 },
+                 
+                 { $project: { password: 0 } } 
+               ]);
        
            if(shops.length == 0){
        return res.status(200).json({success:false,message:"No shops In This Pincode"})
@@ -159,75 +178,103 @@ const getFishByFishId = async (req,res)=>{
     }
 }
 
-const getShopsByFishId = async (req,res)=>{
-    try {
-      const { fishId, zipCode } = req.params;
-console.log(fishId,zipCode)
+const getShopsByFishId = async (req, res) => {
+  try {
+    const { fishId } = req.params;
+    const { lat, lng } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({ success: false, message: "Location Required" });
+    }
+
+    // 1. Find the fish by ID
     const fish = await Fish.findById(fishId);
     if (!fish) {
       return res.status(200).json({ success: false, message: "Fish Not Found" });
     }
 
-    fishName = fish.name
+    const fishName = fish.name;
 
-    const fishes = await Fish.find({name:fishName})
-
-    if(fishes.length==0){
- return res.status(200).json({ success: false, message: "No fish Found" });
+    // 2. Find all fishes with same name
+    const fishes = await Fish.find({ name: fishName });
+    if (fishes.length === 0) {
+      return res.status(200).json({ success: false, message: "No fish Found" });
     }
 
-  const fishExcept = fishes.filter(item => item._id.toString() !== fishId);
-if (fishExcept.length === 0) {
-  return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });
-}
-
-
-   const ownerIds = [...new Set(fishExcept.map(item => item.owner.toString()))];
-
-    if(ownerIds.length == 0){
-      return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });  
+    // 3. Exclude the current fishId
+    const fishExcept = fishes.filter(item => item._id.toString() !== fishId);
+    if (fishExcept.length === 0) {
+      return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });
     }
 
-
-   
-const matchingShops = await Owner.find({
-  _id: { $in: ownerIds, $ne: fish.owner },  
-  zipCode: zipCode
-});
-
-
-
-    if (matchingShops.length == 0) {
-      return res.status(200).json({ success: false, message: "This fish not available in shops of this pincode" });
+    // 4. Collect unique ownerIds of other shops selling the same fish
+    const ownerIds = [...new Set(fishExcept.map(item => item.owner.toString()))];
+    if (ownerIds.length === 0) {
+      return res.status(200).json({ success: false, message: "This Fish is not in any Other Shop" });
     }
 
-const matchingShopIds = matchingShops.map(shop => shop._id.toString());
+    // 5. Find nearby shops from those ownerIds using geo query
+    const matchingShops = await Owner.aggregate([
+      {
+        $geoNear: {
+          near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+          distanceField: "distance",
+          spherical: true,
+        },
+      },
+      {
+        $match: {
+          _id: { $in: ownerIds.map(id => new mongoose.Types.ObjectId(id)) },
+          $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
+        },
+      },
+      { $project: { password: 0 } }
+    ]);
 
+    if (matchingShops.length === 0) {
+      return res.status(200).json({ success: false, message: "This fish not available in shops near your location" });
+    }
+
+    // 6. Get fishes in those shops (same name)
+    const matchingShopIds = matchingShops.map(shop => shop._id.toString());
     const fishesWithOwner = await Fish.find({
       owner: { $in: matchingShopIds },
       name: fishName
-    
     });
-console.log(fishesWithOwner)
 
     return res.status(200).json({
       success: true,
-     matchingShops,
-     fishesWithOwner 
+      matchingShops,
+      fishesWithOwner,
     });
-
-    } catch (error) {
-        res.status(500).json({success:false,message:error.message})
-    }
-}
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 
 const getFishByName = async (req,res)=>{
   try {
-         const {zipCode} = req.params
+             const { lat, lng } = req.query;
            const {fishName} = req.params
        
-           const shops = await Owner.find({zipCode:zipCode}).select("-password")
+             const shops = await Owner.aggregate([
+                 {
+                   $geoNear: {
+                     near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+                     distanceField: "distance", // distance in meters
+                     spherical: true,
+                   },
+                 },
+                 {
+                   $match: {
+                     $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
+                   },
+                 },
+                 { $skip: skip },
+                 { $limit: limit },
+                 { $project: { password: 0 } } 
+               ]);
        
            if(shops.length == 0){
        return res.status(200).json({success:false,message:"No shops In This Pincode"})

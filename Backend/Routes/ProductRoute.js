@@ -21,13 +21,16 @@ router.put("/editFish/:fishId",getAuthentication,editFish)
 router.get("/getFishByShop/:ownerId",getFishByShop)
 
 //Get Fish By Pincode to show The 10 Fishes In the Customer Dashboard
-router.get("/getFishByPincode/:zipCode",getFishByPincode)
+router.get("/getFishByPincode",getFishByPincode)
 
 //Get Fish By FishId
 router.get("/getFishByFishId/:fishId",getFishByFishId)
 
 //Get Shops By FishId
-router.get("/getShopByFishId/:fishId/:zipCode",getShopsByFishId)
+router.get("/getShopByFishId/:fishId",getShopsByFishId)
 
-router.get("/getFishByName/:fishName/:zipCode",getFishByName)
+
+router.get("/getFishByName/:fishName",getFishByName)
+
+
 module.exports = router

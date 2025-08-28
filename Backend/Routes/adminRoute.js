@@ -18,7 +18,11 @@ router.get("/getAllFishes",getAuthentication,getAllFishes)
 
 router.get("/getAllOrders",getAuthentication,getAllOrders)
 
-router.put("/updateDelivered/:orderId",getAuthentication,updateOrderDelivered)
+
+router.put("/updateDelivered/:orderId",(req, res, next) => {
+  console.log("Route hit!", req.params.orderId, req.body);
+  next();
+},getAuthentication,updateOrderDelivered)
 
 router.put("/updateVerifyCustomer/:userId",getAuthentication,updateCustomerVerify)
 

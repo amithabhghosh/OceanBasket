@@ -5,6 +5,7 @@ import { getCart, getProfile } from '../api/auth';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
 export const CheckoutPage = () => {
+  
 const token = localStorage.getItem("userToken")
     const getAddressOfUser = useQuery({
     queryKey: ['getAddressProfile',token ],

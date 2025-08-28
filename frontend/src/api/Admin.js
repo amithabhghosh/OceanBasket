@@ -25,18 +25,21 @@ export const getAllOrders = async ({adminToken})=>{
     return response.data
 }
 
-export const updatedeleiveryStatus = async ({adminToken,orderId,status})=>{
-    const response = await API.put(`/admin/updateDelivered/${orderId}`,{status},{headers:{token:adminToken}})
+export const updatedeleiveryStatus = async ({adminToken,orderId,orderStatus})=>{
+    console.log(adminToken,orderId,orderStatus)
+    const response = await API.put(`/admin/updateDelivered/${orderId}`,{orderStatus},{headers:{token:adminToken}})
+    
     return response.data
 }
 
 
 export const registerOwner = async ({adminToken,ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm})=>{
-    const response = await API.post("/admin/registerOwner",{ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm},{headers:{token:adminToken}})
+    const response = await API.post("/owner/register",{ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm},{headers:{token:adminToken}})
     return response.data
 }
 
 export const updateVerifyCustomer = async ({userId,adminToken,verified})=>{
+    
     const response = await API.put(`/admin/updateVerifyCustomer/${userId}`,{verified},{headers:{token:adminToken}})
     return response.data
 }

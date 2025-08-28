@@ -4,27 +4,148 @@ const Cart = require('../Models/Cart');
 const { getIO } = require('../Socket'); // Make sure path is correct
 const Fish = require('../Models/Fish');
 const Customer = require('../Models/Customer');
+const Owner = require('../Models/Owner');
 
-const createOrder = async (req,res)=>{
-  const userId = req.user.id; 
-  const { paymentMethod} = req.body;
+
+
+
+
+// const createOrder = async (req,res)=>{
+//   const userId = req.user.id; 
+//   const { paymentMethod} = req.body;
+
+//   try {
+
+// const user = await Customer.findById(userId)
+// if(!user){
+//   return res.status(200).json({success:false,message:"User Not Found"})
+// }
+// if(!user.verified){
+//   return res.status(200).json({success:false,message:"Account Disabled"})
+// }
+
+//     const cart = await Cart.findOne({ userId }).populate('items.productId');
+
+//     if (!cart || cart.items.length === 0) {
+//       return res.status(400).json({ message: 'Cart is empty' });
+//     }
+
+//     // Group items by shopId
+//     const shopGroups = {};
+//     cart.items.forEach(item => {
+//       const shopId = item.shopId.toString();
+//       if (!shopGroups[shopId]) {
+//         shopGroups[shopId] = [];
+//       }
+//       shopGroups[shopId].push(item);
+//     });
+
+//     const createdOrders = [];
+
+//     for (const shopId in shopGroups) {
+//       const items = shopGroups[shopId];
+//       const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+// const totalPrice = items.reduce((sum, item) => sum + item.price , 0);
+      
+
+//   for (const item of items) {
+//     const fish = await Fish.findById(item.productId);
+
+//     if (!fish) {
+//       return res.status(404).json({ message: `Fish not found: ${item.name}` });
+//     }
+
+//     // check if enough stock
+//     if (fish.availableQuantityKg < item.quantity) {
+//       return res.status(400).json({ message: `Not enough stock for ${fish.name}` });
+//     }
+
+//     fish.availableQuantityKg -= item.quantity;
+
+//     // update availability if stock runs out
+//     if (fish.availableQuantityKg <= 0) {
+//       fish.availableQuantityKg = 0;
+//       fish.isAvailable = false;
+//     }
+
+//     await fish.save();
+//   }
+
+
+// const newOrder = new Order({
+//   userId,
+//   shopId,
+//   items,
+//   totalQuantity,
+//   totalPrice,
+//   deliveryCharge: 40,
+//   paymentMethod,
+//   paymentStatus: paymentMethod === 'COD' ? 'pending' : 'paid',
+//   orderStatus: 'placed',
+//   shopsNotified: [shopId]
+// });
+
+
+
+//   await newOrder.save();
+//       createdOrders.push(newOrder);
+
+
+      
+//      const io = getIO();
+// io.to(shopId).emit('new-order', {
+//   orderId: newOrder._id,
+//   shopId,
+//   sound: true,
+//   message: "New Order Received!"
+// });
+
+
+// io.to("adminRoom").emit("admin-notification", {
+//       orderId: newOrder._id,
+//       userId: userId,
+//       shopId: shopId,
+//       message: "An order has been confirmed!"
+//     });
+
+//     }
+
+//     cart.items = [];
+//     cart.totalPrice = 0;
+//     cart.totalQuantity = 0;
+//     await cart.save();
+
+//     res.status(201).json({ message: "Orders placed", orders: createdOrders });
+
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// }
+
+
+const createOrder = async (req, res) => {
+  const userId = req.user.id;
+  const { paymentMethod, deliveryLocation } = req.body; // deliveryLocation = { lat, lng }
 
   try {
-
-const user = await Customer.findById(userId)
-if(!user){
-  return res.status(200).json({success:false,message:"User Not Found"})
-}
-if(!user.verified){
-  return res.status(200).json({success:false,message:"Account Disabled"})
+    const user = await Customer.findById(userId);
+    if (!user) {
+      return res.status(200).json({ success: false, message: "User Not Found" });
+    }
+    if (!user.verified) {
+      return res.status(200).json({ success: false, message: "Account Disabled" });
+    }
+ if (!user.address[0]) {
+  return res.status(400).json({ message: "User has no address" });
 }
 
     const cart = await Cart.findOne({ userId }).populate('items.productId');
-
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: 'Cart is empty' });
     }
 
+  
     // Group items by shopId
     const shopGroups = {};
     cart.items.forEach(item => {
@@ -39,70 +160,84 @@ if(!user.verified){
 
     for (const shopId in shopGroups) {
       const items = shopGroups[shopId];
+
+      // ✅ Check shop delivery location
+      const shop = await Owner.findById(shopId);
+      if (!shop || !shop.location?.coordinates) {
+        return res.status(400).json({ message: "Shop location not found" });
+      }
+
+      const [shopLng, shopLat] = shop.location.coordinates;
+      const userLat = deliveryLocation.lat;
+      const userLng = deliveryLocation.lng;
+
+      const distance = getDistanceFromLatLonInKm(shopLat, shopLng, userLat, userLng);
+
+     if (distance > shop.deliveryRadiusInKm) {
+  return res.status(400).json({
+    success: false,
+    message: `Shop ${shop.shopName} does not deliver to your location (distance: ${distance.toFixed(2)} km)`
+  });
+}
+      // Continue with normal stock check + order creation
       const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
-const totalPrice = items.reduce((sum, item) => sum + item.price , 0);
-      
+      const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
 
-  for (const item of items) {
-    const fish = await Fish.findById(item.productId);
+      for (const item of items) {
+        const fish = await Fish.findById(item.productId);
+        if (!fish) {
+          return res.status(404).json({ message: `Fish not found: ${item.name}` });
+        }
+        if (fish.availableQuantityKg < item.quantity) {
+          return res.status(400).json({ message: `Not enough stock for ${fish.name}` });
+        }
 
-    if (!fish) {
-      return res.status(404).json({ message: `Fish not found: ${item.name}` });
-    }
+        fish.availableQuantityKg -= item.quantity;
+        if (fish.availableQuantityKg <= 0) {
+          fish.availableQuantityKg = 0;
+          fish.isAvailable = false;
+        }
+        await fish.save();
+      }
 
-    // check if enough stock
-    if (fish.availableQuantityKg < item.quantity) {
-      return res.status(400).json({ message: `Not enough stock for ${fish.name}` });
-    }
+      const newOrder = new Order({
+        userId,
+        shopId,
+        items,
+        totalQuantity,
+        totalPrice,
+        deliveryCharge: 40,
+        paymentMethod,
+        deliveryLocation: {
+          type: "Point",
+          coordinates: [userLng, userLat]
+        },
+        phone: user.phone,
+alternativeNumber: user.alternativeNumber,
+        googleMapLink:`https://www.google.com/maps?q=${userLat},${userLng}`,
+        deliveryAddress: user.address[0],
+        paymentStatus: paymentMethod === 'COD' ? 'pending' : 'paid',
+        orderStatus: 'placed',
+        shopsNotified: [shopId]
+      });
 
-    fish.availableQuantityKg -= item.quantity;
-
-    // update availability if stock runs out
-    if (fish.availableQuantityKg <= 0) {
-      fish.availableQuantityKg = 0;
-      fish.isAvailable = false;
-    }
-
-    await fish.save();
-  }
-
-
-const newOrder = new Order({
-  userId,
-  shopId,
-  items,
-  totalQuantity,
-  totalPrice,
-  deliveryCharge: 40,
-  paymentMethod,
-  paymentStatus: paymentMethod === 'COD' ? 'pending' : 'paid',
-  orderStatus: 'placed',
-  shopsNotified: [shopId]
-});
-
-
-
-  await newOrder.save();
+      await newOrder.save();
       createdOrders.push(newOrder);
 
+      const io = getIO();
+      io.to(shopId).emit('new-order', {
+        orderId: newOrder._id,
+        shopId,
+        sound: true,
+        message: "New Order Received!"
+      });
 
-      
-     const io = getIO();
-io.to(shopId).emit('new-order', {
-  orderId: newOrder._id,
-  shopId,
-  sound: true,
-  message: "New Order Received!"
-});
-
-
-io.to("adminRoom").emit("admin-notification", {
-      orderId: newOrder._id,
-      userId: userId,
-      shopId: shopId,
-      message: "An order has been confirmed!"
-    });
-
+      io.to("adminRoom").emit("admin-notification", {
+        orderId: newOrder._id,
+        userId: userId,
+        shopId: shopId,
+        message: "An order has been confirmed!"
+      });
     }
 
     cart.items = [];
@@ -116,7 +251,25 @@ io.to("adminRoom").emit("admin-notification", {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
+};
+
+// ✅ Utility function for distance calc
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of earth in km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in km
 }
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
 
 
 const getOrderByOwner = async (req, res) => {

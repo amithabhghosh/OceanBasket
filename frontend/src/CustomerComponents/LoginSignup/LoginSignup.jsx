@@ -5,7 +5,7 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
-import {loginCustomer} from "../../api/auth"
+import {loginCustomer, updatelocationByCustomer} from "../../api/auth"
 import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 export const LoginSignup = () => {
@@ -73,7 +73,36 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
         localStorage.setItem("userRefreshToken",data.refreshToken)
         localStorage.setItem("user", JSON.stringify(data.user));
     toast.success("Login Success")
-    navigate("/dashboard")
+
+     if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+
+          // Save in localStorage
+         
+console.log(lat,lng)
+        const response = await updatelocationByCustomer({lat,lng,token:data.token})
+if(response.success){
+ localStorage.setItem("lat", lat);
+          localStorage.setItem("lng", lng);
+           navigate("/dashboard");
+}
+          
+         
+        },
+        (err) => {
+          console.error("Location error:", err);
+        
+          navigate("/dashboard");
+        },
+        { enableHighAccuracy: true }
+      );
+    } else {
+      // If geolocation not supported
+      navigate("/dashboard");
+    }
 
     },
     onError:(err)=>{

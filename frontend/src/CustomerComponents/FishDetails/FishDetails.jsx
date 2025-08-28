@@ -14,7 +14,8 @@ export const FishDetails = () => {
    const [isBlocked, setIsBlocked] = useState(false);
   const navigate = useNavigate()
   const token = localStorage.getItem("userToken");
-    const {zipCode,setZipCode} = useContext(ContextAPI)
+    const lat = localStorage.getItem("lat")
+    const lng = localStorage.getItem("lng")
        const {fishId} = useParams()
     const [quantity,setQuantity] = useState(.5)
     const [totalAmount,setTotalAmount] = useState(0)
@@ -25,7 +26,7 @@ export const FishDetails = () => {
         isError:fishError
    
       } = useQuery({
-        queryKey: ['fishesByFishId', zipCode,fishId],
+        queryKey: ['fishesByFishId',lat,lng,fishId],
         queryFn: () => getFishByFishId({fishId}),
         keepPreviousData: true,
       });
@@ -36,8 +37,8 @@ export const FishDetails = () => {
         isError:shopError,
         
       } = useQuery({
-        queryKey: ['shopsByFishId', zipCode,fishId],
-        queryFn: () => getShopsByFishId({fishId,zipCode}),
+        queryKey: ['shopsByFishId', lat,lng,fishId],
+        queryFn: () => getShopsByFishId({fishId,lat,lng}),
         keepPreviousData: true,
         enabled: switchShop
       });
@@ -161,9 +162,10 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
 <p>{fishData.fishDetails.description}</p>
 </div>
 
- {switchShop && shopData?.matchingShops && (
+ {switchShop &&  (
   <div className='switchShopBox'>
-    {shopData.matchingShops.map((shop) => {
+{!shopData?.matchingShops ? <p>The Fish Available only in this Shop</p> : (
+ shopData.matchingShops.map((shop) => {
       const matchingFish = shopData.fishesWithOwner.find(
         (fish) => fish.owner === shop._id
       );
@@ -178,7 +180,10 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
           fishOwnerId={matchingFish?._id}  
         />
       );
-    })}
+    })
+)}
+
+   
   </div>
 )}
 

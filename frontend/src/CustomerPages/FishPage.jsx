@@ -9,15 +9,16 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 export const FishPage = () => {
   const {fishName} = useParams()
-const {zipCode,setZipCode} = useContext(ContextAPI)
+const lat = localStorage.getItem("lat")
+const lng = localStorage.getItem("lng")
    const {
         data,
         isLoading,
         isError
         
       } = useQuery({
-        queryKey: ['getFishByName', zipCode],
-        queryFn: () => getFishesByName({zipCode,fishName}),
+        queryKey: ['getFishByName', lng,lat],
+        queryFn: () => getFishesByName({lat,lng,fishName}),
         keepPreviousData: true,
       });
       

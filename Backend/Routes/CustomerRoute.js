@@ -52,10 +52,10 @@ router.put("/editAddress", getAuthentication, editAddress)
 router.delete("/deleteAddress", getAuthentication,deleteAddress)
 
 //Get Shops By Pincode
-router.get("/listShopByPincode/:zipCode",listShopByPincode)
+router.get("/listShopByPincode",listShopByPincode)
 
 //Get Fishes With High Rating
-router.get("/getFishesWithRating/:zipCode" , getFishWithHighRating)
+router.get("/getFishesWithRating" , getFishWithHighRating)
 
 //Get ShopDetails By ShopId 
 router.get("/getShopByShopId/:ownerId",getShopByShopId)
@@ -64,7 +64,7 @@ router.get("/getShopByShopId/:ownerId",getShopByShopId)
 router.get("/shop-status/:shopId",getClosingTime)
 
 
-router.get("/shopsBySearch/:zipCode",getShopsBySearch)
+router.get("/shopsBySearch",getShopsBySearch)
 
 
 module.exports = router;

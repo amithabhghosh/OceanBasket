@@ -4,6 +4,7 @@ require("dotenv").config()
 const CustomerAuthentication = async (req,res,next)=>{
  try {
         const {token}=req.headers
+         console.log("Incoming token:", token); 
         if(!token){
             return res.json({success:false,message:"Not Authorised"})
         }

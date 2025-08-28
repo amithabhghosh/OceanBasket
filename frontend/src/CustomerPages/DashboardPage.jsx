@@ -14,34 +14,35 @@ import { SearchSection } from '../CustomerComponents/SearchSection/SearchSection
 export const DashboardPage = () => {
 const [searchTerm, setSearchTerm] = useState("");
 
+const lat = localStorage.getItem("lat")
+const lng = localStorage.getItem("lng")
 
-  const {zipCode,setZipCode} = useContext(ContextAPI)
  const [showAll, setShowAll] = useState(false);
   const limit = showAll ? 10 : 3;
 const [skip, setSkip] = useState(0);
     const shopsQuery = useInfiniteQuery({
-   queryKey: ['shops',zipCode, showAll],
-    queryFn: ({ pageParam = 0 }) => getShopsByPincode({ pageParam, limit, zipCode }),
+   queryKey: ['shops',lat, lng, showAll],
+    queryFn: ({ pageParam = 0 }) => getShopsByPincode({ pageParam, limit, lat, lng }),
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextPage : undefined,
-    enabled: !!zipCode,
+    enabled: !!lat && !!lng,
 })
 
 const searchShopsQuery = useQuery({
-  queryKey: ['searchShops', searchTerm, zipCode],
-  queryFn: () => getShopBySearch({ zipCode, search: searchTerm }),
+  queryKey: ['searchShops', searchTerm, lat, lng],
+  queryFn: () => getShopBySearch({ lat, lng, search: searchTerm }),
   enabled: !!searchTerm, 
 });
 
 
 const topSellingQuery = useQuery({
-    queryKey: ['topRatedFishes', zipCode, skip],
-    queryFn: () => getFishWithHighRating({ zipCode, skip }),
+    queryKey: ['topRatedFishes', lat, lng, skip],
+    queryFn: () => getFishWithHighRating({ lat, lng, skip }),
     keepPreviousData: true,
   });
 
   const fishQuery = useQuery({
-          queryKey: ['fishListByPincode', zipCode],
-          queryFn: () => getFishesByPincode({ zipCode }),
+          queryKey: ['fishListByPincode', lat, lng],
+          queryFn: () => getFishesByPincode({ lat, lng }),
           keepPreviousData: true,
         });
 

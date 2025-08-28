@@ -5,8 +5,8 @@ export const loginCustomer = async ({phoneNumber,password}) =>{
     return response.data
 }
 
-export const getShopsByPincode = async ({pageParam = 0, limit,zipCode})=>{
-    const response = await API.get(`/customer/listShopByPincode/${zipCode}?limit=${limit}&skip=${pageParam}`)
+export const getShopsByPincode = async ({pageParam = 0, limit,lat, lng})=>{
+    const response = await API.get(`/customer/listShopByPincode?lat=${lat}&lng=${lng}&limit=${limit}&skip=${pageParam}`)
     
     return {
           shops: response.data.shops,
@@ -15,13 +15,13 @@ export const getShopsByPincode = async ({pageParam = 0, limit,zipCode})=>{
     }
 }
 
-export const getFishWithHighRating = async ({ zipCode, skip = 0 }) => {
-  const response = await API.get(`/customer/getFishesWithRating/${zipCode}?skip=${skip}`);
+export const getFishWithHighRating = async ({ lat, lng, skip = 0 }) => {
+  const response = await API.get(`/customer/getFishesWithRating?lat=${lat}&lng=${lng}&skip=${skip}`);
   return response.data;
 };
 
-export const getFishesByPincode = async ({ zipCode}) => {
-  const response = await API.get(`/product/getFishByPincode/${zipCode}`);
+export const getFishesByPincode = async ({ lat, lng}) => {
+  const response = await API.get(`/product/getFishByPincode?lat=${lat}&lng=${lng}`);
   return response.data;
 };
 
@@ -35,8 +35,8 @@ export const getFishByFishId = async ({fishId})=>{
   return response.data
 }
 
-export const getShopsByFishId = async ({fishId,zipCode})=>{
-  const response = await API.get(`/product/getShopByFishId/${fishId}/${zipCode}`)
+export const getShopsByFishId = async ({fishId,lat, lng})=>{
+  const response = await API.get(`/product/getShopByFishId/${fishId}?lat=${lat}&lng=${lng}`)
   return response.data
 }
 
@@ -83,8 +83,8 @@ export const deleteAddress = async ({token})=>{
     return response.data
 }
 
-export const getFishesByName = async({zipCode,fishName})=>{
-  const response = await API.get(`/product/getFishByName/${fishName}/${zipCode}`)
+export const getFishesByName = async({lat, lng,fishName})=>{
+  const response = await API.get(`/product/getFishByName/${fishName}?lat=${lat}&lng=${lng}`)
   return response.data
 }
 
@@ -93,8 +93,8 @@ export const getTimeOfClosing = async ({shopId})=>{
   return response.data
 }
 
-export const createPayment = async ({token,paymentMethod})=>{
-  const response = await API.post("/order/create",{paymentMethod},{headers:{token:token}})
+export const createPayment = async ({token,paymentMethod,deliveryLocation})=>{
+  const response = await API.post("/order/create",{paymentMethod,deliveryLocation},{headers:{token:token}})
   return response.data
 }
 
@@ -108,7 +108,12 @@ export const getOrderById = async ({token,orderId})=>{
   return response.data
 }
 
-export const getShopBySearch = async ({ zipCode, search }) => {
-  const response = await API.get(`/customer/shopsBySearch/${zipCode}?search=${search}`);
+export const getShopBySearch = async ({ lat, lng, search }) => {
+  const response = await API.get(`/customer/shopsBySearch?lat=${lat}&lng=${lng}?search=${search}`);
   return response.data;  // <-- this means data = { success, shops }
 };
+
+export const updatelocationByCustomer = async ({lat,lng,token})=>{
+  const response = await API.put("/location/locationUpdateByCustomer",{lat,lng},{headers:{token:token}})
+  return response.data
+}

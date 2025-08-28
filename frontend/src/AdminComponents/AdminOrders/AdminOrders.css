@@ -8,6 +8,13 @@ display: flex;
 .adminOrderHeading{
     margin-bottom: 20px;
 }
+.AdminOrderSummary{
+    display: flex;
+    gap:100px;
+}
+.AdminOrderLeftSide{
+    width: 100%;
+}
 @media (max-width:1100px){
     .adminOrdersContainer{
         margin: 20px;
@@ -16,7 +23,12 @@ display: flex;
         margin-bottom: 10px;
     }
 }
-
+@media(max-width:800px){
+    .AdminOrderSummary{
+        flex-direction: column;
+          gap:10px;
+    }
+}
 @media (max-width:500px){
     .adminOrdersContainer{
         margin-top: 50px;

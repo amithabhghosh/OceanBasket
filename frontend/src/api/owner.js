@@ -50,3 +50,8 @@ export const updateOrderByOwner = async ({ownerToken,status,orderId})=>{
     const response = await API.put(`/order/updateOrderByOwner/${orderId}`,{status},{headers:{token:ownerToken}})
     return response.data
 }
+
+export const locationUpdating = async ({ownerToken,lat,lng})=>{
+    const response = await API.put("/location/locationByOwner",{lat,lng},{headers:{token:ownerToken}})
+    return response.data
+}

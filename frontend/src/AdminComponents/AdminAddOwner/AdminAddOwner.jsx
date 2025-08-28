@@ -15,12 +15,12 @@ const [zipCode,setZipCode] = useState("")
 const [addressLine1,setAddressLine1] = useState("")
 const [addressLine2,setAddressLine2] = useState("")
 const [city,setCity] = useState("")
-const [state,setState] = useState("")
+const [selectedState,setSelectedState] = useState("")
 const [shopOpenTime,setShopOpenTime] = useState("")
 const [shopCloseTime,setShopClosingTime] = useState("")
 const [deliveryRadiusInKm,setDeliveryRadiusInKm] = useState(0)
 
-
+const adminToken = localStorage.getItem("adminToken")
   const {mutate,isPending,isSuccess,isError,error} = useMutation({
     mutationFn:registerOwner,
     onSuccess:(data)=>{
@@ -36,15 +36,36 @@ const [deliveryRadiusInKm,setDeliveryRadiusInKm] = useState(0)
 
 
 
-const handleAdminLogin  = (e)=>{
+const handleAddOwner  = (e)=>{
 e.preventDefault()
-console.log(ownerName,email,password,phone,shopName,zipCode,addressLine1,addressLine2,city,state,shopOpenTime,shopCloseTime,deliveryRadiusInKm)
-if(!ownerName.trim() || !email.trim() || !password.trim() || !phone.trim() || !shopName.trim() || !zipCode.trim() || !addressLine1.trim() || !addressLine2.trim() || !city.trim() || !state.trim() || !shopOpenTime.trim() || !shopCloseTime.trim() || !deliveryRadiusInKm.trim() ){
-  return toast.error("All Fields Required")
+console.log(password)
+console.log(ownerName,email,password,phone,shopName,zipCode,addressLine1,addressLine2,city,selectedState,shopOpenTime,shopCloseTime,deliveryRadiusInKm)
+const fields = {
+  ownerName,
+  email,
+  password,
+  phone,
+  shopName,
+  zipCode,
+  addressLine1,
+  addressLine2,
+  city,
+  selectedState,
+  shopOpenTime,
+  shopCloseTime,
+  deliveryRadiusInKm
+};
+
+// validate
+for (const [key, value] of Object.entries(fields)) {
+  if (!value || String(value).trim() === "") {
+    return toast.error(`${key} is required`);
+  }
 }
 
+
   mutate({
-    ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state, shopOpenTime,shopCloseTime,deliveryRadiusInKm
+    ownerName,email,password,phone,shopName,zipCode, addressLine1, addressLine2, city, state:selectedState, shopOpenTime,shopCloseTime,deliveryRadiusInKm,adminToken
   })
 }
   return (
@@ -107,7 +128,8 @@ if(!ownerName.trim() || !email.trim() || !password.trim() || !phone.trim() || !s
 
         <div className="AdminAddOwnerField">
           <label>State</label>
-          <select  onChange={(e)=>setState(e.target.value)} value={state}>
+          <select  onChange={(e)=>setSelectedState(e.target.value)} value={selectedState}>
+             <option value="">Select State</option>
             <option value="Kerala">Kerala</option>
             <option value="Tamil Nadu">Tamil Nadu</option>
             <option value="Karnataka">Karnataka</option>
@@ -129,7 +151,7 @@ if(!ownerName.trim() || !email.trim() || !password.trim() || !phone.trim() || !s
           <input type="number"  onChange={(e)=>setDeliveryRadiusInKm(e.target.value)} value={deliveryRadiusInKm} />
         </div>
 
-        <button type="submit" className="AdminAddOwnerButton" onClick={handleAdminLogin}>
+        <button type="submit" className="AdminAddOwnerButton" onClick={handleAddOwner}>
           Save Owner
         </button>
       </form>

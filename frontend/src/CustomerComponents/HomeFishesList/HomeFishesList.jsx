@@ -21,7 +21,7 @@ export const HomeFishesList = ({data,isLoading,isError}) => {
   if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
 
   const fishList = data?.fishes || [];
-
+console.log(fishList)
   return (
 
     <div className='HomeFishesList'>

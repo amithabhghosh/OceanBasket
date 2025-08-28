@@ -528,14 +528,33 @@ const deleteAddress = async (req,res)=>{
 
 const listShopByPincode = async (req,res)=>{
   try {
-    const {zipCode} = req.params
-   
+ const { lat, lng } = req.query; 
+
+  
      const limit = parseInt(req.query.limit) || 3;
     const skip = parseInt(req.query.skip) || 0;
 
-    const shops = await Owner.find({zipCode:zipCode}).select("-password")
-                              .skip(skip)
-                             .limit(limit);
+   if (!lat || !lng) {
+      return res.status(400).json({ success: false, message: "Location Required" });
+    }
+
+    const shops = await Owner.aggregate([
+      {
+        $geoNear: {
+          near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+          distanceField: "distance", // distance in meters
+          spherical: true,
+        },
+      },
+      {
+        $match: {
+          $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
+        },
+      },
+      { $skip: skip },
+      { $limit: limit },
+      { $project: { password: 0 } } 
+    ]);
 
     if(shops.length == 0){
       return res.status(200).json({success:false,message:"No Shops Under This Pincode"})
@@ -546,16 +565,39 @@ const listShopByPincode = async (req,res)=>{
     res.status(500).json({success:false,message:error.message})
   }
 }
+
+
 const getFishWithHighRating = async (req,res)=>{
   try {
-    const {zipCode} = req.params
+    const { lat, lng } = req.query; 
     const limit = 5; 
     const skip = parseInt(req.query.skip) || 0;
 
-    const shops = await Owner.find({zipCode:zipCode})
+
+   if (!lat || !lng) {
+      return res.status(400).json({ success: false, message: "Location Required" });
+    }
+
+     const shops = await Owner.aggregate([
+      {
+        $geoNear: {
+          near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+          distanceField: "distance", // distance in meters
+          spherical: true,
+        },
+      },
+      {
+        $match: {
+          $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
+        },
+      },
+      { $skip: skip },
+      { $limit: limit },
+      { $project: { password: 0 } } 
+    ]);
 
     if(shops.length == 0){
-return res.status(200).json({success:false,message:"No shops In This Pincode"})
+return res.status(200).json({success:false,message:"No shops In Your Location"})
     }
 
 const shopsId = shops.map(shop=>shop._id)
@@ -622,21 +664,35 @@ const getClosingTime = async (req,res)=>{
 
 const getShopsBySearch = async (req, res) => {
   try {
-    const { zipCode } = req.params;
-    let { search } = req.query;
+    const { lat, lng, search } = req.query;
 
-    console.log("zipCode:", zipCode, "search:", search);
+    if (!lat || !lng) {
+      return res.status(400).json({ success: false, message: "Location Required" });
+    }
 
-    if (!search) search = ""; // fallback if no search given
+    // escape regex to prevent errors
+    const safeSearch = search ? escapeRegex(search) : "";
 
-    // escape regex special chars to avoid 500 errors
-    const safeSearch = escapeRegex(search);
-
-    const shops = await Owner.find({
-      zipCode: String(zipCode),
-      shopName: { $regex: safeSearch, $options: "i" }
-    });
-console.log("shops List",shops)
+    const shops = await Owner.aggregate([
+      {
+        $geoNear: {
+          near: { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+          distanceField: "distance",
+          spherical: true,
+        },
+      },
+      {
+        $match: {
+          $and: [
+            // filter within delivery radius
+            { $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] } },
+            // filter shop name by search
+            { shopName: { $regex: safeSearch, $options: "i" } },
+          ],
+        },
+      },
+      { $project: { password: 0 } } // hide sensitive fields
+    ]);
 
     if (!shops || shops.length === 0) {
       return res.status(200).json({ success: false, message: "No Shops Found" });

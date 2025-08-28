@@ -7,7 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FishCard } from '../FishCard/FishCard'
 export const ShopFishesSection = () => {
   const [available,setAvailable] = useState()
-        const {zipCode,setZipCode} = useContext(ContextAPI)
+    const lat = localStorage.getItem("lat")
+    const lng = localStorage.getItem("lng")
         const {ownerId} = useParams()
         console.log(ownerId)
           const {
@@ -16,7 +17,7 @@ export const ShopFishesSection = () => {
         isError,
         refetch,
       } = useQuery({
-        queryKey: ['getShopById', zipCode,ownerId],
+        queryKey: ['getShopById', lat,lng,ownerId],
         queryFn: () => getShopByShopId({ ownerId}),
         keepPreviousData: true,
       });

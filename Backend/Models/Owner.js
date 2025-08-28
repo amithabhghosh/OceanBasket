@@ -36,4 +36,7 @@ const ownerSchema = new mongoose.Schema({
   verified:{type:Boolean,default:true}
 });
 
+ownerSchema.index({ location: "2dsphere" });
+
+
 module.exports = mongoose.model("Owner", ownerSchema);

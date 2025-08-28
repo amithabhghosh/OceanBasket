@@ -37,12 +37,13 @@ try {
                     if (!isMatch){
                       return res.status(200).json({success:false, msg: 'Invalid credentials' });
                     }
-                    const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '24h' });
-        const refreshToken = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '5d' });
+                    const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '7d' });
+        const refreshToken = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '30d' });
                     res.status(201).json({success:true,message:"Admin Login SuccessFull",token,refreshToken})
 } catch (error) {
     res.status(500).json({success:false,message:error.message})
 }
+
 }
 
 const getAllCustomers = async (req,res)=>{
@@ -95,9 +96,11 @@ const getAllOrders = async (req,res)=>{
 
 const updateOrderDelivered = async (req,res)=>{
     try {
-      const {status} = req.body
+      const {orderStatus} = req.body
          const {orderId} = req.params
-          const order = await Order.findByIdAndUpdate(orderId,{orderStatus:status},{new:true})
+
+         console.log(req.body)
+          const order = await Order.findByIdAndUpdate(orderId,{orderStatus},{new:true})
              if(!order){
                return res.status(200).json({success:false,message:"Order Not Found"})
              }

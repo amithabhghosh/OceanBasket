@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const addressSchema = new mongoose.Schema({
+  firstName: { type: String },
+  secondName: { type: String },
+  zipCode: { type: String },
+  state: { type: String },
+  addressLine1: { type: String },
+  addressLine2: { type: String },
+  landmark: { type: String },
+  city: { type: String }
+}, { _id: false });
+
 const orderedItemSchema = new mongoose.Schema({
   productId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -50,11 +61,27 @@ const orderSchema = new mongoose.Schema({
     enum: ['COD', 'RAZORPAY'],
     required: true
   },
+ deliveryLocation: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number],
+      default: [0, 0]
+    }
+  },
+  phone:{type:String},
+  alternativeNumber:{type:String},
+  googleMapLink:{type:String},
+  deliveryAddress: addressSchema,   
   paymentStatus: {
     type: String,
     enum: ['pending', 'paid'],
     default: 'pending'
   },
+ 
   orderStatus: {
     type: String,
     enum: ['placed', 'confirmed', 'delivered', 'cancelled',"out for delivery","preparing"],
