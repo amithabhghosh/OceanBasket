@@ -28,10 +28,12 @@ const navigate = useNavigate()
   // };
 
 
-  if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
+if(!data.uniqueFishes){
+  return null
+}
 
   const fishList = data?.uniqueFishes || [];
-
+console.log(fishList)
   return (
     <div className='TopSelling'>
 <div className="topSellingTopSection">

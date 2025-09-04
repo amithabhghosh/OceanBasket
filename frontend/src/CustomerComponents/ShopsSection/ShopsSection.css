@@ -7,7 +7,7 @@
   animation: spin 0.8s linear infinite;
 }
 .ShopsSection{
-    background-color: #eaf6ff;
+    background-color: #ddf2fd;
     display: flex;
     flex-direction: column;
     padding: 10px 70px 10px 70px;
@@ -41,7 +41,7 @@
 }
 .shopSectionShopsList{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
  width: 100%;
@@ -53,6 +53,9 @@
     }
     .shopsSectionTexts{
         margin: 0px 15px 15px 15px;
+    }
+    .shopSectionShopsList{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 @media (max-width:800px){

@@ -1,12 +1,13 @@
 import React from 'react'
 import "./SearchSection.css"
 import { ShopCard } from '../ShopCard/ShopCard'
+import EmptySection from '../EmptySection/EmptySection';
 export const SearchSection = ({data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch,showAll,setShowAll ,isLoading}) => {
 const shops = data?.shops || []; // safely extract
   console.log("Shops:", shops);
 
 if(shops.length == 0){
-  return <p>No Shops Found</p>
+  return <EmptySection/>
 }  
   return (
     <div className='SearchSection'>

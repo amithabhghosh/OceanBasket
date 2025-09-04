@@ -15,7 +15,7 @@ export const CheckoutSection = ({cartData,personalData}) => {
 
 const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
 
-  // ✅ Payment API
+
   const Payments = useMutation({
     mutationFn: ({ token, paymentMethod, deliveryLocation }) =>
       createPayment({ token, paymentMethod, deliveryLocation }),

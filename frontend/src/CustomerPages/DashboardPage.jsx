@@ -11,6 +11,7 @@ import { getFishesByPincode, getFishWithHighRating, getShopBySearch, getShopsByP
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import {LoadingSpinner} from "../CustomerComponents/LoadingSpinner/LoadingSpinner"
 import { SearchSection } from '../CustomerComponents/SearchSection/SearchSection'
+import EmptySection from '../CustomerComponents/EmptySection/EmptySection'
 export const DashboardPage = () => {
 const [searchTerm, setSearchTerm] = useState("");
 
@@ -54,6 +55,7 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
   }
 
 
+
   return (
 
   //   <div>
@@ -80,6 +82,7 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
     <HomeBanner searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
 {searchTerm ? (
+  
   <SearchSection
     data={searchShopsQuery.data}
     isLoading={searchShopsQuery.isLoading}
@@ -93,7 +96,11 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
   />
 ) : (
   <>
-    <ShopsSection
+{shopsQuery.data.pages[0].shops.length == 0 ? (
+<EmptySection message={"No Shops In Your Location"}/>
+) : (
+  <>
+<ShopsSection
       data={shopsQuery.data}
       fetchNextPage={shopsQuery.fetchNextPage}
       hasNextPage={shopsQuery.hasNextPage}
@@ -103,11 +110,18 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
       setShowAll={setShowAll}
       isLoading={shopsQuery.isLoading}
     />
-    <TopSelling
+
+    
+    
+    </>
+)}
+<TopSelling
       data={topSellingQuery.data}
       isLoading={topSellingQuery.isLoading}
       isError={topSellingQuery.isError}
     />
+    
+
     <HomeFishesList
       data={fishQuery.data}
       isLoading={fishQuery.isLoading}

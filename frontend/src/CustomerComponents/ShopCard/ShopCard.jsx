@@ -2,7 +2,7 @@ import React from 'react'
 import "./ShopCard.css"
 import FishStore from "../../assets/images/FishStore.webp"
 import { useNavigate } from 'react-router-dom'
-export const ShopCard = ({shopName,delivery,id,image}) => {
+export const ShopCard = ({shopName,delivery,id,image,city}) => {
   const navigate = useNavigate()
   return (
  <div className="shopCard" onClick={()=>navigate(`/shop/${id}`)}>
@@ -14,7 +14,7 @@ export const ShopCard = ({shopName,delivery,id,image}) => {
       <div className="shopCardDetails">
         <div className="shopCardTextInfo">
           <h3>{shopName}</h3>
-          <p>Ernakulam</p>
+          <p>{city}</p>
         </div>
 
         <div className="shopCardDelivery">

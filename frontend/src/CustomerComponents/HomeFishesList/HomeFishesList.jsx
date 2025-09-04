@@ -18,8 +18,11 @@ export const HomeFishesList = ({data,isLoading,isError}) => {
     //   });
 
       
-  if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
 
+
+  if(!data.fishes){
+return null
+  }
   const fishList = data?.fishes || [];
 console.log(fishList)
   return (

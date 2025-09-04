@@ -1,0 +1,24 @@
+.empty-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  background: #ddf2fd;
+  color: #555;
+  font-family: Arial, sans-serif;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.empty-text {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}

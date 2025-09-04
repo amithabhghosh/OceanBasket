@@ -6,7 +6,7 @@ import { ShopCard } from '../ShopCard/ShopCard';
 import { ContextAPI } from '../../Context/ContextAPI';
 export const ShopsSection = ({ data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch,showAll,setShowAll ,isLoading}) => {
 const {zipCode,setZipCode} = useContext(ContextAPI)
-
+console.log(data.pages[0].shops)
 
   // const limit = showAll ? 10 : 3;
 // const {data,
@@ -61,7 +61,7 @@ const loadMoreRef = useRef();
   {!isLoading && data?.pages?.flatMap(page =>
     page.shops.map(shop => (
         <>
-      <ShopCard key={shop._id} id={shop._id} shopName={shop.shopName} delivery={shop.deliveryRadiusInKm} image={shop.shopImage}/>
+      <ShopCard key={shop._id} id={shop._id} shopName={shop.shopName} delivery={shop.deliveryRadiusInKm} image={shop.shopImage} city={shop.city}/>
        
       </>
     ))

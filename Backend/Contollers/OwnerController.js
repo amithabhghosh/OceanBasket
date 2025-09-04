@@ -27,7 +27,8 @@ const registerOwner = async (req,res)=>{
                    state,
                     shopOpenTime,
                     shopCloseTime,
-                    deliveryRadiusInKm
+                    deliveryRadiusInKm,
+                    shopImage:"https://res.cloudinary.com/dysh5anaw/image/upload/v1756375177/ShopImage_o8rhli.png"
             })
     await newUser.save()
     
