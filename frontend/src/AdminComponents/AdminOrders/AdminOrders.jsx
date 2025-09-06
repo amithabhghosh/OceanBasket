@@ -5,6 +5,7 @@ import { updatedeleiveryStatus } from '../../api/Admin';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { LoadingSpinner } from '../../CustomerComponents/LoadingSpinner/LoadingSpinner';
+import EmptySection from '../../CustomerComponents/EmptySection/EmptySection';
 export const AdminOrders = ({data,refetch}) => {
 const orders = data?.orders || []
 
@@ -50,7 +51,9 @@ const handleCopy = (order) => {
 if(isPending){
   return <LoadingSpinner/>
 }
-
+if(orders.length == 0){
+  return <EmptySection message={"No Orders"}/>
+}
 
   return (
     <div className="adminOrdersContainer">

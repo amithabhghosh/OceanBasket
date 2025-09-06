@@ -26,8 +26,12 @@ if(orders.isError){
   return (
     <div>
         <div style={{display:"flex"}}>
-<AdminNavbar/>
+ <div style={{ position: "fixed", top: 0, left: 0, height: "100vh" }}>
+    <AdminNavbar />
+  </div>
+    <div className='adminRightPage' >
         <AdminOrders data={orders.data} refetch = {orders.refetch} />
+        </div>
         </div>
         
     </div>

@@ -2,9 +2,12 @@ import React from 'react'
 import "./AdminOwner.css"
 import { AdminOwnerCard } from '../AdminOwnerCard/AdminOwnerCard'
 import { useNavigate } from 'react-router-dom'
+import EmptySection from '../../CustomerComponents/EmptySection/EmptySection'
 export const AdminOwner = ({data,refetch}) => {
   const navigate = useNavigate()
-
+if(data.owners.length == 0){
+  return <EmptySection message={"No Owners"}/>
+}
   return (
     <div className='AdminOwner'>
 <div className="adminOwnerHeading">

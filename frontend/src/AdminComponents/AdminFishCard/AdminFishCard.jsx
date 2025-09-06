@@ -10,7 +10,7 @@ export const AdminFishCard = ({id,price,quantity,ownerId,shopName,image,name}) =
 <div className="adminFishCardDetails">
     <p className='adminFishCardDetailName'>{name}</p>
     <p>{shopName}</p>
-    <p><span>₹{price}</span>/500g</p>
+    <p><span>₹{price/2}</span>/500g</p>
     <p>{quantity}Kg Available</p>
 </div>
     </div>

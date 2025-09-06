@@ -13,7 +13,7 @@ const currentPath = location.pathname;
     {/* Sidebar */}
       <div className={`adminNavbar ${isOpen ? "open" : ""}`}>
         <div className="adminNavList">
-          <div className="adminCustomerNav">
+          <div className="adminCustomerNav" onClick={()=>navigate("/admin/analatics")}>
             <ion-icon name="analytics"></ion-icon>
             <p>Analytics</p>
           </div>

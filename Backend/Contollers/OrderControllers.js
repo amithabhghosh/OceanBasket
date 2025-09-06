@@ -359,4 +359,59 @@ console.log(orderId,status)
     res.status(500).json({ error: "Server error" });
   }
 }
-module.exports = {createOrder,getOrderByOwner,getOrdersByUser,getOrderByOrderId,getOrderByShopId,updateOrderStatusByOwner}
+
+
+const getChartDataForOrders = async (req,res)=>{
+  try {
+     // Total orders
+    const totalOrders = await Order.countDocuments();
+
+    // Total amount
+    const totalAmountAgg = await Order.aggregate([
+      { $group: { _id: null, total: { $sum: "$totalPrice" } } }
+    ]);
+    const totalAmount = totalAmountAgg[0]?.total || 0;
+
+    // Total customers
+    const totalCustomers = await Customer.countDocuments();
+
+    // Total owners
+    const totalOwners = await Owner.countDocuments();
+
+    // Daily orders & amount (last 7 days)
+    const dailyOrders = await Order.aggregate([
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+          },
+          orders: { $sum: 1 },
+          amount: { $sum: "$totalPrice" }
+        }
+      },
+      { $sort: { _id: 1 } },
+      { $limit: 7 }
+    ]);
+
+    // Format data for chart (day name instead of full date)
+    const formattedDaily = dailyOrders.map((d) => {
+      const dateObj = new Date(d._id);
+      const day = dateObj.toLocaleDateString("en-US", { weekday: "short" });
+      return { day, orders: d.orders, amount: d.amount };
+    });
+
+    res.json({
+      stats: {
+        totalOrders,
+        totalAmount,
+        totalCustomers,
+        totalOwners
+      },
+      dailyOrders: formattedDaily
+    });
+  } catch (error) {
+     console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+module.exports = {getChartDataForOrders,createOrder,getOrderByOwner,getOrdersByUser,getOrderByOrderId,getOrderByShopId,updateOrderStatusByOwner}

@@ -1,7 +1,12 @@
 import React from 'react'
 import "./AdminFishes.css"
 import { AdminFishCard } from '../AdminFishCard/AdminFishCard'
+import EmptySection from '../../CustomerComponents/EmptySection/EmptySection'
 export const AdminFishes = ({data}) => {
+  if (!data || !data.fishes) {
+     return <EmptySection message={"No Fishes"}/>
+  }
+
   return (
     <div className='AdminFishes'>
 <div className="adminFishesHeading">

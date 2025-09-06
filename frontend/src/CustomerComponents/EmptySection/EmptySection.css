@@ -4,11 +4,13 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  border: 2px dashed #ccc;
+  /* border: 2px dashed #ccc; */
   border-radius: 12px;
   background: #ddf2fd;
   color: #555;
   font-family: Arial, sans-serif;
+  min-height: 90vh;
+  width: 100%;
 }
 
 .empty-icon {

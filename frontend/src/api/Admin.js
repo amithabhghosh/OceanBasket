@@ -48,3 +48,8 @@ export const updateVerifyOwner = async ({ownerId,adminToken,verified})=>{
     const response = await API.put(`/admin/updateVerifyOwner/${ownerId}`,{verified},{headers:{token:adminToken}})
     return response.data
 }
+
+export const getChartData = async ({adminToken})=>{
+    const response = await API.get("/order/getChartDataForOrders",{headers:{token:adminToken}})
+    return response.data
+}

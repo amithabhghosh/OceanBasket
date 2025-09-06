@@ -1,7 +1,12 @@
 import React from 'react'
 import "./AdminCustomer.css"
 import { AdminCustomerCard } from '../AdminCustomerCard/AdminCustomerCard'
+import EmptySection from '../../CustomerComponents/EmptySection/EmptySection'
 export const AdminCustomer = ({data,refetch}) => {
+if(data.customers.length == 0){
+  return <EmptySection message={"No Customers"}/>
+}
+
   return (
     <div className='AdminCustomer'>
 <div className="adminCustomerHeading">

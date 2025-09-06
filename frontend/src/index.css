@@ -8,3 +8,20 @@ body {
  background-color: #ddf2fd;
  
 }
+.adminRightPage{
+  margin-left: 260px;
+    flex: 1 1 0%;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+@media (max-width:800px){
+  .adminRightPage{
+    margin-left: 230px;
+  }
+}
+@media (max-width:500px){
+  .adminRightPage{
+    margin-left: 0;
+  }
+}

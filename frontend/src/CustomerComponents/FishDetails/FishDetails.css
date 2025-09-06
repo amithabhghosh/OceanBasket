@@ -1,7 +1,7 @@
 .FishDetails{
   display: flex;
     flex-direction: column;
-    background-color:#eaf6ff ;
+    background-color:#ddf2fd ;
     padding: 30px 100px 35px 100px ;
     gap: 30px;
     color: #164863; 

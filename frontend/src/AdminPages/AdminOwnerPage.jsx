@@ -22,12 +22,14 @@ if(owners.isError){
   return navigate("/admin/login")
 }
   return (
-    <div>
-      <div style={{display:"flex"}}>
- <AdminNavbar/>
-      <AdminOwner data = {owners.data}  refetch={owners.refetch}/>
-      </div>
-     
-    </div>
+   <div style={{ display: "flex" }}>
+  <div style={{ position: "fixed", top: 0, left: 0, height: "100vh" }}>
+    <AdminNavbar />
+  </div>
+  <div  className='adminRightPage'>
+    <AdminOwner data={owners.data} refetch={owners.refetch} />
+  </div>
+</div>
+
   )
 }
