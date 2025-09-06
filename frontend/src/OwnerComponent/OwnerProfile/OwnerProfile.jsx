@@ -51,47 +51,33 @@ const handleSetLocation = () => {
 
 
   return (
-    <section className='ownerProfileMainSection'>
-      <div className='ownerProfileDetailsMainSection'>
-        <div className='ownerProfileBackgroundAndProfileImageSection' style={{backgroundImage: `url(${owner?.shopImage})`}}>
-          <img className='ownerProfileImage' src={profile} alt="Profile Image Of Owner"/>
-        </div>
-        <div className="ownerProfileDetailsSection">
-          <div className='ownerProfileNameAndAddressSection'>
-            <h2 className='ownerProfileName'>{owner?.shopName}</h2>
-            <p className='ownerProfileAddress'>{owner?.addressLine1},{owner?.addressLine2}</p>
-          {owner?.location?.coordinates &&
+   <div className='ownerProfile'>
+ <div className="ownerProfileBackButton">  
+        <p> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
+       </div>    
+<div className="ownerProfileDetailsSection">
+  <div className="ownerProfileImageSection">
+    <img src={owner.shopImage} alt="" />
+      {owner?.location?.coordinates &&
    (owner.location.coordinates[0] === 0 &&
     owner.location.coordinates[1] === 0) ? (
       <button onClick={handleSetLocation} className='setLocationBtn'>Set Current Location</button>
     ) : null}
-          </div>
-          <div className='ownerProfileShopDetailsSection'>
-            <h3 className='ownerProfileShopDetailsHeading'>Shop Details</h3>
-            <div className='ownerShopOwnerSection'>
-              <p className='ownerShopOwnerText'>Shop Owner</p>
-              <h3 className='ownerShopOwnerName'>{owner?.ownerName}</h3>
-            </div>
-            <div className='ownerShopNameSection'>
-              <p className='ownerShopNameText'>Shop Name</p>
-              <h3 className='ownerShopName'>{owner?.shopName}</h3>
-            </div>
-            <div className='ownerShopAddressSection'>
-              <p className='ownerShopAddressText'>Shop Address</p>
-              <h3 className='ownerShopAddress'>{owner?.addressLine1},{owner?.addressLine2}</h3>
-            </div>
-            <div className="ownerShopLiscenseNumberSection">
-              <p className='ownerShopLicenseNumberText'>Pincode</p>
-              <h3 className='ownerShopLicenseNumber'>{owner?.zipCode}</h3>
-            </div>
-            <div className="ownerShopDetailsToBeAddedSection1">
-              <p className='ownerShopDetailsToBeAddedSection1Text'>City</p>
-              <h3 className='ownerShopDetailsToBeAddedSection1Details'>{owner?.city}</h3>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-    </section>
+  </div>
+<div className="ownerProfileRightSection">
+  <div className="ownerProfileNamesAndDetails">
+    <p>Shop Name : <span>{owner.shopName}</span></p>
+    <p>Shop Owner Name: <span>{owner.ownerName}</span></p>
+    <p>Address Line1 : <span>{owner.addressLine1}</span></p>
+    <p>Address Line2 : <span>{owner.addressLine2}</span></p>
+    <p>Zipcode  : <span>{owner.zipCode}</span></p>
+    <p>City : <span>{owner.city}</span></p>
+    <p>State : <span>{owner.state}</span></p>
+    <p>Shop Open Time : <span>{owner.shopOpenTime}</span></p>
+    <p>Shop Closing Time : <span>{owner.shopCloseTime}</span></p>
+  </div>
+</div>
+</div>
+   </div>
   )
 }

@@ -67,6 +67,7 @@ const getOwnerData = async (req,res)=>{
         }
         res.status(201).json({success:true,owner})
     } catch (error) {
+      console.log(error.message)
         res.status(500).json({success:false,message:error.message})
     }
 }
@@ -89,7 +90,7 @@ const updateQuantity  = async (req, res) => {
     const { quantity } = req.body;
 const ownerId = req.user.id
 
-const owner = await Owner.findById(owner)
+const owner = await Owner.findById(ownerId)
 if(!owner){
   return res.status(200).json({success:false,message:"Owner Not Found"})
 }

@@ -46,12 +46,12 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
                         <div className="ownerPhoneNumberDiv">
                             <label htmlFor="">Phone Number</label>
                             <input placeholder="Enter your phone number" className="ownerPhoneNumberInputTag" type="tel" name="" id="" onChange={(e)=>setPhone(e.target.value)} value={phone}/>
-                            <i id="phoneicon" class="fa-solid fa-phone"></i>
+                            <i id="ownerphoneicon" class="fa-solid fa-phone"></i>
                         </div>
                         <div className="ownerPasswordDiv">
                             <label htmlFor="">Password</label>
                             <input placeholder="Enter your password" className="ownerPasswordInputTag" type="password" name="" id="" onChange={(e)=>setPassword(e.target.value)} value={password}/>
-                            <i id="passwordicon" class="fa-solid fa-lock"></i>
+                            <i id="ownerpasswordicon" class="fa-solid fa-lock"></i>
                         </div>
                     </div>
                     <div className="ownerCheckBoxMainDiv">

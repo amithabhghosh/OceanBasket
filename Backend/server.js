@@ -14,7 +14,7 @@ const adminRoute = require("../Backend/Routes/adminRoute")
 const cronSchedule = require("./utils/cronSchecdule")
 const locationRoute = require("./Routes/LocationRoute")
 connectDb();
-// cronSchedule()
+cronSchedule()
 const app = express();
 
 app.use(cors({ origin: process.env.FRONTENDLINK, credentials: true }));

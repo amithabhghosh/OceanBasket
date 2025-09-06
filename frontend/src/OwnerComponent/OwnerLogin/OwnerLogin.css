@@ -45,7 +45,7 @@
 .ownerPhoneNumberInputTag::placeholder{
     font-size: medium;
 }
-#phoneicon{
+#ownerphoneicon{
     position: absolute;
     top: 40px;
     left: 12px;
@@ -65,7 +65,7 @@
 .ownerPasswordInputTag::placeholder{
     font-size: medium;
 }
-#passwordicon{
+#ownerpasswordicon{
     position: absolute;
     top: 40px;
     left: 12px;

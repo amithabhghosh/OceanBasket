@@ -25,8 +25,10 @@ export const addFishByOwner = async ({name,availableQuantityKg,pricePerKg,type,o
     return response.data
 }
 
-export const getOwnerData = async ({ownerToken})=>{
+export const getShopData = async ({ownerToken})=>{
+    console.log(ownerToken)
     const response = await API.get("/owner/getOwnerData",{headers:{token:ownerToken}})
+    console.log(response.data)
     return response.data
 }
 

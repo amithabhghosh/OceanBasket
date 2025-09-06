@@ -1,30 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./OwnerNavbar.css"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 export const OwnerNavbar = () => {
   const navigate = useNavigate()
+
+ const location = useLocation();
+const currentPath = location.pathname;
+
+const ownerLogOut = () =>{
+  localStorage.removeItem("ownerToken")
+  localStorage.removeItem("ownerRefreshToken")
+  toast.success("Logout Success")
+navigate("/ownerSignUp")
+}
+
+  const [isLogin, setIsLogin] = useState(!!localStorage.getItem("ownerToken"));
   return (
- <>
-     <nav className="owner-nav-bar">
-        <div className="owner-nav-name">
-            <p>My <br />Ocean <br />basket </p>
-        </div>
-        <div className="owner-nav-items">
-            <a onClick={()=>navigate("/owner/orders")}>Orders</a>
-            <a onClick={()=>navigate("/ownerProfile")}>Profile</a>
-        </div>
+  <div className='Navbar'>
+      <div className="navbarHeading">
+        <p>My</p>
+        <p>Ocean</p>
+        <p>Basket</p>
+      </div>
 
-        
+      <div className="navbarIcons">
+        {isLogin ? (
+          <>
+           
 
-      
-     </nav>
-     <div className="owner-threeline-icon">
-             <i class="fa-solid fa-ellipsis-vertical"></i>
-        </div>
-          <div className="owner-nav-dropdown">
-               <a onClick={()=>navigate("/owner/orders")}>Orders</a>
-            <a onClick={()=>navigate("/ownerProfile")}>Profile</a>
-        </div>
-    </>
+            <ion-icon name="bag" onClick={() => navigate("/owner/orders")} style={{ color: currentPath === '/owner/orders' ? '#5fbaff' : '#eaf6ff' }}></ion-icon>
+            <ion-icon name="person-outline" onClick={() => navigate("/ownerProfile")} style={{ color: currentPath === '/ownerProfile' ? '#5fbaff' : '#eaf6ff' }}></ion-icon>
+            <ion-icon name="power" onClick={ownerLogOut}></ion-icon>
+          </>
+        ) : (
+          <button className='Navbar-Sign-In-Button' onClick={() => navigate("/ownerSignUp")}>Sign In</button>
+        )}
+      </div>
+    </div>
   )
 }

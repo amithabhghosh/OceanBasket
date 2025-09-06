@@ -5,6 +5,7 @@ import {LoadingSpinner} from "../../CustomerComponents/LoadingSpinner/LoadingSpi
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import EmptySection from '../../CustomerComponents/EmptySection/EmptySection';
 export const OwnerOrderCard = ({ data, refetch }) => {
   const orders = data?.orders || [];
   const [expandedOrder, setExpandedOrder] = useState(null);
@@ -38,7 +39,9 @@ if(isPending){
   return <LoadingSpinner/>
 }
 
-
+if(orders.length == 0){
+  return <EmptySection message={"No Orders"}/>
+}
   return (
     <div className="ownerOrdersContainer">
       {orders.map((order) => (

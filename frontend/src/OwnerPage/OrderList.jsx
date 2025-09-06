@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getOrdersByOwner } from '../api/owner';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import { Footer } from '../CustomerComponents/Footer/Footer';
 export const OrderList = () => {
     const navigate = useNavigate()
 const ownerToken = localStorage.getItem("ownerToken")
@@ -22,9 +23,12 @@ const ownerToken = localStorage.getItem("ownerToken")
             return navigate("/ownerSignup")
         }
   return (
-    <div>
+    <div >
          <OwnerNavbar />
-         <OwnerOrderCard data = {getOrdersByShop.data} refetch = {getOrdersByShop.refetch}/>
+         <div style={{marginTop:"100px", minHeight:"300px"}}>
+ <OwnerOrderCard data = {getOrdersByShop.data} refetch = {getOrdersByShop.refetch} />
+         </div>
+        <Footer/>
     </div>
   )
 }

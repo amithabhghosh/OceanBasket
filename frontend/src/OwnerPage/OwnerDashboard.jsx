@@ -1,7 +1,7 @@
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
 import { OwnerFishList } from '../OwnerComponent/OwnerFishList/OwnerFishList'
 import { OwnerNavbar } from '../OwnerComponent/OwnerNavbar/OwnerNavbar'
-import { getFish, getOwnerData } from "../api/owner"
+import { getFish, getShopData } from "../api/owner"
 
 import { useQuery } from '@tanstack/react-query';
 import io from 'socket.io-client';
@@ -25,7 +25,7 @@ export const OwnerDashboard = () => {
     isError
   } = useQuery({
     queryKey: ['getOwnerData'],
-    queryFn: () => getOwnerData({ ownerToken }),
+    queryFn: () => getShopData({ ownerToken }),
   });
 
   useEffect(() => {

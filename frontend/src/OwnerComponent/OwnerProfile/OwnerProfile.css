@@ -1,319 +1,96 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+.ownerProfile{
+   display: flex;
+    flex-direction: column;
+    background-color: #ddf2fd;
+    padding: 90px 100px 0px 100px ;
+    gap: 30px;
+    color: #164863; 
+  min-height: 500px;
 }
-.ownerProfileMainSection{
-    background-color: #DDF2FD;
-    color: #164863;
+.ownerProfileBackButton p{
+    cursor: pointer;
+    display: inline;
 }
-.ownerProfileDetailsMainSection{
-    display: grid;
+.ownerProfileBackButton p ion-icon{
+   position: relative; 
+    top: 2px;
 }
-.ownerProfileBackgroundAndProfileImageSection{
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background-position: center;
-    background-size: cover;
-}
-.ownerProfileImage{
-    position: absolute;
-    top: 260px;
-    left: 190px;
-    border-radius: 50%;
-    height: 260px;
-    width: 260px;
+.ownerProfileImageSection{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     overflow: hidden;
-    object-fit: cover;
-    box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.619)
+}
+.ownerProfileImageSection img{
+    width: 400px;
+    height: 100%;
+    border-radius: 10px;
+}
+.setLocationBtn{
+    background: #164863;
+    color: #ddf2fd;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
 }
 .ownerProfileDetailsSection{
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    align-items: center;
-    justify-items: center;
+    display: flex;
+ gap:50px;
+  align-items: center;
 }
-.ownerProfileNameAndAddressSection{
-    display: grid;
-    justify-items: center;
-    text-align: center;
-    gap: 25px;
-    padding: 0px 50px;
-    position: relative;
-   
-    font-size: 18px;
+.ownerProfileNamesAndDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-.ownerProfileName{
-    font-weight: 400;
-}
-.ownerProfileShopDetailsSection{
-    display: grid;
-    gap: 20px;
-    border: 0.1px solid #164863;
-    border-radius: 15px;
-    padding: 30px 40px;
-    margin: 40px 10px;
-}
-.ownerProfileShopDetailsHeading{
+.ownerProfileNamesAndDetails p{
     font-size: 18px;
     font-weight: 500;
 }
-.ownerShopOwnerSection{
-    display: grid;
-grid-template-columns: 1fr 2fr;
-    font-size: 16px;
+.ownerProfileNamesAndDetails p span{
+    font-size: 19px;
+    font-weight: 600;
 }
-.ownerShopOwnerName{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopNameSection{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopName{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopAddressSection{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopAddress{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopLiscenseNumberSection{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopLicenseNumber{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopDetailsToBeAddedSection1{
-    display: grid;
-grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopDetailsToBeAddedSection1Details{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopDetailsToBeAddedSection2{
-    display: grid;
-  grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopDetailsToBeAddedSection2Details{
-    font-weight: 300;
-    font-size: 14px;
-}
-.ownerShopDetailsToBeAddedSection3{
-    display: grid;
-   grid-template-columns: 1fr 2fr;
-    font-size: 16px;
-}
-.ownerShopDetailsToBeAddedSection3Details{
-    font-weight: 300;
-    font-size: 14px;
-}
-.setLocationBtn {
-  background: linear-gradient(135deg, #0077ff, #00c6ff);
-  color: #fff;
-  padding: 10px 18px;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
-}
-
-.setLocationBtn:hover {
-  background: linear-gradient(135deg, #005ce6, #0094cc);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 119, 255, 0.4);
-}
-
-.setLocationBtn:active {
-  transform: scale(0.96);
-}
-
-@media(max-width:1250px){
-    .ownerProfileBackgroundAndProfileImageSection{
-        height: 300px;
-    }
-    .ownerProfileImage{
-        top: 150px;
-        left: 120px;
-        height: 250px;
-        width: 250px;
-    }
-    .ownerProfileNameAndAddressSection{
-        gap: 20px;
-        bottom: 65px;
-        font-size: 17px;
-    }
-    .ownerProfileShopDetailsSection{
-        margin: 40px 30px;
-    }
-    .ownerShopOwnerSection{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopNameSection{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopAddressSection{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopLiscenseNumberSection{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopDetailsToBeAddedSection1{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopDetailsToBeAddedSection2{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
-    }
-    .ownerShopDetailsToBeAddedSection3{
-    display: grid;
-    grid-template-columns: repeat(2,0.5fr);
+@media (max-width:1100px){
+    .ownerProfile{
+        padding: 90px 50px 20px 50px;
     }
 }
-@media(max-width:1025px){
-    .ownerProfileBackgroundAndProfileImageSection{
-        height: 290px;
-    }
-    .ownerProfileImage{
-        top: 140px;
-        left: 80px;
-        height: 240px;
-        width: 240px;
-    }
-    .ownerProfileNameAndAddressSection{
-        gap: 18px;
-        bottom: 85px;
-    }
-}
-@media(max-width:820px){
-    .ownerProfileBackgroundAndProfileImageSection{
-        height: 290px;
+@media (max-width:800px){
+    .ownerProfileBackButton{
+        display: none;
     }
     .ownerProfileDetailsSection{
-        display: flex;
         flex-direction: column;
-        margin: 130px 0px;
     }
-    .ownerProfileShopDetailsSection{
-        margin: 15px;
+    .ownerProfileImageSection{
+        width: 100%;
     }
-    .ownerProfileImage{
-        top: 120px;
-        left: 250px;
-        height: 240px;
-        width: 240px;
-        box-shadow: none;
+.ownerProfileImageSection img{
+    width: 100%;
+    height: 300px;
+}
+.ownerProfileDetailsSection{
+    align-items: flex-start;
+    gap: 20px;
+}
+}
+@media (max-width:500px){
+    .ownerProfile{
+        padding: 80px 20px 20px 20px;
     }
-    .ownerProfileNameAndAddressSection{
-        bottom: 30px;
-    }
-    .ownerProfileNameAndAddressSection{
-        font-size: 16px;
-    }
-     .ownerProfileShopDetailsHeading{
-        font-size: 16px;
-    }
-    .ownerShopOwnerSection{
-    font-size: 15px;
-    }
-    .ownerShopOwnerName{
+    .ownerProfileImageSection img{
+    width: 100%;
+    height: 250px;
+}
+.ownerProfileNamesAndDetails p{
     font-size: 16px;
-    }
-    .ownerShopNameSection{
-        font-size: 15px;
-    }
-    .ownerShopName{
-        font-size: 16px;
-    }
-    .ownerShopAddressSection{
-        font-size: 15px;
-    }
-    .ownerShopAddress{
-        font-size: 16px;
-    }
-    .ownerShopLiscenseNumberSection{
-        font-size: 15px;
-    }
-    .ownerShopLicenseNumber{
-        font-size: 16px;
-    }
-    .ownerShopDetailsToBeAddedSection1{
-        font-size: 15px;
-    }
-    .ownerShopDetailsToBeAddedSection1Details{
-        font-size: 16px;
-    }
-    .ownerShopDetailsToBeAddedSection2{
-        font-size: 15px;
-    }
-    .ownerShopDetailsToBeAddedSection2Details{
-        font-size: 16px;
-    }
-    .ownerShopDetailsToBeAddedSection3{
-        font-size: 15px;
-    }
-    .ownerShopDetailsToBeAddedSection3Details{
-        font-size: 16px;
-    }
 }
-@media(max-width:541px){
-    .ownerProfileImage{
-        top: 150px;
-        left: 100px;
-        height: 220px;
-        width: 220px;
-    }
-    .ownerProfileShopDetailsSection{
-        padding: 20px 17px;
-    }
-    .ownerProfileShopDetailsSection{
-        padding: 20px 16px;
-    }
+.ownerProfileNamesAndDetails p span{
+    font-size: 17px;
 }
-@media(max-width:400px){
-    .ownerProfileImage{
-        top: 175px;
-        left: 95px;
-        height: 200px;
-        width: 200px;
-    }
-}
-@media(max-width:325px){
-    .ownerProfileImage{
-        top: 215px;
-        left: 83px;
-        height: 150px;
-        width: 150px;
-    }
-    .ownerProfileShopDetailsSection{
-        margin: 10px;
-    }
-    .ownerShopLiscenseNumberSection{
-    grid-template-columns: repeat(2,.992fr);
-    }
 }
