@@ -37,24 +37,24 @@ import { AdminOrderTracking } from './AdminComponents/AdminOrderTracking/AdminOr
 const router= createBrowserRouter([
   {path:"/",element:<LoginSignUp/>},
   
-  {path:"/dashboard",element:<PincodeManager>
+  {path:"/dashboard",element:
     <DashboardPage/>
-    </PincodeManager>},
-    {path:"shop/:ownerId",element:<PincodeManager>
+   },
+    {path:"shop/:ownerId",element:
       <ShopDetailPage/>
-    </PincodeManager>},
-    {path:"fish/:fishId",element:<PincodeManager>
+    },
+    {path:"fish/:fishId",element:
       <FishDetailPage/>
-    </PincodeManager>},
-    {path:"/cart",element:<PincodeManager>
+    },
+    {path:"/cart",element:
       <CartPage/>
-    </PincodeManager>},
-    {path:"/profile",element:<PincodeManager>
+    },
+    {path:"/profile",element:
       <ProfilePage/>
-    </PincodeManager>},
-    {path:"/Name/:fishName",element:<PincodeManager>
+  },
+    {path:"/Name/:fishName",element:
       <FishPage/>
-    </PincodeManager>},
+   },
     {path:"/checkout",element:<CheckoutPage/>},
     {path:"/order/:orderId",element:<OrderDetailPage/>},
     {path:"/ownerSignUp",element:<OwnerSignUp/>},

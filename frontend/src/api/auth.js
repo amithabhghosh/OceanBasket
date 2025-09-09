@@ -69,12 +69,12 @@ export const updateProfile = async ({token,name, email, alternativeNumber})=>{
   return response.data
 }
 
-export const updateAddress = async ({token, addressLine1, addressLine2, city, zipCode, landmark})=>{
-  const response = await API.put("/customer/editAddress",{ addressLine1,addressLine2,city,zipCode,landmark},{headers:{token:token}})
+export const updateAddress = async ({token, addressLine1, addressLine2, city, zipCode, landmark,firstName, secondName})=>{
+  const response = await API.put("/customer/editAddress",{ addressLine1,addressLine2,city,zipCode,landmark,firstName, secondName},{headers:{token:token}})
   return response.data
 }
-export const addAddress = async ({token, addressLine1,addressLine2,city,zipCode,landmark})=>{
-  const response = await API.post("/customer/addAddress",{ addressLine1,addressLine2,city,zipCode,landmark},{headers:{token:token}})
+export const addAddress = async ({token, addressLine1,addressLine2,city,zipCode,landmark,firstName, secondName})=>{
+  const response = await API.post("/customer/addAddress",{ addressLine1,addressLine2,city,zipCode,landmark,firstName,secondName},{headers:{token:token}})
   return response.data
 }
 

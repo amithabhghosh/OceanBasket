@@ -7,7 +7,9 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { ContextAPI } from '../../Context/ContextAPI';
-export const Profile = () => {
+export const Profile = ({data,refetch,isError}) => {
+
+
   const navigate = useNavigate();
     const {zipCode,setZipCode} = useContext(ContextAPI)
     const [isProfileEdit,setIsProfileEdit] = useState(false)
@@ -21,21 +23,21 @@ const [addressLine2,setAddressline2] = useState("")
 const [pinCode,setPinCode] = useState("")
 const [landmark,setLandmark] = useState("") 
 const [city,setCity] = useState("")
+const [firstName,setFirstName] = useState("")
+const [secondName,setSecondName] = useState("")
 
-
-
+const handleCustomerLogout = ()=>{
+  localStorage.removeItem("userToken")
+    localStorage.removeItem("userRefreshToken")
+    localStorage.removeItem("lat")
+    localStorage.removeItem("lng")
+    localStorage.removeItem("user")
+    toast.success("Logout Success")
+  navigate("/")
+}
 
      const token = localStorage.getItem("userToken");
-const {
-        data,
-        isLoading,
-        isError,
-   refetch
-      } = useQuery({
-        queryKey: ['getProfile'],
-        queryFn: () => getProfile({token}),
-        keepPreviousData: true,
-      });
+
 
 
 const updateProfileMutation = useMutation({
@@ -58,8 +60,9 @@ const updateAddressMutation = useMutation({
         refetch()
         setIsEditAddress(false)
       toast.success("Address Updated")
-  setZipCode(pinCode)
-      localStorage.setItem("zipCode",pinCode)
+  setZipCode("")
+      setFirstName("")
+      setSecondName("")
        setAddressline1("");
     setAddressline2("");
     setLandmark("");
@@ -78,8 +81,10 @@ const updateAddressMutation = useMutation({
         refetch()
         setIsAddAddress(false)
       toast.success("Address Added")
-    setZipCode(pinCode)
-      localStorage.setItem("zipCode",pinCode)
+    setZipCode("")
+    
+      setFirstName("")
+      setSecondName("")
         setAddressline1("");
     setAddressline2("");
     setLandmark("");
@@ -98,7 +103,8 @@ const updateAddressMutation = useMutation({
         refetch()
       toast.success("Address Deleted")
     
-      localStorage.removeItem("zipCode")
+    setFirstName("")
+    setSecondName("")
         setAddressline1("");
     setAddressline2("");
     setLandmark("");
@@ -121,7 +127,7 @@ updateProfileMutation.mutate({
 }
 
 const handleAddNewAddress = ()=>{
-    if(!addressLine1.trim() || !addressLine2.trim() || !city.trim() || !pinCode.trim() || !landmark.trim()){
+    if(!firstName.trim() || !secondName.trim() || !addressLine1.trim() || !addressLine2.trim() || !city.trim() || !pinCode.trim() || !landmark.trim()){
         return toast.error("The Fields are Required")
     }
 addAddressMutation.mutate({
@@ -129,12 +135,14 @@ addAddressMutation.mutate({
       addressLine2,
       city,
       zipCode:pinCode,
-      landmark
+      landmark,
+      firstName,
+      secondName
     });
 }
 
 const handleUpdateAddress = ()=>{
-    if(!addressLine1.trim() || !addressLine2.trim() || !city.trim() || !pinCode.trim() || !landmark.trim()){
+    if(!firstName.trim() || !secondName.trim() || !addressLine1.trim() || !addressLine2.trim() || !city.trim() || !pinCode.trim() || !landmark.trim()){
         return toast.error("The Fields are Required")
     }
 updateAddressMutation.mutate({
@@ -142,7 +150,9 @@ updateAddressMutation.mutate({
       addressLine2,
       city,
       zipCode:pinCode,
-      landmark
+      landmark,
+        firstName,
+      secondName
     });
 }
 
@@ -167,11 +177,11 @@ useEffect(() => {
     setLandmark(addr.landmark || "");
     setPinCode(addr.zipCode || "");
     setCity(addr.city || "");
-    
+    setFirstName(addr.firstName || "")
+    setSecondName(addr.secondName || "")
   }
 }, [data]);
-      console.log(data)
-    if(isLoading)return <LoadingSpinner/>
+     
     if (isError){
       return navigate("/")
     }
@@ -189,6 +199,7 @@ useEffect(() => {
     <p>{data?.user?.email}</p>
     <p>{data?.user?.phone}</p>
     <p>{data?.user?.alternativeNumber}</p>
+    <button className='customerLogoutBtn' onClick={handleCustomerLogout}>Logout</button>
 </div>
 <div className="profilePersonalButton">
     <button onClick={()=>setIsProfileEdit((prev)=>!prev)}>Edit Personal Info</button>
@@ -214,6 +225,9 @@ useEffect(() => {
 data.user.address.map((address)=>(
     <div className='addressOne'>
         <div className='addressNumberOne'>
+          
+          <p>{address.firstName} {address.secondName}</p>
+  
 <p>{address.addressLine1}</p>
 <p>{address.addressLine2}</p>
 <p>{address.landmark}</p>
@@ -237,6 +251,8 @@ data.user.address.map((address)=>(
 
 {(isEditAddress || isAddAddress) && (
   <div className='editAddress'>
+    <input type="text" placeholder='First Name' onChange={(e)=>setFirstName(e.target.value)} value={firstName} />
+    <input type="text" placeholder='Second Name' onChange={(e)=>setSecondName(e.target.value)} value={secondName} />
     <input type="text" placeholder='Address Line 1' onChange={(e)=>setAddressline1(e.target.value)} value={addressLine1}/>
     <input type="text" placeholder='Address Line 2' onChange={(e)=>setAddressline2(e.target.value)} value={addressLine2} />
     <input type="text" placeholder='Landmark' onChange={(e)=>setLandmark(e.target.value)} value={landmark}/>

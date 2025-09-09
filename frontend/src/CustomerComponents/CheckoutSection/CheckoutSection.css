@@ -191,7 +191,7 @@
 }
 
 .locationPopup {
-  background: #fff;
+  background: #DDF2FD;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
@@ -213,11 +213,25 @@
 
 .popupButtons button:first-child {
   background: #007bff;
-  color: #fff;
+  color: #DDF2FD;
 }
 
 .popupButtons button:last-child {
-  background: #ccc;
+  background: #DDF2FD;
+}
+.checkoutSectionAddAddressBtn{
+    padding: 0px 12px 0px 12px;
+    background-color: #164863;
+    color: #DDF2FD;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.checkoutSectionAddAddressBtn:hover{
+    background-color: #007bff;
 }
 
 @media(max-width:1250px){

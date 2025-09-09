@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import "./AdminNavbar.css"
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 export const AdminNavbar = () => {
 const navigate = useNavigate()
   const location = useLocation();
 const currentPath = location.pathname;
     const [isOpen, setIsOpen] = useState(false);
+const handleAdminLogout = ()=>{
+  localStorage.removeItem("adminToken")
+     localStorage.removeItem("adminRefreshToken")
+     toast.success("Logout Success")
+     navigate("/admin/login")
+}
+
   return (
     <>
 
@@ -32,6 +40,10 @@ const currentPath = location.pathname;
           <div className="adminOrdersNav" onClick={()=>navigate("/admin/orders")} style={{color:currentPath === "/admin/orders"? "#5fbaff " : "white"}}>
             <ion-icon name="briefcase"></ion-icon>
             <p>Orders</p>
+          </div>
+             <div className="adminLogoutNav" onClick={handleAdminLogout}>
+            <ion-icon name="power"></ion-icon>
+            <p>Logout</p>
           </div>
         </div>
       </div>

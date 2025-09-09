@@ -9,40 +9,19 @@ import { ShopCardRelated } from '../ShopCardRelated/ShopCardRelated';
 import { FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
+import EmptySection from '../EmptySection/EmptySection';
 
-export const FishDetails = () => {
+export const FishDetails = ({fishData,shopData,switchShop,setSwitchShop}) => {
    const [isBlocked, setIsBlocked] = useState(false);
   const navigate = useNavigate()
   const token = localStorage.getItem("userToken");
     const lat = localStorage.getItem("lat")
     const lng = localStorage.getItem("lng")
-       const {fishId} = useParams()
+     
     const [quantity,setQuantity] = useState(.5)
     const [totalAmount,setTotalAmount] = useState(0)
-    const [switchShop,setSwitchShop] = useState(false)
-      const {
-        data:fishData,
-        isLoading:fishLoading,
-        isError:fishError
-   
-      } = useQuery({
-        queryKey: ['fishesByFishId',lat,lng,fishId],
-        queryFn: () => getFishByFishId({fishId}),
-        keepPreviousData: true,
-      });
-
-   const {
-        data:shopData,
-        isLoading:shopLoading,
-        isError:shopError,
-        
-      } = useQuery({
-        queryKey: ['shopsByFishId', lat,lng,fishId],
-        queryFn: () => getShopsByFishId({fishId,lat,lng}),
-        keepPreviousData: true,
-        enabled: switchShop
-      });
-
+    
+     console.log("FishData",fishData)
       // const getTime = useQuery({
       //   queryKey: ['getTime'],
       //   queryFn: () => getFishByFishId({shopId:fishData.ownerDetails._id}),
@@ -103,8 +82,7 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
   },
 });
 
-  if (fishLoading) return <LoadingSpinner/>
-  if (fishError || fishData?.success === false) return <p >{fishData?.message || "Error fetching fishes"}</p>;
+
 
 
 
@@ -164,7 +142,7 @@ const { mutate: handleAddToCart, isLoading:buttonLoading, isError, error } = use
 
  {switchShop &&  (
   <div className='switchShopBox'>
-{!shopData?.matchingShops ? <p>The Fish Available only in this Shop</p> : (
+{!shopData?.matchingShops ?<p>The Fish Available only in this Shop</p>: (
  shopData.matchingShops.map((shop) => {
       const matchingFish = shopData.fishesWithOwner.find(
         (fish) => fish.owner === shop._id

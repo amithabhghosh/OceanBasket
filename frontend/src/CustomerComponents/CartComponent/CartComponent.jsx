@@ -6,20 +6,11 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { useQuery } from '@tanstack/react-query';
 import { Cart } from '../Cart/Cart';
 import { useNavigate } from 'react-router-dom';
-export const CartComponent = () => {
+export const CartComponent = ({data,refetch}) => {
   const navigate = useNavigate();
 const token = localStorage.getItem("userToken");
 const [totalPrice, setTotalPrice] = useState(0);
-  const {
-      data,
-      isLoading,
-      isError,
-      refetch,
-    } = useQuery({
-      queryKey: ['getCart',token],
-      queryFn: () => getCart({token}),
-      keepPreviousData: true,
-    });
+ 
 
 
       const calculateTotalPrice = () => {
@@ -45,9 +36,9 @@ const handleCartChange = async () => {
 
 
 
-      if (isLoading) return<LoadingSpinner/>
-  if (isError || data?.success === false) return <p>{data?.message || "Error fetching fishes"}</p>;
-console.log(data)
+    
+
+
 
   return (
     <div className='CartComponent'>
@@ -79,7 +70,7 @@ console.log(data)
               </div>
               <div className="cartUpdateCart">
 <ion-icon name="repeat-outline"></ion-icon>
-<p>Update cart</p>
+<p onClick={handleCartChange}>Update cart</p>
               </div>
               
             </div>

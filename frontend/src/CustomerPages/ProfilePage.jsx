@@ -4,7 +4,7 @@ import { Profile } from '../CustomerComponents/Profile/Profile'
 import { Footer } from '../CustomerComponents/Footer/Footer'
 import { OrderList } from '../CustomerComponents/OrderList/OrderList'
 import { useQuery } from '@tanstack/react-query'
-import { getOrderByCustomer } from '../api/auth'
+import { getOrderByCustomer, getProfile } from '../api/auth'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
 export const ProfilePage = () => {
@@ -16,7 +16,13 @@ const customerOrders = useQuery({
     keepPreviousData: true,
   });
 
-if(customerOrders.isLoading){
+const profile = useQuery({
+        queryKey: ['getProfile'],
+        queryFn: () => getProfile({token}),
+        keepPreviousData: true,
+      });
+
+if(customerOrders.isLoading || profile.isLoading){
   return <LoadingSpinner/>
 }
 
@@ -27,7 +33,7 @@ if(customerOrders.isError){
   return (
     <div>
          <Navbar/>
-         <Profile/>
+         <Profile data = {profile.data} refetch={profile.refetch} isError={profile.isError} />
            <OrderList data={customerOrders?.data}  />
          <Footer/>
        

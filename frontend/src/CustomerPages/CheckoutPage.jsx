@@ -4,6 +4,7 @@ import { CheckoutSection } from '../CustomerComponents/CheckoutSection/CheckoutS
 import { getCart, getProfile } from '../api/auth';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
+import { Footer } from '../CustomerComponents/Footer/Footer';
 export const CheckoutPage = () => {
   
 const token = localStorage.getItem("userToken")
@@ -31,7 +32,8 @@ if(error){
   return (
     <div>
        <Navbar/> 
-       <CheckoutSection cartData = {getCartData.data} personalData = {getAddressOfUser.data} />
+       <CheckoutSection cartData = {getCartData.data} personalData = {getAddressOfUser.data} refetch = {getAddressOfUser.refetch} />
+       <Footer/>
     </div>
   )
 }

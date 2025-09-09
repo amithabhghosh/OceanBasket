@@ -5,6 +5,7 @@ import {  getOrderById } from '../api/auth'
 import { useNavigate, useParams } from 'react-router-dom'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
 import { OrderDetail } from '../CustomerComponents/OrderDetail/OrderDetail'
+import { Footer } from '../CustomerComponents/Footer/Footer'
 
 export const OrderDetailPage = () => {
 const {orderId} = useParams()
@@ -29,6 +30,7 @@ if(customerOrders.isError){
     <div>
         <Navbar/>
         <OrderDetail data={customerOrders.data}/>
+        <Footer/>
     </div>
   )
 }

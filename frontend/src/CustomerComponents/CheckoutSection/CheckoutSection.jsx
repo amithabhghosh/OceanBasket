@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import "./CheckoutSection.css"
 import razor from "../../assets/images/razorpay_logo.png"
-import { createPayment, updatelocationByCustomer } from '../../api/auth'
+import { addAddress, createPayment, updatelocationByCustomer } from '../../api/auth'
 import { toast } from 'react-toastify'
+import { FaSpinner } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom'
-export const CheckoutSection = ({cartData,personalData}) => {
+export const CheckoutSection = ({cartData,personalData,refetch}) => {
      const navigate = useNavigate();
   const token = localStorage.getItem("userToken");
 
@@ -13,8 +14,54 @@ export const CheckoutSection = ({cartData,personalData}) => {
   const [deliveryLocation, setDeliveryLocation] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("");
 
+const [firstName,setFirstName] = useState("")
+const [secondName,setSecondName] = useState("")
+const [zipCode,setZipCode] = useState("")
+const [addressLine1,setAddressLine1] = useState("")
+const [addressLine2,setAddressLine2] = useState("")
+const [landmark,setLandmark] = useState("")
+const [city,setCity] = useState("")
+
 const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
 
+
+  const addAddressMutation = useMutation({
+    mutationFn: (addressData) => addAddress({...addressData,token}),
+    onSuccess: (data) => {
+        refetch()
+       
+      toast.success("Address Added")
+    setZipCode("")
+      
+      setFirstName("")
+      setSecondName("")
+        setAddressLine1("");
+    setAddressLine2("");
+    setLandmark("");
+    setZipCode("");
+    setCity("");
+    },
+    onError: (err) => {
+      const message = err?.response?.data?.message || err.message || "Something went wrong";
+      toast.error(message);
+    },
+  });
+
+  const handleAddNewAddress = (e)=>{
+    e.preventDefault()
+      if(!firstName.trim() || !secondName.trim() || !addressLine1.trim() || !addressLine2.trim() || !city.trim() || !zipCode.trim() || !landmark.trim()){
+          return toast.error("The Fields are Required")
+      }
+  addAddressMutation.mutate({
+        addressLine1,
+        addressLine2,
+        city,
+        zipCode,
+        landmark,
+        firstName,
+        secondName
+      });
+  }
 
   const Payments = useMutation({
     mutationFn: ({ token, paymentMethod, deliveryLocation }) =>
@@ -50,7 +97,12 @@ const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
 
   // ✅ Handle Payments
   const handlePayments = (e) => {
+
     e.preventDefault();
+   if(personalData?.user?.address.length == 0){
+      return toast.error("Add Your Address")
+    }
+
     if (!deliveryLocation) {
       setShowLocationPopup(true);
       return;
@@ -65,6 +117,9 @@ const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
 
   // ✅ Fetch Current Location
   const fetchCurrentLocation = () => {
+
+ 
+
     if (!navigator.geolocation) {
       toast.error("Geolocation not supported by your browser");
       return;
@@ -101,6 +156,7 @@ const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
         {personalData?.user?.address[0] ? (
 <div>
       <div className='CheckoutAlreadyAccountSection'>
+        <p>{personalData?.user?.address[0].firstName} {personalData?.user?.address[0].secondName}</p>
 <p>{personalData?.user?.address[0].addressLine1}</p>
 <p>{personalData?.user?.address[0].addressLine2}</p>
 <p>{personalData?.user?.address[0].landmark}</p>
@@ -112,19 +168,19 @@ const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
         ) : (
 <form className="checkoutAddressFormSection">
             <div className="checkoutNameDetailsCollectingSection">
-                <input className='checkoutFirstNameDetailsSection' placeholder='First Name' type="text" name="" id="" />
-                <input className='checkoutSecondNameDetailsSection' placeholder='Second Name' type="text" name="" id="" />
+                <input className='checkoutFirstNameDetailsSection' placeholder='First Name' type="text" name="" id="" onChange={(e)=>setFirstName(e.target.value)} value={firstName}/>
+                <input className='checkoutSecondNameDetailsSection' placeholder='Second Name' type="text" name="" id=""  onChange={(e)=>setSecondName(e.target.value)} value={secondName} />
             </div>
-            <input className='checkoutUserEmailAddress' placeholder='Email Address' type="email" name="" id="" />
+            <input className='checkoutUserEmailAddress' placeholder='Land Mark' type="text" name="" id="" onChange={(e)=>setLandmark(e.target.value)} value={landmark} />
             <div className="checkoutUserAddressSection">
-                <input className='checkoutUserAddressInput1' placeholder='Address Line 1' type="text" name="" id="" />
-                <input className='checkoutUserAddressInput2' placeholder='Address Line 2' type="text" name="" id="" />
+                <input className='checkoutUserAddressInput1' placeholder='Address Line 1' type="text" name="" id="" onChange={(e)=>setAddressLine1(e.target.value)} value={addressLine1} />
+                <input className='checkoutUserAddressInput2' placeholder='Address Line 2' type="text" name="" id="" onChange={(e)=>setAddressLine2(e.target.value)} value={addressLine2}/>
             </div>
             <div className="checkoutUserCityDetailsSection">
-                <input className='checkoutUserCityNameInput' placeholder='City' type="text" name="" id="" />
-                <input className='checkoutUserCityPincodeInput' placeholder='Pincode' type="text" name="" id="" />
+                <input className='checkoutUserCityNameInput' placeholder='City' type="text" name="" id="" onChange={(e)=>setCity(e.target.value)} value={city} />
+                <input className='checkoutUserCityPincodeInput' placeholder='Pincode' type="text" name="" id="" onChange={(e)=>setZipCode(e.target.value)} value={zipCode} />
             </div>
-            <input className='checkoutUserPhoneNumberInput' placeholder='Phone Number' type="tel" name="" id="" />
+       <button className='checkoutSectionAddAddressBtn' onClick={handleAddNewAddress}>{addAddressMutation.isPending ? ( <FaSpinner className="spin" />) : "Add Address"}</button>
         </form>
 
         )}

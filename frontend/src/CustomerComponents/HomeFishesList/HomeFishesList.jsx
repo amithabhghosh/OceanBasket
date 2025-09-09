@@ -4,6 +4,7 @@ import { ContextAPI } from '../../Context/ContextAPI'
 import { getFishesByPincode } from '../../api/auth'
 import { useQuery } from '@tanstack/react-query';
 import { FishCard } from '../FishCard/FishCard'
+import EmptySection from '../EmptySection/EmptySection';
 export const HomeFishesList = ({data,isLoading,isError}) => {
     const {zipCode,setZipCode} = useContext(ContextAPI)
     //  const {
@@ -21,7 +22,7 @@ export const HomeFishesList = ({data,isLoading,isError}) => {
 
 
   if(!data.fishes){
-return null
+return <EmptySection message={"No Fishes"}/>
   }
   const fishList = data?.fishes || [];
 console.log(fishList)

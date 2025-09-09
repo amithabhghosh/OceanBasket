@@ -41,7 +41,7 @@ font-size: 14px;
 }
 .profilePersonalButton button{
 padding: 10px 35px 10px 35px;
-background-color: #eaf6ff;
+background-color: #ddf2fd;
 border: .5px solid #164863;
 color: #164863;
 outline: none;
@@ -65,7 +65,7 @@ min-width: 350px;
 }
 .profileInfoEditSection button{
     background-color: #164863;
-    color: #eaf6ff;
+    color: #ddf2fd;
     padding: 5px 10px;
     border-radius: 10px;
     border: none;
@@ -119,7 +119,7 @@ align-items: center;
 }
 .addressOneButtons button{
     padding: 10px 35px 10px 35px;
-background-color: #eaf6ff;
+background-color: #ddf2fd;
 border: .5px solid #164863;
 color: #164863;
 outline: none;
@@ -130,7 +130,7 @@ font-weight: 300;
     padding: 8px 35px 8px 35px;
     border-radius: 10px;
     border: .5px solid #164863;
-    background-color:#eaf6ff;
+    background-color:#ddf2fd;
     
     outline: none;
     cursor: pointer;
@@ -152,11 +152,25 @@ font-weight: 300;
 .editAddress button{
      padding: 8px 35px 8px 35px;
     border-radius: 10px;
-    border: .5px solid #eaf6ff;
+    border: .5px solid #ddf2fd;
     background-color:#164863;
-    color: #eaf6ff;
+    color: #ddf2fd;
     outline: none;
     cursor: pointer;
+}
+.customerLogoutBtn{
+    padding: 7px 12px 7px 12px;
+    border: none;
+    background-color: #164863;
+    color: #ddf2fd;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    font-size: 14px;
+    font-weight: 600;
+}
+.customerLogoutBtn:hover{
+    background-color: red;
 }
 @media (max-width:1100px){
     .Profile{

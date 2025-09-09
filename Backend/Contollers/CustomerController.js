@@ -483,7 +483,9 @@ const editAddress = async (req,res)=>{
       addressLine2,
       city,
       zipCode,
-      landmark } = req.body;
+      landmark ,
+    firstName, 
+    secondName} = req.body;
     
         const user = await User.findById(userId);
     
@@ -495,7 +497,9 @@ const editAddress = async (req,res)=>{
       addressLine2,
       city,
       zipCode,
-      landmark};
+      landmark,
+    firstName,
+     secondName};
     
         await user.save();
     
