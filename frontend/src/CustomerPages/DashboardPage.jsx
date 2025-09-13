@@ -96,7 +96,7 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
   />
 ) : (
   <>
-{shopsQuery.data.pages[0].shops.length == 0 ? (
+{!shopsQuery?.data?.pages[0]?.shops ? (
 <EmptySection message={"No Shops In Your Location"}/>
 ) : (
   <>
@@ -126,6 +126,7 @@ const isLoading = shopsQuery.isLoading || topSellingQuery.isLoading || fishQuery
       data={fishQuery.data}
       isLoading={fishQuery.isLoading}
       isError={fishQuery.isError}
+      shopData={shopsQuery.data}
     />
     <PreBook/>
        <Footer/>

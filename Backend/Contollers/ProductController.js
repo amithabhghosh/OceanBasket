@@ -257,7 +257,7 @@ const getFishByName = async (req,res)=>{
   try {
              const { lat, lng } = req.query;
            const {fishName} = req.params
-       
+     
              const shops = await Owner.aggregate([
                  {
                    $geoNear: {
@@ -271,8 +271,7 @@ const getFishByName = async (req,res)=>{
                      $expr: { $lte: ["$distance", { $multiply: ["$deliveryRadiusInKm", 1000] }] },
                    },
                  },
-                 { $skip: skip },
-                 { $limit: limit },
+                 
                  { $project: { password: 0 } } 
                ]);
        

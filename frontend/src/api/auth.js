@@ -83,7 +83,7 @@ export const deleteAddress = async ({token})=>{
     return response.data
 }
 
-export const getFishesByName = async({lat, lng,fishName})=>{
+export const getFishesByName = async({lat,lng,fishName})=>{
   const response = await API.get(`/product/getFishByName/${fishName}?lat=${lat}&lng=${lng}`)
   return response.data
 }
@@ -117,3 +117,8 @@ export const updatelocationByCustomer = async ({lat,lng,token})=>{
   const response = await API.put("/location/locationUpdateByCustomer",{lat,lng},{headers:{token:token}})
   return response.data
 }
+
+export const refreshAccessToken = async ({ refreshToken }) => {
+  const response = await API.post("/auth/refresh", { refreshToken });
+  return response.data;
+};

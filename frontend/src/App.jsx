@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import  {checkTokenExpiration} from "./tokenExpiry"
 import { LoginSignUp } from './CustomerPages/LoginSignUp'
 import { DashboardPage } from './CustomerPages/DashboardPage'
-import { PincodeManager } from './PincodeManager'
+
 import { ShopDetailPage } from './CustomerPages/ShopDetailPage'
 import { FishDetailPage } from './CustomerPages/FishDetailPage'
 import { CartPage } from './CustomerPages/CartPage'
@@ -31,6 +31,10 @@ import { AdminFishesPage } from './AdminPages/AdminFishesPage'
 import { AdminAddOwnerPage } from './AdminPages/AdminAddOwnerPage'
 import { AdminOrderPage } from './AdminPages/AdminOrderPage'
 import { AdminOrderTracking } from './AdminComponents/AdminOrderTracking/AdminOrderTracking'
+import { LocationManager } from './LocationManager'
+import { CustomerAuth } from './AuthRoutes/CustomerAuth'
+import { OwnerAuth } from './AuthRoutes/OwnerAuth'
+import { AdminAuth } from './AuthRoutes/AdminAuth'
 
 
 
@@ -38,7 +42,8 @@ const router= createBrowserRouter([
   {path:"/",element:<LoginSignUp/>},
   
   {path:"/dashboard",element:
-    <DashboardPage/>
+    <LocationManager> <DashboardPage/></LocationManager>
+   
    },
     {path:"shop/:ownerId",element:
       <ShopDetailPage/>
@@ -47,37 +52,47 @@ const router= createBrowserRouter([
       <FishDetailPage/>
     },
     {path:"/cart",element:
-      <CartPage/>
+      <CustomerAuth><CartPage/></CustomerAuth>
+      
     },
     {path:"/profile",element:
-      <ProfilePage/>
+      <CustomerAuth> <ProfilePage/></CustomerAuth>
+     
   },
     {path:"/Name/:fishName",element:
       <FishPage/>
    },
-    {path:"/checkout",element:<CheckoutPage/>},
-    {path:"/order/:orderId",element:<OrderDetailPage/>},
+    {path:"/checkout",element:<CustomerAuth><CheckoutPage/></CustomerAuth>},
+    {path:"/order/:orderId",element:<CustomerAuth><OrderDetailPage/></CustomerAuth>},
+
+
     {path:"/ownerSignUp",element:<OwnerSignUp/>},
-  {path:"/ownerDashboard",element:<OwnerDashboard/>}
-  ,{path:"/ownerProfile",element:<OwnerProfilePage/>},
-  {path:"/owner/fish/:fishId",element:<OwnerFishDetails/>},
-  {path:"/owner/addFish",element:<OwnerFishAdd/>},
-  {path:"/owner/orders",element:<OrderList/>},
+  {path:"/ownerDashboard",element:<OwnerAuth><OwnerDashboard/></OwnerAuth>}
+  ,{path:"/ownerProfile",element:<OwnerAuth><OwnerProfilePage/></OwnerAuth>},
+  {path:"/owner/fish/:fishId",element:<OwnerAuth><OwnerFishDetails/></OwnerAuth>},
+  {path:"/owner/addFish",element:<OwnerAuth><OwnerFishAdd/></OwnerAuth>},
+  {path:"/owner/orders",element:<OwnerAuth><OrderList/></OwnerAuth>},
 
 
 
 
   {path:"/admin/login",element:<AdminLoginPage/>},
   {path:"/admin/analatics",element:<AdminDashboard/>},
-  {path:"/admin/customer",element:<AdminOrderTracking>
+  {path:"/admin/customer",element:
+  <AdminAuth>
+  <AdminOrderTracking>
     <AdminCustomerPage/>
-    </AdminOrderTracking>},
-  {path:"/admin/owner",element:<AdminOrderTracking>
+    </AdminOrderTracking>
+    </AdminAuth>},
+  {path:"/admin/owner",element:
+  <AdminAuth>
+  <AdminOrderTracking>
     <AdminOwnerPage/>
-  </AdminOrderTracking>},
-  {path:"/admin/fishes",element:<AdminOrderTracking><AdminFishesPage/></AdminOrderTracking>},
-{path:"admin/addOwner",element:<AdminOrderTracking><AdminAddOwnerPage/></AdminOrderTracking>},
-{path:"/admin/orders",element:<AdminOrderTracking><AdminOrderPage/></AdminOrderTracking>}
+  </AdminOrderTracking>
+  </AdminAuth>},
+  {path:"/admin/fishes",element:<AdminAuth><AdminOrderTracking><AdminFishesPage/></AdminOrderTracking></AdminAuth>},
+{path:"admin/addOwner",element:<AdminAuth><AdminOrderTracking><AdminAddOwnerPage/></AdminOrderTracking></AdminAuth>},
+{path:"/admin/orders",element:<AdminAuth><AdminOrderTracking><AdminOrderPage/></AdminOrderTracking></AdminAuth>}
 
 ])
 

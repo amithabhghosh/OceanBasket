@@ -28,7 +28,7 @@ const navigate = useNavigate()
   // };
 
 
-if(!data.uniqueFishes){
+if(!data?.uniqueFishes){
   return null
 }
 

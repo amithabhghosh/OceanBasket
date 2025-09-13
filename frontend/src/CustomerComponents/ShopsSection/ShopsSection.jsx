@@ -4,9 +4,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getShopsByPincode } from '../../api/auth';
 import { ShopCard } from '../ShopCard/ShopCard';
 import { ContextAPI } from '../../Context/ContextAPI';
+import EmptySection from '../EmptySection/EmptySection';
 export const ShopsSection = ({ data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch,showAll,setShowAll ,isLoading}) => {
 const {zipCode,setZipCode} = useContext(ContextAPI)
-console.log(data.pages[0].shops)
+console.log(data?.pages[0]?.shops)
 
   // const limit = showAll ? 10 : 3;
 // const {data,
@@ -45,7 +46,9 @@ const loadMoreRef = useRef();
     };
   }, [loadMoreRef.current, hasNextPage, showAll]);
 
-
+// if(!data?.pages[0]?.shops){
+//   return <EmptySection message={"No Shops"}/>
+// }
   
   return (
     <div className='ShopsSection'>
@@ -59,7 +62,7 @@ const loadMoreRef = useRef();
 </div>
 <div className="shopSectionShopsList">
   {!isLoading && data?.pages?.flatMap(page =>
-    page.shops.map(shop => (
+    page?.shops?.map(shop => (
         <>
       <ShopCard key={shop._id} id={shop._id} shopName={shop.shopName} delivery={shop.deliveryRadiusInKm} image={shop.shopImage} city={shop.city}/>
        
