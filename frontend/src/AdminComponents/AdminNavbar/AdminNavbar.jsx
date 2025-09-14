@@ -10,14 +10,15 @@ const currentPath = location.pathname;
 const handleAdminLogout = ()=>{
   localStorage.removeItem("adminToken")
      localStorage.removeItem("adminRefreshToken")
+     localStorage.removeItem("audioAllowed")
      toast.success("Logout Success")
      navigate("/admin/login")
 }
 
   return (
     <>
+{isOpen ? (      <ion-icon name="close-outline" className={`hamburger ${isOpen ? "navOpen" : ""}`} onClick={() => setIsOpen(!isOpen)}></ion-icon> ) : (<ion-icon name="menu" className="hamburger" onClick={() => setIsOpen(!isOpen)}></ion-icon>)}
 
-       <ion-icon name="menu" className="hamburger" onClick={() => setIsOpen(!isOpen)}></ion-icon>
     {/* Sidebar */}
       <div className={`adminNavbar ${isOpen ? "open" : ""}`}>
         <div className="adminNavList">

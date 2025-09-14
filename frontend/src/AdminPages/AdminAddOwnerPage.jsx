@@ -1,16 +1,12 @@
 import React from 'react'
 import { AdminNavbar } from '../AdminComponents/AdminNavbar/AdminNavbar'
 import { AdminAddOwner } from '../AdminComponents/AdminAddOwner/AdminAddOwner'
+import { AdminLayout } from '../AdminComponents/AdminLayout'
 
 export const AdminAddOwnerPage = () => {
   return (
-    <div>
-      <div style={{display:"flex"}}>
- <AdminNavbar/>
-        
-        <AdminAddOwner/>
-      </div>
-       
-    </div>
+   <AdminLayout>
+     <AdminAddOwner/>
+   </AdminLayout>
   )
 }

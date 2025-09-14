@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { getAllOwners } from '../api/Admin'
 import { useQuery } from '@tanstack/react-query'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
+import { AdminLayout } from '../AdminComponents/AdminLayout'
 
 export const AdminOwnerPage = () => {
 
@@ -22,14 +23,10 @@ if(owners.isError){
   return navigate("/admin/login")
 }
   return (
-   <div style={{ display: "flex" }}>
-  <div style={{ position: "fixed", top: 0, left: 0, height: "100vh" }}>
-    <AdminNavbar />
-  </div>
-  <div  className='adminRightPage'>
-    <AdminOwner data={owners.data} refetch={owners.refetch} />
-  </div>
-</div>
+<AdminLayout>
+  <AdminOwner data={owners.data} refetch={owners.refetch} />
+</AdminLayout>
+
 
   )
 }

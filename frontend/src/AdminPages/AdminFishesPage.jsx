@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getAllFishes } from '../api/Admin'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
+import { AdminLayout } from '../AdminComponents/AdminLayout'
 export const AdminFishesPage = () => {
  const navigate = useNavigate()
   const adminToken = localStorage.getItem("adminToken")
@@ -21,11 +22,10 @@ if(fishes.isError){
 }
 
   return (
-    <div>
-        <div style={{display:"flex"}}>
-        <AdminNavbar/>
-        <AdminFishes data={fishes.data} />
-        </div>
-    </div>
+   
+ <AdminLayout>
+   <AdminFishes data={fishes.data} />
+ </AdminLayout>
+   
   )
 }

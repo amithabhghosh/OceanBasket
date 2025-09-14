@@ -16,13 +16,17 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
     onSuccess:(data)=>{
         localStorage.setItem("adminToken",data.token)
         localStorage.setItem("adminRefreshToken",data.refreshToken)
-  
+   localStorage.setItem("audioAllowed", "true");
     toast.success("Login Success")
     navigate("/admin/analatics")
 
     },
     onError:(err)=>{
-      toast.error(err.message)
+          if (err.response?.data?.msg) {
+            toast.error(err.response.data.msg);
+          } else {
+            toast.error("Something went wrong. Please try again.");
+          }
      
     }
 })

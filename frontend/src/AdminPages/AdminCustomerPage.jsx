@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllCustomers } from '../api/Admin';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import { AdminLayout } from '../AdminComponents/AdminLayout';
 
 export const AdminCustomerPage = () => {
 const navigate = useNavigate()
@@ -21,12 +22,8 @@ if(Customers.isError){
   return navigate("/admin/login")
 }
   return (
-    <div>
-      <div className="adminCustomerPageDesign" style={{display:"flex"}}>
-  <AdminNavbar/>
-        <AdminCustomer data={Customers.data} isError={Customers.isError} refetch={Customers.refetch}/>
-      </div>
-      
-    </div>
+   <AdminLayout>
+    <AdminCustomer data={Customers.data} isError={Customers.isError} refetch={Customers.refetch}/>
+   </AdminLayout>
   )
 }

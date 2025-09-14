@@ -16,7 +16,7 @@
 }
 
 .adminNavbar.open {
-  left: -100px; /* show */
+  left: 0; /* show */
 }
 
 .adminNavList {
@@ -46,9 +46,14 @@
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 1100; /* above sidebar */
+  z-index: 1100; 
+  color: #164863;
+  visibility: visible !important;/* above sidebar */
 }
 
+.hamburger.navOpen{
+  color: #ddf2fd;
+}
 .hamburger span {
   height: 3px;
   width: 100%;

@@ -112,6 +112,9 @@ const handlePaymentSelect = (method)=>{ setPaymentMethod(method) }
       return;
     }
 
+    if(paymentMethod === "razorpay"){
+      return toast.error("Razorpay Is Currently Not Available")
+    }
     Payments.mutate({ token, paymentMethod, deliveryLocation });
   };
 

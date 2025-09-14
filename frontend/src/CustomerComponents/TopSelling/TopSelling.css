@@ -1,5 +1,5 @@
 .TopSelling{
-    background-color: #eaf6ff;
+    background-color: #ddf2fd;
     display: flex;
     flex-direction: column;
     padding: 70px 70px 10px 70px;
@@ -37,7 +37,7 @@ color: #164863;
 }
 
 .topSellingFishCard {
-  background-color:#eaf6ff;
+  background-color:#ddf2fd;
   border-radius: 12px;
   text-align: center;
 

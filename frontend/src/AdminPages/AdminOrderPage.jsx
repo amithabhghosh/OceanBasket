@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getAllOrders } from '../api/Admin'
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner'
+import { AdminLayout } from '../AdminComponents/AdminLayout'
 
 export const AdminOrderPage = () => {
 
@@ -24,16 +25,9 @@ if(orders.isError){
 
 
   return (
-    <div>
-        <div style={{display:"flex"}}>
- <div style={{ position: "fixed", top: 0, left: 0, height: "100vh" }}>
-    <AdminNavbar />
-  </div>
-    <div className='adminRightPage' >
-        <AdminOrders data={orders.data} refetch = {orders.refetch} />
-        </div>
-        </div>
-        
-    </div>
+ <AdminLayout>
+    <AdminOrders data={orders.data} refetch = {orders.refetch} />
+ </AdminLayout>
+  
   )
 }

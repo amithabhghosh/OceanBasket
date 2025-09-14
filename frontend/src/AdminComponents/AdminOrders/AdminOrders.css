@@ -15,6 +15,16 @@ display: flex;
 .AdminOrderLeftSide{
     width: 100%;
 }
+.mapCopyLinkBtn{
+    padding: 7px 12px 7px 12px ;
+    background-color: #164863;
+    border: none;
+    outline: none;
+    color: #ddf2fd;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
 @media (max-width:1100px){
     .adminOrdersContainer{
         margin: 20px;

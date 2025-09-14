@@ -4,6 +4,7 @@ import { getChartData } from '../api/Admin';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
 import { AdminAnaltytics } from '../AdminComponents/AdminAnalytics/AdminAnaltytics';
 import { useQuery } from '@tanstack/react-query';
+import { AdminLayout } from '../AdminComponents/AdminLayout';
 
 export const AdminDashboard = () => {
   const adminToken = localStorage.getItem("adminToken")
@@ -17,13 +18,8 @@ export const AdminDashboard = () => {
       return <LoadingSpinner/>
     }
   return (
-     <div style={{ display: "flex" }}>
-     <div style={{ position: "fixed", top: 0, left: 0, height: "100vh" }}>
-       <AdminNavbar />
-     </div>
-     <div  className='adminRightPage'>
-      <AdminAnaltytics data={Data.data}/>
-     </div>
-   </div>
+   <AdminLayout>
+     <AdminAnaltytics data={Data.data}/>
+   </AdminLayout>
   )
 }

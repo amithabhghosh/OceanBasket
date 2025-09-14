@@ -10,11 +10,14 @@ body {
 }
 .adminRightPage{
   margin-left: 260px;
-    flex: 1 1 0%;
+    flex:1;
     height: 100vh;
     overflow-y: auto;
     scrollbar-width: none;
+    transition: margin-left 0.3s ease;
+
 }
+
 @media (max-width:800px){
   .adminRightPage{
     margin-left: 230px;

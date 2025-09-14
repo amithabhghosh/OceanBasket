@@ -24,13 +24,18 @@ const {mutate,isPending,isSuccess,isError,error} = useMutation({
     onSuccess:(data)=>{
         localStorage.setItem("ownerToken",data.token)
         localStorage.setItem("ownerRefreshToken",data.refreshToken)
-    console.log(data.token)
+        localStorage.setItem("ownerAudioAllowed","true");
+   
     toast.success("Login Success")
     navigate("/ownerDashboard")
 
     },
     onError:(err)=>{
-        toast.error('Login error:', err.response?.data?.message || err.message)
+           if (err.response?.data?.msg) {
+              toast.error(err.response.data.msg);
+            } else {
+              toast.error("Something went wrong. Please try again.");
+            }
     }
 })
   return (

@@ -298,7 +298,7 @@ const getOrdersByUser = async (req, res) => {
       .populate({
         path: 'shopsNotified', 
         select: 'shopName shopImage' 
-      });
+      }).sort({ createdAt: -1 });
 
     if (orders.length == 0) {
       return res.status(201).json({ success: false, message: "No Orders" });
@@ -330,7 +330,7 @@ const getOrderByOrderId = async (req,res)=>{
 const getOrderByShopId = async (req,res)=>{
 try {
   const ownerId = req.user.id;
-  const orders = await Order.find({shopsNotified:ownerId})
+  const orders = await Order.find({shopsNotified:ownerId}).sort({ createdAt: -1 })
   if(orders.length == 0){
     return res.status(200).json({success:false,message:"No Orders"})
   }

@@ -8,9 +8,9 @@ const Order = require("../Models/Order");
 const registerAdmin = async (req,res)=>{
 try {
     const {phoneNumber,password} = req.body
-    const existingAdmin = await Admin.find({phoneNumber})
-    if(existingAdmin.length > 0){
-        return res.status(200).json({success:false,message:"Admin Already Exist"})
+    const existingAdmin = await Admin.findOne({phoneNumber})
+    if(existingAdmin){
+        return res.status(400).json({success:false,message:"Admin Already Exist"})
     }
      const hashedPassword = await argon2.hash(password);
     const newAdmin = new Admin({
@@ -31,11 +31,11 @@ try {
     const {phoneNumber,password} = req.body
     const admin = await Admin.findOne({phoneNumber})
     if(!admin){
-        return res.status(200).json({success:false,message:"Admin Doesn't Exist"})
+        return res.status(401).json({success:false,msg:"Admin Doesn't Exist"})
     }
      const isMatch = await argon2.verify(admin.password, password);
                     if (!isMatch){
-                      return res.status(200).json({success:false, msg: 'Invalid credentials' });
+                      return res.status(401).json({success:false, msg: 'Invalid credentials' });
                     }
                     const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '7d' });
         const refreshToken = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '30d' });
@@ -48,7 +48,7 @@ try {
 
 const getAllCustomers = async (req,res)=>{
     try {
-        const customers = await Customer.find().select("-password")
+        const customers = await Customer.find().select("-password").sort({ createdAt: -1 })
         if(customers.length == 0){
             res.status(201).json({success:false,message:"No Customers"})
         }
@@ -60,7 +60,7 @@ const getAllCustomers = async (req,res)=>{
 
 const getAllOwners = async (req,res)=>{
     try {
-        const owners = await Owner.find().select("-password")
+        const owners = await Owner.find().select("-password").sort({ createdAt: -1 })
         if(owners.length == 0){
             return res.status(201).json({success:false,message:"No Owners Found"})
         }
@@ -72,7 +72,7 @@ const getAllOwners = async (req,res)=>{
 
 const getAllFishes = async (req,res)=>{
     try {
-        const fishes = await Fish.find().populate("owner", "ownerName shopName");
+        const fishes = await Fish.find().populate("owner", "ownerName shopName").sort({ createdAt: -1 });
         if(fishes.length==0){
             return res.status(201).json({success:false,message:"No Fishes Found"})
         }
@@ -84,7 +84,10 @@ const getAllFishes = async (req,res)=>{
 
 const getAllOrders = async (req,res)=>{
     try {
-        const orders = await Order.find()
+        const orders = await Order.find().populate({
+        path: 'shopsNotified', 
+        select: 'shopName city phone' 
+      }).sort({ createdAt: -1 })
         if(orders.length == 0){
             return res.status(201).json({success:false,message:"No Orders"})
         } 

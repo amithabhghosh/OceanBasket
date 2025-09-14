@@ -43,7 +43,7 @@ const loginOwner = async (req,res)=>{
         try {
             const owner = await Owner.findOne({phone:phone})
             if(!owner){
-               return res.status(400).json({success:false,message:"Owner Doesn't Exist"})
+               return res.status(400).json({success:false,msg:"Owner Doesn't Exist"})
             }
     
               const isMatch = await argon2.verify(owner.password, password);
@@ -54,7 +54,7 @@ const loginOwner = async (req,res)=>{
     const refreshToken = jwt.sign({ id: owner._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
                 res.status(201).json({success:true,message:"Owner Login SuccessFull",token,refreshToken})
         } catch (error) {
-            res.status(500).json({success:false,messsage:error.message})
+             res.status(500).json({success:false, error: error.message });
         }
 }
 

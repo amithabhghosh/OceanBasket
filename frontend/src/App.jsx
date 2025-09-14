@@ -35,6 +35,7 @@ import { LocationManager } from './LocationManager'
 import { CustomerAuth } from './AuthRoutes/CustomerAuth'
 import { OwnerAuth } from './AuthRoutes/OwnerAuth'
 import { AdminAuth } from './AuthRoutes/AdminAuth'
+import { OwnerOrderTracking } from './OwnerComponent/OwnerOrderTracking'
 
 
 
@@ -67,11 +68,15 @@ const router= createBrowserRouter([
 
 
     {path:"/ownerSignUp",element:<OwnerSignUp/>},
-  {path:"/ownerDashboard",element:<OwnerAuth><OwnerDashboard/></OwnerAuth>}
-  ,{path:"/ownerProfile",element:<OwnerAuth><OwnerProfilePage/></OwnerAuth>},
-  {path:"/owner/fish/:fishId",element:<OwnerAuth><OwnerFishDetails/></OwnerAuth>},
-  {path:"/owner/addFish",element:<OwnerAuth><OwnerFishAdd/></OwnerAuth>},
-  {path:"/owner/orders",element:<OwnerAuth><OrderList/></OwnerAuth>},
+  {path:"/ownerDashboard",element:<OwnerAuth>
+    <OwnerOrderTracking>
+    <OwnerDashboard/>
+    </OwnerOrderTracking>
+    </OwnerAuth>}
+  ,{path:"/ownerProfile",element:<OwnerAuth>   <OwnerOrderTracking><OwnerProfilePage/>   </OwnerOrderTracking></OwnerAuth>},
+  {path:"/owner/fish/:fishId",element:<OwnerAuth><OwnerOrderTracking><OwnerFishDetails/>  </OwnerOrderTracking></OwnerAuth>},
+  {path:"/owner/addFish",element:<OwnerAuth><OwnerOrderTracking><OwnerFishAdd/></OwnerOrderTracking></OwnerAuth>},
+  {path:"/owner/orders",element:<OwnerAuth><OwnerOrderTracking><OrderList/></OwnerOrderTracking></OwnerAuth>},
 
 
 

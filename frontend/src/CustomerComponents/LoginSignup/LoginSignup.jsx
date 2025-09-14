@@ -100,13 +100,17 @@ if(response.success){
         { enableHighAccuracy: true }
       );
     } else {
-      // If geolocation not supported
+
       navigate("/dashboard");
     }
 
     },
     onError:(err)=>{
-        toast.error('Login error:', err.response?.data?.message || err.message)
+       if (err.response?.data?.msg) {
+      toast.error(err.response.data.msg);
+    } else {
+      toast.error("Something went wrong. Please try again.");
+    }
     }
 })
 

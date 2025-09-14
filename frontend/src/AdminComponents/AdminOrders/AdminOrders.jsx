@@ -92,6 +92,10 @@ null
               {new Date(order.createdAt).toLocaleString()}
             </p>
 
+<p>
+  <strong>ShopName : </strong> 
+  {order.shopsNotified[0].shopName}, {order.shopsNotified[0].city} ,{order.shopsNotified[0].phone}
+</p>
   <button
             className="viewItemsBtn"
             onClick={() => toggleItems(order._id)}
@@ -135,7 +139,7 @@ null
           </a>
 
           {/* Copy button */}
-          <button onClick={()=>handleCopy(order)}>
+          <button className='mapCopyLinkBtn' onClick={()=>handleCopy(order)}>
             Copy Link
           </button>
         </div>

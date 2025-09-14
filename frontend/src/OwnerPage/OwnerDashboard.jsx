@@ -32,6 +32,7 @@ export const OwnerDashboard = () => {
     if (!ownerData?.owner) return;
 
     socket.emit("joinShopRoom", ownerData.owner._id);
+    
 console.log("Joining room with ID:", ownerData.owner._id); 
     socket.on("new-order", (orderData) => {
       console.log("New order received:", orderData);

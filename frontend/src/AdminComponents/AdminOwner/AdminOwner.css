@@ -1,7 +1,7 @@
 .AdminOwner {
   padding: 20px;
 width: 100%;
-position: relative;
+
 
 }
 
@@ -9,7 +9,7 @@ position: relative;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #222;
+  color: #164863;
  
 }
 .adminAddOwnerButton{
@@ -47,7 +47,7 @@ cursor: pointer;
 /* Mobile: 1 card per row */
 @media (max-width: 500px) {
   .AdminOwner{
-    top: 50px;
+    margin-top: 45px;
   }
     .adminOwnerHeading h2{
          margin-bottom: 10px;
