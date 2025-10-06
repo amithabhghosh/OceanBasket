@@ -61,9 +61,7 @@
     }
 }
 @media (max-width:800px){
-    .ownerProfileBackButton{
-        display: none;
-    }
+   
     .ownerProfileDetailsSection{
         flex-direction: column;
     }
@@ -80,6 +78,9 @@
 }
 }
 @media (max-width:500px){
+    .ownerProfileBackButton {
+        display: none;
+    }
     .ownerProfile{
         padding: 80px 20px 20px 20px;
     }

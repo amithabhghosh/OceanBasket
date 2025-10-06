@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./OwnerFishDetail.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getEditTime, updateQuantity } from '../../api/owner'
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ export const OwnerFishDetail = ({data,isLoading,isError,refetch}) => {
     const fishDetail = data?.fishDetails
 const [edit,setEdit] = useState(false)
 const {fishId} = useParams()
+const navigate = useNavigate()
 const ownerToken = localStorage.getItem("ownerToken")
 const [quantity,setQuantity] = useState(0)
    const checkStatus = async () => {
@@ -55,7 +56,7 @@ const handleUpdateQuantity = async () => {
     <div className="fish-details-container">
        <div className="fish-details-backbutton">
         
-        <p> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
+        <p onClick={() => navigate(-1)}> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
        </div>
        <div className="fish-details-items">
         <div className="fish-details-image">

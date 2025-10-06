@@ -55,8 +55,8 @@ const handleCartChange = async () => {
 </div>
 
 <div className="cartUpdateCartMobile">
-<ion-icon name="repeat-outline"></ion-icon>
-<p>Update cart</p>
+
+<p onClick={handleCartChange}><ion-icon name="repeat-outline"></ion-icon>Update cart</p>
               </div>
 
 <div className="cartCouponSection">
@@ -69,8 +69,8 @@ const handleCartChange = async () => {
                
               </div>
               <div className="cartUpdateCart">
-<ion-icon name="repeat-outline"></ion-icon>
-<p onClick={handleCartChange}>Update cart</p>
+
+<p onClick={handleCartChange}><ion-icon name="repeat-outline"></ion-icon>Update cart</p>
               </div>
               
             </div>

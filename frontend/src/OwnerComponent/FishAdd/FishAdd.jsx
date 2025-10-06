@@ -3,10 +3,11 @@ import './FishAdd.css';
 import { toast } from 'react-toastify'
 import { addFishByOwner } from '../../api/owner';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 export const FishAdd = ({data,isLoading,errors,refetch}) => {
 const ownerToken = localStorage.getItem("ownerToken")
   const [filteredFishes, setFilteredFishes] = useState([]);
-
+const navigate = useNavigate()
 const [fishInputs, setFishInputs] = useState({});
 
 
@@ -67,6 +68,10 @@ refetch()
 
   return (
     <div className="fish-table-wrapper">
+      <div className="ownerFishAddBackBtn">
+ <p onClick={() => navigate(-1)}> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
+      </div>
+      
       <table className="fish-table">
         <thead>
           <tr>

@@ -8,6 +8,7 @@
 .topCartSection p{
 font-size: 14px;
 cursor: pointer;
+display: inline;
 }
 .topCartSection p ion-icon{
     border-radius: 50%;
@@ -156,14 +157,19 @@ border: none;
 }
 .cartUpdateCart{
     display: flex;
-    gap: 5px;
+  
     align-items: center;
 }
 .cartUpdateCart p{
     font-size: 13px;
+    cursor: pointer;
 }
 .cartUpdateCart ion-icon{
     font-size: 13px;
+    
+}
+.cartUpdateCartMobile p{
+    cursor: pointer;
 }
 .cartUpdateCartMobile{
     display: none;

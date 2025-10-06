@@ -44,6 +44,10 @@ if(orders.length == 0){
 }
   return (
     <div className="ownerOrdersContainer">
+      <div className="ownerOrderBackBtn">
+   <p onClick={() => navigate(-1)}> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p> 
+      </div>
+    
       {orders.map((order) => (
         <div className="orderCard" key={order._id}>
           <div className="orderSummary">

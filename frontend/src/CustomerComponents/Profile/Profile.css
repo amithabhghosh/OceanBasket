@@ -10,6 +10,7 @@
 .profileTop p{
     cursor: pointer;
 font-size: 14px;
+display: inline;
 }
 
 .profileTop ion-icon{

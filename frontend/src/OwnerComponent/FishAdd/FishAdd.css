@@ -4,6 +4,16 @@
   background-color: #ddf2fd;
   color: #164863;
 }
+.ownerFishAddBackBtn p{
+font-size: 14px;
+cursor: pointer;
+display: inline;
+}
+.ownerFishAddBackBtn p ion-icon{
+  font-size: 15px;
+  position: relative;
+  top: 2px;
+}
 
 .fish-table {
   width: 100%;
@@ -204,6 +214,9 @@ margin-left: 244px;
     }
 }
 @media (max-width:500px){
+  .ownerFishAddBackBtn{
+    display: none;
+  }
   .fish-table-wrapper{
     margin: 80px 5px 20px 5px;
   }

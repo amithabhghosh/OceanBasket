@@ -11,6 +11,7 @@
 .fishDetailTopSection p{
      font-size: 14px;
     cursor: pointer;
+    display: inline;
 }
 .fishDetailTopSection ion-icon{
   position: relative;
@@ -139,7 +140,7 @@ cursor: pointer;
  scroll-behavior: smooth;
   border: .5px solid #164863;
   position: relative;
-  bottom: 75px;
+  bottom: 60px;
   margin: 0px 160px 0px 100px;
   z-index: 1;
 }
@@ -176,8 +177,8 @@ padding: 15px 70px 15px 70px;
         margin-left: 10px;
     }
     .switchShopBox{
-        bottom: 75px;
-  margin: 0px 30px 0px 140px;
+        bottom: 55px;
+  margin: 0px 70px 0px 140px;
     }
 }
 @media (max-width:800px){
@@ -208,6 +209,10 @@ padding: 15px 70px 15px 70px;
       margin: 0px 5px 0px 140px;
       padding: 5px;
   } */
+   .switchShopBox{
+  margin: 0px 5px 0px 140px;
+   }
+
 }
 
 @media (max-width:500px){
@@ -257,9 +262,12 @@ font-size: 15px;
         font-size: 12px;
     }
     .switchShopBox{
-           bottom: 33px;
+           bottom: 25px;
   margin: 0px 5px 0px 60px;
-  padding: 5px;
+  padding: 10px;
+    }
+    .switchShopBox p{
+        font-size: 15px;
     }
 }
 @media (max-width:400px){
@@ -275,6 +283,13 @@ font-size: 15px;
     }
     .fishDetailSectionImage{
         height: 200px;
+    }
+    .switchShopBox{
+        bottom: 16px;
+          margin: 0px 5px 0px 30px;
+    }
+      .switchShopBox p{
+        font-size: 13px;
     }
     
 }

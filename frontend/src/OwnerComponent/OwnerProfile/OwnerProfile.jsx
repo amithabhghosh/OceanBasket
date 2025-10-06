@@ -5,10 +5,11 @@ import profile from "../../assets/images/Profile.jpg"
 import { useMutation } from '@tanstack/react-query'
 import { locationUpdating } from '../../api/owner'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 export const OwnerProfile = ({data,refetch}) => {
   const owner = data?.owner || []
 const ownerToken = localStorage.getItem("ownerToken")
-
+const navigate = useNavigate()
 const {mutate,isPending,isSuccess,isError,error} = useMutation({
     mutationFn:locationUpdating,
     onSuccess:(data)=>{
@@ -53,7 +54,7 @@ const handleSetLocation = () => {
   return (
    <div className='ownerProfile'>
  <div className="ownerProfileBackButton">  
-        <p> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
+        <p onClick={() => navigate(-1)}> <ion-icon name="arrow-back-circle-outline"></ion-icon> Back</p>
        </div>    
 <div className="ownerProfileDetailsSection">
   <div className="ownerProfileImageSection">

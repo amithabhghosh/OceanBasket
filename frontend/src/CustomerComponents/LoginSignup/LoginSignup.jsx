@@ -182,7 +182,8 @@ if(response.success){
         <label htmlFor="phone">Phone number</label>
         <div className="signUpMobileFormPhoneInput">
             <input type="tel" id='phone' className='signUpMobileFormPhoneInputBox'/>
-                 <FaPhone className="signUpMobileFormphoneicon" />
+                
+                 <ion-icon className="signUpMobileFormphoneicon"  name="call"></ion-icon>
         </div>
     </div>
 
@@ -291,7 +292,8 @@ if(response.success){
         <label htmlFor="phone">Phone number</label>
         <div className="signUpPhoneInput">
             <input type="tel" id='phone' className='signUpPhoneInputBox'/>
-                 <FaPhone className="phoneicon" />
+               
+                 <ion-icon className="phoneicon"  name="call"></ion-icon>
         </div>
     </div>
 
@@ -355,7 +357,8 @@ if(response.success){
             <label htmlFor="phone">Phone Number</label>
             <div className="loginPhoneInputIcons">
 <input type="tel" name="" id="phone" className='loginPhoneInputField' onChange={(e)=>setPhoneNumber(e.target.value)}/>
-            <FaPhone className="loginPhoneIcon" />
+       
+            <ion-icon  className="loginPhoneIcon" name="call"></ion-icon>
             </div>
             
         </div>

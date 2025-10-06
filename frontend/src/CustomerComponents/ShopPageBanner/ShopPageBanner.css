@@ -1,5 +1,5 @@
 .ShopPageBanner{
-    background-color:#eaf6ff ;
+    background-color:#ddf2fd;
     padding: 90px 80px 35px 80px ;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,7 @@
 .shopBannerTopSection p{
     font-size: 14px;
     cursor: pointer;
+    display: inline;
 }
 .shopBannerTopSection ion-icon{
     position: relative;
