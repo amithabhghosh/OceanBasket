@@ -8,7 +8,7 @@ const CustomerAuthentication = async (req,res,next)=>{
         if(!token){
             return res.json({success:false,message:"Not Authorised"})
         }
-        const token_decode=jwt.verify(token,process.env.SECRET_KEY)
+        const token_decode=jwt.verify(token,"Hello!123")
         req.body.userId=token_decode.id
         next()
     } catch (error) {

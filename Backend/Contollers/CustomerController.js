@@ -28,8 +28,8 @@ const {phone}=req.body
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-console.log("Generating OTP...");
-console.log(process.env.FAST2SMS_API_KEY) 
+// console.log("Generating OTP...");
+// console.log(process.env.FAST2SMS_API_KEY) 
         const otp = generateOTP();
         const expiresAt = Date.now() + OTP_EXPIRATION;
         
@@ -128,8 +128,8 @@ const { phone, password } = req.body;
     if (!isMatch)
       return res.status(400).json({ msg: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
+    const token = jwt.sign({ id: user._id }, "Hello!123", { expiresIn: '1h' });
+const refreshToken = jwt.sign({ id: user._id }, "Hello!123", { expiresIn: '5h' });
 
     res.status(201).json({
       success:true,
