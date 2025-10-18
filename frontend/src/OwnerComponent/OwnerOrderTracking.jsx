@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { getShopData } from '../api/owner';
 import { LoadingSpinner } from '../CustomerComponents/LoadingSpinner/LoadingSpinner';
 
-const socket = io("http://localhost:5000", {
+const socket = io("https://myoceanbasket.in/api", {
   withCredentials: true,
 });
 export const OwnerOrderTracking = ({children}) => {
