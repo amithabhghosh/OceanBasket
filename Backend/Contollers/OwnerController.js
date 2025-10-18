@@ -50,8 +50,8 @@ const loginOwner = async (req,res)=>{
                 if (!isMatch){
                   return res.status(400).json({success:false, msg: 'Invalid credentials' });
                 }
-                const token = jwt.sign({ id: owner._id }, "Hello!123", { expiresIn: '1h' });
-    const refreshToken = jwt.sign({ id: owner._id }, "Hello!123", { expiresIn: '5h' });
+                const token = jwt.sign({ id: owner._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ id: owner._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
                 res.status(201).json({success:true,message:"Owner Login SuccessFull",token,refreshToken})
         } catch (error) {
              res.status(500).json({success:false, error: error.message });

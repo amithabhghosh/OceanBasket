@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
-
+require("dotenv").config()
 const getAuthentication = (req, res, next) => {
   const token = req.header("token");
  console.log("Incoming token:", token); 
   if (!token) return res.status(401).json({ msg: "No token, access denied" });
 
   try {
-    const verified = jwt.verify(token,"Hello!123");
+    const verified = jwt.verify(token,process.env.SECRET_KEY);
     req.user = verified; 
     console.log("Verified payload:", verified);// Attach decoded token { id: ... }
     next();

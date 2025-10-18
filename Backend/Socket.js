@@ -5,7 +5,7 @@ let io;
 function initSocket(server) {
   io = socketIO(server, {
     cors: {
-      origin: "http://localhost:5173", // Use your real frontend domain in production
+      origin: process.env.FRONTENDLINK, // Use your real frontend domain in production
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     },

@@ -128,8 +128,8 @@ const { phone, password } = req.body;
     if (!isMatch)
       return res.status(400).json({ msg: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user._id }, "Hello!123", { expiresIn: '1h' });
-const refreshToken = jwt.sign({ id: user._id }, "Hello!123", { expiresIn: '5h' });
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '5h' });
 
     res.status(201).json({
       success:true,

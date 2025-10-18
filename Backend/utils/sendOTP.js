@@ -14,12 +14,12 @@ const sendOTP = async (phone, otp) => {
       //   Authorization: process.env.FAST2SMS_API_KEY
       // }
 
-      params: {
-        authorization: process.env.FAST2SMS_API_KEY,
-        variables_values: `Your OTP is ${otp}`,
-        route: 'otp',
-        numbers: phone
-      }
+      // params: {
+      //   authorization: process.env.FAST2SMS_API_KEY,
+      //   variables_values: `Your OTP is ${otp}`,
+      //   route: 'otp',
+      //   numbers: phone
+      // }
   
     });
 

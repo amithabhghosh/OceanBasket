@@ -5,6 +5,7 @@ const Customer = require("../Models/Customer");
 const Owner = require("../Models/Owner");
 const Fish = require("../Models/Fish");
 const Order = require("../Models/Order");
+require("dotenv").config()
 const registerAdmin = async (req,res)=>{
 try {
     const {phoneNumber,password} = req.body
@@ -37,8 +38,8 @@ try {
                     if (!isMatch){
                       return res.status(401).json({success:false, msg: 'Invalid credentials' });
                     }
-                    const token = jwt.sign({ id: admin._id },"Hello!123", { expiresIn: '7d' });
-        const refreshToken = jwt.sign({ id: admin._id }, "Hello!123", { expiresIn: '30d' });
+                    const token = jwt.sign({ id: admin._id },process.env.SECRET_KEY, { expiresIn: '7d' });
+        const refreshToken = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '30d' });
                     res.status(201).json({success:true,message:"Admin Login SuccessFull",token,refreshToken})
 } catch (error) {
     res.status(500).json({success:false,message:error.message})
