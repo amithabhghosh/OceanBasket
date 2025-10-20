@@ -36,6 +36,8 @@ import { CustomerAuth } from './AuthRoutes/CustomerAuth'
 import { OwnerAuth } from './AuthRoutes/OwnerAuth'
 import { AdminAuth } from './AuthRoutes/AdminAuth'
 import { OwnerOrderTracking } from './OwnerComponent/OwnerOrderTracking'
+import { PrivacyPage } from './CustomerPages/PrivacyPage'
+import { TermsPage } from './CustomerPages/TermsPage'
 
 
 
@@ -97,8 +99,11 @@ const router= createBrowserRouter([
   </AdminAuth>},
   {path:"/admin/fishes",element:<AdminAuth><AdminOrderTracking><AdminFishesPage/></AdminOrderTracking></AdminAuth>},
 {path:"admin/addOwner",element:<AdminAuth><AdminOrderTracking><AdminAddOwnerPage/></AdminOrderTracking></AdminAuth>},
-{path:"/admin/orders",element:<AdminAuth><AdminOrderTracking><AdminOrderPage/></AdminOrderTracking></AdminAuth>}
+{path:"/admin/orders",element:<AdminAuth><AdminOrderTracking><AdminOrderPage/></AdminOrderTracking></AdminAuth>},
 
+
+{path:"/privacy-policy",element:<PrivacyPage/>},
+{path:"/terms-and-condition",element:<TermsPage/>}
 ])
 
 function App() {

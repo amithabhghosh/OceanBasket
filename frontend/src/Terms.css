@@ -1,0 +1,79 @@
+/* TermsAndConditions.css */
+
+.terms-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 20px;
+  background-color:#ddf2fd ;
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+}
+
+.terms-page h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #0077b6;
+  margin-bottom: 30px;
+}
+
+.terms-page h2 {
+  margin-top: 30px;
+  color: #005f73;
+  font-size: 1.5rem;
+}
+
+.terms-page p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.terms-page a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+.terms-page a:hover {
+  text-decoration: underline;
+}
+
+.terms-page section {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .terms-page {
+    padding: 30px 15px;
+  }
+
+  .terms-page h1 {
+    font-size: 2rem;
+  }
+
+  .terms-page h2 {
+    font-size: 1.25rem;
+  }
+
+  .terms-page p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-page {
+    padding: 20px 10px;
+  }
+
+  .terms-page h1 {
+    font-size: 1.8rem;
+  }
+
+  .terms-page h2 {
+    font-size: 1.1rem;
+  }
+
+  .terms-page p {
+    font-size: 0.9rem;
+  }
+}

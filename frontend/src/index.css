@@ -17,6 +17,9 @@ body {
     transition: margin-left 0.3s ease;
 
 }
+.loginsignupPageCustomer{
+  background-color: #ddf2fd;
+}
 
 @media (max-width:800px){
   .adminRightPage{
@@ -26,5 +29,8 @@ body {
 @media (max-width:500px){
   .adminRightPage{
     margin-left: 0;
+  }
+  .loginsignupPageCustomer{
+    background-color: #fff;
   }
 }

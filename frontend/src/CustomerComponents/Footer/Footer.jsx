@@ -1,6 +1,8 @@
 import React from 'react'
 import "./Footer.css"
+import { useNavigate } from 'react-router-dom'
 export const Footer = () => {
+  const navigate = useNavigate()
   return (
      <footer className="footer">
       <div className="footerContent">
@@ -36,7 +38,13 @@ export const Footer = () => {
         </div>
       </div>
 
+<div className="footerPrivacyandOtherDetail">
+<p onClick={()=>navigate("/privacy-policy")}>Privacy-policy</p>
+<p onClick={()=>navigate("/terms-and-condition")}>Terms and Condition</p>
+</div>
+
       <div className="footerBottom">
+        
         <p>© 2025 My Ocean Basket. All rights reserved.</p>
       </div>
     </footer>

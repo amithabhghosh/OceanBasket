@@ -1,13 +1,12 @@
 import React from 'react'
-import { LoginSignup } from '../CustomerComponents/LoginSignup/LoginSignup'
+import { Privacy } from '../Privacy'
 import { Footer } from '../CustomerComponents/Footer/Footer'
 
-export const LoginSignUp = () => {
+export const PrivacyPage = () => {
   return (
     <div className='loginsignupPageCustomer'>
-
-<LoginSignup/>
-<Footer/>
+      <Privacy/>
+      <Footer/>
     </div>
   )
 }
