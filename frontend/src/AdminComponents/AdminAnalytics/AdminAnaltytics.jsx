@@ -49,6 +49,11 @@ export const AdminAnaltytics = ({data}) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
+
+      <div className="addingPercentageInputs">
+        <input type="text"  placeholder='Add Percentage'/>
+        <button>Add</button>
+      </div>
     </div>
   )
 }
