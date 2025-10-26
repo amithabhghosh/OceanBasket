@@ -31,30 +31,39 @@ const Location = useMutation({
     },
   });
 
-   const fetchCurrentLocation = () => {
-      if (!navigator.geolocation) {
-        toast.error("Geolocation not supported by your browser");
-        return;
+
+const fetchCurrentLocation = () => {
+  if (!navigator.geolocation) {
+    toast.error("Geolocation not supported by your browser");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const newLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+
+      setDeliveryLocation(newLocation);
+      localStorage.setItem("lat", newLocation.lat);
+      localStorage.setItem("lng", newLocation.lng);
+      Location.mutate({ ...newLocation, token });
+
+    },
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        toast.info(
+          "Location permission denied. Please enable location manually from browser settings and try again."
+        );
+      } else {
+        toast.error("Failed to fetch location");
+        console.error(error);
       }
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const newLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          setDeliveryLocation(newLocation);
-          
-          
-  
-    
-          Location.mutate({ ...newLocation, token });
-        },
-        (error) => {
-          toast.error("Failed to fetch location");
-          console.error(error);
-        }
-      );
-    };
+    }
+  );
+};
+
   
 
 

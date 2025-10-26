@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import io from 'socket.io-client';
 import { useEffect } from 'react';
 
-const socket = io("https://myoceanbasket.in/api"); // or your server URL
+const socket = io("http://localhost:5000"); // or your server URL
 
 export const OwnerDashboard = () => {
   const ownerToken = localStorage.getItem("ownerToken");
