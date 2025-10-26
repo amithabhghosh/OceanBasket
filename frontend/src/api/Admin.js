@@ -53,3 +53,8 @@ export const getChartData = async ({adminToken})=>{
     const response = await API.get("/order/getChartDataForOrders",{headers:{token:adminToken}})
     return response.data
 }
+
+export const addpercentage = async ({adminToken,percentage})=>{
+    const response = await API.post("/admin/addpercentage",{percentage},{headers:{token:adminToken}})
+    return response.data
+}

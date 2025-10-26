@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   BarChart,
   Bar,
@@ -9,10 +9,39 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./AdminAnaltytics.css"
-export const AdminAnaltytics = ({data}) => {
+import { addpercentage } from '../../api/Admin';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+export const AdminAnaltytics = ({data,refetch}) => {
+const [percentage,setPercentage] = useState()
 
-    console.log(data)
+  const adminToken = localStorage.getItem("adminToken")
 
+
+
+ const {mutate,isPending,isSuccess,isError,error} = useMutation({
+    mutationFn:addpercentage,
+    onSuccess:(data)=>{
+    toast.success("Percentage Added")
+    setPercentage()
+    refetch()
+
+    },
+    onError:(err)=>{
+      const message = err?.response?.data?.message || err.message || "Something went wrong";
+           toast.error(message);
+     
+    }
+})
+
+
+const addPercentageClick = ()=>{
+if(!percentage || percentage.trim() === ""){
+  return toast.info("Field is Empty")
+}
+
+mutate({adminToken,percentage})
+}
   return (
   <div className="dashboard">
       {/* Stats Section */}
@@ -49,10 +78,12 @@ export const AdminAnaltytics = ({data}) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-
+<div className="alreadyAddedPercentage">
+  <p>Percentage : {data?.admin?.percentage ? `${data?.admin?.percentage}%`  : "Not Yet Added"}</p>
+</div>
       <div className="addingPercentageInputs">
-        <input type="text"  placeholder='Add Percentage'/>
-        <button onClick={addPercentage}>Add</button>
+        <input type="text"  placeholder='Add Percentage' onChange={(e)=>setPercentage(e.target.value)} value={percentage}/>
+        <button onClick={addPercentageClick}>{data.admin.percentage ? "Update" : "Add" }</button>
       </div>
     </div>
   )

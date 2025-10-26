@@ -5,6 +5,7 @@ const { getIO } = require('../Socket'); // Make sure path is correct
 const Fish = require('../Models/Fish');
 const Customer = require('../Models/Customer');
 const Owner = require('../Models/Owner');
+const Admin = require('../Models/Admin');
 
 
 
@@ -364,6 +365,11 @@ console.log(orderId,status)
 const getChartDataForOrders = async (req,res)=>{
   try {
      // Total orders
+
+     const adminId = req.user.id;
+
+     const admin = await Admin.findById(adminId).select("-password")
+
     const totalOrders = await Order.countDocuments();
 
     // Total amount
@@ -407,7 +413,8 @@ const getChartDataForOrders = async (req,res)=>{
         totalCustomers,
         totalOwners
       },
-      dailyOrders: formattedDaily
+      dailyOrders: formattedDaily,
+      admin
     });
   } catch (error) {
      console.error(error);

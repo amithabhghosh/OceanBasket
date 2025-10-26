@@ -38,8 +38,7 @@ const adminToken = localStorage.getItem("adminToken")
 
 const handleAddOwner  = (e)=>{
 e.preventDefault()
-console.log(password)
-console.log(ownerName,email,password,phone,shopName,zipCode,addressLine1,addressLine2,city,selectedState,shopOpenTime,shopCloseTime,deliveryRadiusInKm)
+
 const fields = {
   ownerName,
   email,

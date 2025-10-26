@@ -19,7 +19,7 @@ export const AdminDashboard = () => {
     }
   return (
    <AdminLayout>
-     <AdminAnaltytics data={Data.data}/>
+     <AdminAnaltytics data={Data.data} refetch={Data.refetch}/>
    </AdminLayout>
   )
 }

@@ -135,7 +135,7 @@ const updateOwnerverify = async (req,res)=>{
         const {ownerId}  = req.params
         const owner = await Owner.findByIdAndUpdate(ownerId,{verified:!verified},{new:true})
         if(!owner){
-            return res.status(200).json({success:false,message:"No Owner Found"})
+            return res.status(400).json({success:false,message:"No Owner Found"})
         }
         res.status(200).json({success:true,owner})
     } catch (error) {
@@ -150,7 +150,7 @@ const {percentage} = req.body
 const admin = await Admin.findByIdAndUpdate(adminId,{percentage:percentage},{new:true})
 
 if(!admin){
- return   res.status(200).json({success:false,message:"Percentage Not Updated"})
+ return   res.status(400).json({success:false,message:"Percentage Not Updated"})
 }
 
 res.status(200).json({success:true,message:"Percentage Added"})

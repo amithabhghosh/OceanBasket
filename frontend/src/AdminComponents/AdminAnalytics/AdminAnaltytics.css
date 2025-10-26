@@ -75,3 +75,20 @@ border-radius: 5px;
 .addingPercentageInputs button:hover{
   background-color: #0077ff;
 }
+.alreadyAddedPercentage{
+  padding-top: 20px;
+}
+@media (max-width:500px){
+  .addingPercentageInputs{
+    width: 100%;
+  }
+}
+@media (max-width:350px){
+  .addingPercentageInputs input{
+     padding: 10px 8px 10px 8px ;
+  }
+  .addingPercentageInputs button{
+     padding: 10px 10px 10px 10px ;
+       font-weight: 500;
+  }
+}
