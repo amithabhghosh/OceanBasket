@@ -142,4 +142,17 @@ const updateOwnerverify = async (req,res)=>{
               res.status(500).json({success:false,message:error.message}) 
     }
 }
-module.exports = {registerAdmin,loginAdmin,getAllCustomers,getAllOwners,getAllFishes,getAllOrders,updateOrderDelivered,updateCustomerVerify,updateOwnerverify}
+
+const addpercentageByAdmin =async (req,res)=>{
+     const adminId = req.user.id;
+const {percentage} = req.body
+
+const admin = await Admin.findByIdAndUpdate(adminId,{percentage:percentage},{new:true})
+
+if(!admin){
+ return   res.status(200).json({success:false,message:"Percentage Not Updated"})
+}
+
+res.status(200).json({success:true,message:"Percentage Added"})
+}
+module.exports = {addpercentageByAdmin,registerAdmin,loginAdmin,getAllCustomers,getAllOwners,getAllFishes,getAllOrders,updateOrderDelivered,updateCustomerVerify,updateOwnerverify}

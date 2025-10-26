@@ -52,7 +52,7 @@ export const AdminAnaltytics = ({data}) => {
 
       <div className="addingPercentageInputs">
         <input type="text"  placeholder='Add Percentage'/>
-        <button>Add</button>
+        <button onClick={addPercentage}>Add</button>
       </div>
     </div>
   )

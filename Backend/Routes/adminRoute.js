@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerAdmin, loginAdmin, getAllCustomers, getAllOwners, getAllFishes, getAllOrders, updateOrderDelivered, updateCustomerVerify, updateOwnerverify } = require('../Contollers/AdminController');
+const { registerAdmin, loginAdmin, getAllCustomers, getAllOwners, getAllFishes, getAllOrders, updateOrderDelivered, updateCustomerVerify, updateOwnerverify, addpercentageByAdmin } = require('../Contollers/AdminController');
 const { getAuthentication } = require('../MiddleWare/getAuth');
 const router = express.Router();
 
@@ -28,4 +28,6 @@ router.put("/updateVerifyCustomer/:userId",getAuthentication,updateCustomerVerif
 
 router.put("/updateVerifyOwner/:ownerId",getAuthentication,updateOwnerverify)
 
+
+router.post("/addpercentage",getAuthentication,addpercentageByAdmin)
 module.exports = router
